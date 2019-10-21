@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MacLarenApp</string>
+    <string name="seguinte">Seguinte</string>
+    <string name="intr_email_text">Introduza o seu endereço de email de forma a verificar o seu registo.</string>
+    <string name="bem_vindo">Bem-vindo!</string>
+    <string name="iniciar_sessao">Iniciar sessão</string>
+    <string name="tem_conta">Tem conta?</string>
+</resources>

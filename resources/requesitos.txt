@@ -1,0 +1,14 @@
+em vez de numero meter o email
+
+o registo mais explicito
+
+caixinha das permissoes do android em vez do botao
+
+gradaçao de cores conforme a distancia do utilizador
+ex: verde para os proximos, amarelos para mais ou menos e verlhos para utilizaods
+
+falta ecra para ir buscar o carrinho
+
+melhorias:
+
+ngm deu melhorias :(( n ajudamos ngm pq ngm nos ajudou :'(
