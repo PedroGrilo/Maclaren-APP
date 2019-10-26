@@ -5,4 +5,8 @@
     <string name="bem_vindo">Bem-vindo!</string>
     <string name="iniciar_sessao">Iniciar sessão</string>
     <string name="tem_conta">Tem conta?</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="user_maclaren_com">user@maclaren.com</string>
 </resources>
