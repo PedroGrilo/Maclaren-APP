@@ -9,4 +9,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="user_maclaren_com">user@maclaren.com</string>
+    <string name="est_quase_no_fim">Está quase no fim!</string>
+    <string name="introduza_o_c_digo_recebido_no_email">Introduza o código recebido no email.</string>
+    <string name="code">123456</string>
+    <string name="finalizar">Finalizar</string>
+    <string name="title_activity_inpute_email">inpute_email</string>
 </resources>
