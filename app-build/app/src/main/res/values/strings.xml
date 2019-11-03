@@ -14,4 +14,8 @@
     <string name="code">123456</string>
     <string name="finalizar">Finalizar</string>
     <string name="title_activity_inpute_email">inpute_email</string>
+    <string name="title_activity_sign_up">SignUp</string>
+    <string name="hello_again">Olá, outra vez!</string>
+    <string name="sign_up_email_text">Inicie sessão a partir do endereço de email.</string>
+    <string name="back">Voltar</string>
 </resources>
