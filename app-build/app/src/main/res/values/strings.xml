@@ -18,4 +18,6 @@
     <string name="hello_again">Olá, outra vez!</string>
     <string name="sign_up_email_text">Inicie sessão a partir do endereço de email.</string>
     <string name="back">Voltar</string>
+    <string name="accept_gps_title">Autorizar os serviços de Localização</string>
+    <string name="accept_gps_subtext">Autoriza à Maclaren usar os serviços de localização de modo a mostrar os carrinhos de bébe proximos de si.</string>
 </resources>
