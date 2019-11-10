@@ -51,8 +51,9 @@ public class SignUpActivity extends AppCompatActivity {
     public void callVerificationScene() {
         Intent intent = new Intent(SignUpActivity.this, VerificationCodeActivity.class);
         Bundle email = new Bundle();
-        email.putString("email", tV_email.getText().toString()); //Email
+        email.putString("EMAIL", tV_email.getText().toString()); //Email
         intent.putExtras(email);
+        finish();
         startActivity(intent);
     }
 

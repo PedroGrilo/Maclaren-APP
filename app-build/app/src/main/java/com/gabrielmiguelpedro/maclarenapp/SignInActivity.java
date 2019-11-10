@@ -31,6 +31,7 @@ public class SignInActivity extends AppCompatActivity{
         btn_iniciar_sessao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
                 Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
                 startActivity(intent);
             }
@@ -54,8 +55,9 @@ public class SignInActivity extends AppCompatActivity{
     public void callVerificationScene() {
         Intent intent = new Intent(SignInActivity.this, VerificationCodeActivity.class);
         Bundle email = new Bundle();
-        email.putString("email", tV_email.getText().toString()); //Email
+        email.putString("EMAIL", tV_email.getText().toString()); //Email
         intent.putExtras(email);
+        finish();
         startActivity(intent);
     }
 

@@ -20,4 +20,5 @@
     <string name="back">Voltar</string>
     <string name="accept_gps_title">Autorizar os serviços de Localização</string>
     <string name="accept_gps_subtext">Autoriza à Maclaren usar os serviços de localização de modo a mostrar os carrinhos de bébe proximos de si.</string>
+    <string name="title_activity_main">Map</string>
 </resources>
