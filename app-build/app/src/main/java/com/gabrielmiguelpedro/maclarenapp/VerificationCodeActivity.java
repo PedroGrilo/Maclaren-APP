@@ -40,6 +40,7 @@ public class VerificationCodeActivity extends AppCompatActivity {
                         info.putString("CODE", codeS);
                         Intent i;
                         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            info.putString("PERMISSION","LOCATION");
                             i = new Intent(VerificationCodeActivity.this, PermissionActivity.class);
                             i.putExtras(info);
                             finish();

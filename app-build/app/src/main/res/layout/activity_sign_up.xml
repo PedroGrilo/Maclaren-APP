@@ -30,7 +30,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/autorizar_titulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -41,7 +41,7 @@
                 android:textSize="33sp" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/autorizar_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="50dp"
