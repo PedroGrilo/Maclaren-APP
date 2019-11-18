@@ -1,30 +1,23 @@
 package com.gabrielmiguelpedro.maclarenapp;
 
-import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
-
-import static com.gabrielmiguelpedro.maclarenapp.SignInActivity.FILE_NAME;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, Serializable {
 
@@ -32,25 +25,28 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Bundle infoBundle;
     private User u;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (readUser() == null) {
+        if (FileConfig.readUser() == null) {
             infoBundle = getIntent().getExtras();
+            assert infoBundle != null;
             String email = infoBundle.getString("EMAIL");
             String code = infoBundle.getString("CODE");
             u = new UserClass(email, code);
-            saveUser(u);
+            FileConfig.saveUser(u);
         } else {
-            System.out.println("entro aqui");
-            u = readUser();
+            u = FileConfig.readUser();
         }
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
         Toast.makeText(getApplicationContext(), u.getEmail() + " - " + u.getLastLogin(), Toast.LENGTH_SHORT).show();
@@ -70,43 +66,31 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        googleMap.setMyLocationEnabled(true);
+
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-    }
+        //LatLng sydney = new LatLng(u.getLastLocation().getLatitude(), u.getLastLocation().getLongitude());
+        // mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Me"));
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
 
-    public static void saveUser(User user)  {
-        System.out.println("a salvar...");
-        try {
-            FileOutputStream out = new FileOutputStream(SignInActivity.f.getAbsolutePath());
-            ObjectOutputStream oout = new ObjectOutputStream(out);
-            oout.writeObject(user);
-            System.out.println("File created");
-            oout.close();
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
+        @SuppressLint("MissingPermission") Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
+        if (location != null) {
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13));
 
-    public User readUser() {
-       User temp = null;
-        try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SignInActivity.f.getAbsolutePath()));
-            temp = (User) ois.readObject();
-            ois.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        } finally {
-            return temp;
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                    .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
+                    .zoom(17)                   // Sets the zoom
+                    .bearing(90)                // Sets the orientation of the camera to east
+                    .tilt(40)                   // Sets the tilt of the camera to 30 degrees
+                    .build();                   // Creates a CameraPosition from the builder
+            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        saveUser(u);
+        FileConfig.saveUser(u);
     }
 }

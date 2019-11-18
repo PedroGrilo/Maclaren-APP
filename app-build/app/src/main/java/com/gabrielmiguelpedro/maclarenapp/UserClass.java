@@ -1,6 +1,8 @@
 package com.gabrielmiguelpedro.maclarenapp;
 
 
+import android.location.Location;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,12 +12,23 @@ public class UserClass implements User, Serializable {
     private String lastCode;
     private Boolean logged;
     private Date lastLogin;
+    private Location lastLocation;
 
     public UserClass(String email, String lastCode) {
         this.email = email;
         this.lastCode = lastCode;
         logged = true;
         lastLogin = new Date();
+    }
+
+    @Override
+    public Location getLastLocation() {
+        return lastLocation;
+    }
+
+    @Override
+    public void setLastLocation(Location lastLocation) {
+        this.lastLocation = lastLocation;
     }
 
     @Override

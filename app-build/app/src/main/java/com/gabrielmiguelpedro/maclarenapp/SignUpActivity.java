@@ -12,8 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.gabrielmiguelpedro.maclarenapp.Exceptions.InvalidFieldException;
 
 public class SignUpActivity extends AppCompatActivity {
-    TextView tV_email,btn_back;
+    TextView tV_email, btn_back;
     Button btn_next;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +40,7 @@ public class SignUpActivity extends AppCompatActivity {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               try {
+                try {
                     if (checkFields())
                         callVerificationScene();
                 } catch (InvalidFieldException e) {
@@ -48,6 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
+
     public void callVerificationScene() {
         Intent intent = new Intent(SignUpActivity.this, VerificationCodeActivity.class);
         Bundle email = new Bundle();

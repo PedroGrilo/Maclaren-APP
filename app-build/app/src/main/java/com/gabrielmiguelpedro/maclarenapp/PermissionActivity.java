@@ -6,15 +6,14 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 public class PermissionActivity extends AppCompatActivity {
 
+    TextView titulo, desc;
     private Bundle infoFromVerificationActivity;
-    TextView titulo,desc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +24,17 @@ public class PermissionActivity extends AppCompatActivity {
         infoFromVerificationActivity = getIntent().getExtras();
 
         assert infoFromVerificationActivity != null;
-        switch (infoFromVerificationActivity.getString("PERMISSION")){
+
+        switch (infoFromVerificationActivity.getString("PERMISSION")) {
             case "LOCATION":
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                titulo.setText(R.string.accept_gps_title);
+                desc.setText(R.string.accept_gps_subtext);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
                 break;
             case "STORAGE":
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
+                titulo.setText(R.string.accept_storage_title);
+                desc.setText(R.string.accept_storage_subtext);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
                 break;
             default:
                 finish();
@@ -41,7 +45,7 @@ public class PermissionActivity extends AppCompatActivity {
     }
 
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        Log.d("PERMISSION", "onRequestPermissionsResult: "+requestCode);
+        Log.d("PERMISSION", "onRequestPermissionsResult: " + requestCode);
         switch (requestCode) {
             case 1: {
                 titulo.setText(R.string.accept_gps_title);
@@ -55,7 +59,7 @@ public class PermissionActivity extends AppCompatActivity {
                 }
                 return;
             }
-            case 2:{
+            case 2: {
                 finish();
             }
         }

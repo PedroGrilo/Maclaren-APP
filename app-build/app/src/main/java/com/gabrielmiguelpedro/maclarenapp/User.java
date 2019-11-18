@@ -1,8 +1,14 @@
 package com.gabrielmiguelpedro.maclarenapp;
 
+import android.location.Location;
+
 import java.util.Date;
 
 interface User {
+    Location getLastLocation();
+
+    void setLastLocation(Location lastLocation);
+
     Date getLastLogin();
 
     void setLastLogin(Date lastLogin);
