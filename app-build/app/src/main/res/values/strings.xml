@@ -23,4 +23,23 @@
     <string name="accept_storage_title">Autorizar o Armazenamento</string>
     <string name="accept_storage_subtext">Autoriza à Maclaren usar o armazenamento de modo a guardar informações sobre a sua conta no seu telefone?</string>
     <string name="title_activity_main">Map</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_hello">Olá,</string>
+    <string name="nav_header_email">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_wallet">Carteira</string>
+    <string name="menu_settings">Opções</string>
+    <string name="menu_help">Ajuda and FAQs</string>
+    <string name="menu_exitaccount">Terminar sessão</string>
+    <string name="menu_history">Histórico</string>
+    <string name="account">Conta</string>
+    <string name="payment_method_button">Adicionar método de pagamento</string>
+    <string name="balance">Saldo:</string>
+    <string name="promotions">Promoções</string>
+    <string name="add_promotion_Code">Adicionar código promocional</string>
+    <string name="code_value">Introduzir código</string>
 </resources>

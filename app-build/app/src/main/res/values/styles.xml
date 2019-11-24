@@ -1,12 +1,12 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:windowFullscreen">true</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="android:background">@color/backgroundColor</item>
+        <item name="android:fontFamily">@font/calibri_reg</item>
     </style>
 
     <style name="editText_style">
@@ -30,7 +30,15 @@
         <item name="windowNoTitle">false</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="android:logo">@drawable/maclaren_logo_revert</item>
+        <item name="android:background">#ececec </item>
         <item name="android:displayOptions">useLogo|showHome</item>
+    </style>
+
+
+    <style name="NavigationDrawerStyle">
+
+        <item name="android:textSize">24sp</item><!-- text size in menu-->
+
     </style>
 
 
