@@ -6,14 +6,17 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import java.util.Objects;
+
 public class PermissionActivity extends AppCompatActivity {
 
     TextView titulo, desc;
-    private Bundle infoFromVerificationActivity;
+    Intent infoFromVerificationActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +24,10 @@ public class PermissionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_permission);
         titulo = findViewById(R.id.autorizar_titulo);
         desc = findViewById(R.id.autorizar_desc);
-        infoFromVerificationActivity = getIntent().getExtras();
+        infoFromVerificationActivity = getIntent();
 
-        assert infoFromVerificationActivity != null;
-
-        switch (infoFromVerificationActivity.getString("PERMISSION")) {
+        /* verifica a key que foi passada na intent para apresentar o respectivo texto no background da dialog */
+        switch (Objects.requireNonNull(infoFromVerificationActivity.getExtras().getString("PERMISSION"))) {
             case "LOCATION":
                 titulo.setText(R.string.accept_gps_title);
                 desc.setText(R.string.accept_gps_subtext);
@@ -36,11 +38,7 @@ public class PermissionActivity extends AppCompatActivity {
                 desc.setText(R.string.accept_storage_subtext);
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
                 break;
-            default:
-                finish();
-
         }
-
 
     }
 
@@ -48,20 +46,38 @@ public class PermissionActivity extends AppCompatActivity {
         Log.d("PERMISSION", "onRequestPermissionsResult: " + requestCode);
         switch (requestCode) {
             case 1: {
-                titulo.setText(R.string.accept_gps_title);
-                desc.setText(R.string.accept_gps_subtext);
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Intent intent = new Intent(PermissionActivity.this, MainActivity.class);
-                    finish();
-                    startActivity(intent, infoFromVerificationActivity);
+                    /* Se o utilizador aceitar as permissões de localizaçao */
+                    redirectActivity(MainActivity.class);
+                    break;
                 } else {
+                    /* Se o utilizador recusar as permissões */
+                    Toast.makeText(getApplicationContext(), "PRECISA DE ACEITAR AS PERMISSÕES PARA CONTINUAR", Toast.LENGTH_SHORT).show();
                     finish();
                 }
-                return;
             }
             case 2: {
-                finish();
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    /* Se o utilizador aceitar as permissões de armazenamento */
+                    redirectActivity(SignInActivity.class);
+                    break;
+                } else {
+                    /* Se o utilizador recusar as permissões */
+                    Toast.makeText(getApplicationContext(), "PRECISA DE ACEITAR AS PERMISSÕES PARA CONTINUAR", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
             }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
         }
     }
+
+    private void redirectActivity(Class activityDestiny) {
+        finish();
+        Intent i = new Intent(PermissionActivity.this, activityDestiny);
+        i.putExtras(infoFromVerificationActivity.getExtras());
+        startActivity(i);
+    }
+
 }

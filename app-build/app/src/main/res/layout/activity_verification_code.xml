@@ -79,6 +79,7 @@
                 android:fontFamily="@font/calibri_bold"
                 android:text="@string/finalizar"
                 android:textAlignment="center"
+                android:textColor="#ececec"
                 android:textSize="20sp" />
 
         </LinearLayout>

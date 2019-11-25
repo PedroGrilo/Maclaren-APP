@@ -14,7 +14,6 @@ import androidx.core.content.ContextCompat;
 
 import com.gabrielmiguelpedro.maclarenapp.Exceptions.InvalidFieldException;
 
-import java.io.File;
 import java.io.Serializable;
 
 public class SignInActivity extends AppCompatActivity implements Serializable {
@@ -30,16 +29,19 @@ public class SignInActivity extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+        /* verifica as permissoes de armazenamento*/
         checkPermissionsStorage();
 
         tV_email = findViewById(R.id.si_email);
         btn_next_email = findViewById(R.id.btn_si_next);
-        SignUpBtn();
-        emailCheck();
+
+        SignUpBtn();//botao de login
+        emailCheck();//verificação do email e continuação do registo
     }
 
     private void checkPermissionsStorage() {
         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            finish();// se não tiver permissão, termina a sign in activity, para que o utilizador não possa voltar à mesma sem permissoes
             Bundle b = new Bundle();
             b.putString("PERMISSION", "STORAGE");
             Intent i = new Intent(this, PermissionActivity.class);
@@ -52,6 +54,7 @@ public class SignInActivity extends AppCompatActivity implements Serializable {
         TextView btn_iniciar_sessao = findViewById(R.id.iniciar_sessao);
         btn_iniciar_sessao.setOnClickListener(new View.OnClickListener() {
             @Override
+            //acaba com a activity atual para começar a nova, ou seja, a activity de login
             public void onClick(View v) {
                 finish();
                 Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
@@ -66,7 +69,7 @@ public class SignInActivity extends AppCompatActivity implements Serializable {
             public void onClick(View v) {
                 try {
                     if (checkFields())
-                        callVerificationScene();
+                        callVerificationActivity(); // chama um método para passar à proxima acitivity
                 } catch (InvalidFieldException e) {
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -74,7 +77,7 @@ public class SignInActivity extends AppCompatActivity implements Serializable {
         });
     }
 
-    public void callVerificationScene() {
+    public void callVerificationActivity() {
         Intent intent = new Intent(SignInActivity.this, VerificationCodeActivity.class);
         Bundle email = new Bundle();
         email.putString("EMAIL", tV_email.getText().toString()); //Email
@@ -96,8 +99,7 @@ public class SignInActivity extends AppCompatActivity implements Serializable {
     @Override
     protected void onStart() {
         super.onStart();
-        FileConfig.f = new File(getApplicationContext().getFilesDir(), FileConfig.FILE_NAME);
-        if (FileConfig.readUser() != null) {
+        if (SaveInfoConfig.readUser(this) != null) {
             finish();
             startActivity(new Intent(SignInActivity.this, MainActivity.class));
         }
@@ -107,6 +109,5 @@ public class SignInActivity extends AppCompatActivity implements Serializable {
     protected void onStop() {
         super.onStop();
     }
-
 
 }
