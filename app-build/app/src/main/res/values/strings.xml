@@ -40,6 +40,6 @@
     <string name="payment_method_button">Adicionar método de pagamento</string>
     <string name="balance">Saldo:</string>
     <string name="promotions">Promoções</string>
-    <string name="add_promotion_Code">Adicionar código promocional</string>
+    <string name="add_promotion_Code">Adicionar código promocional.</string>
     <string name="code_value">Introduzir código</string>
 </resources>
