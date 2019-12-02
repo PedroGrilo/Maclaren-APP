@@ -56,7 +56,6 @@ public class SignInActivity extends AppCompatActivity implements Serializable {
             @Override
             //acaba com a activity atual para começar a nova, ou seja, a activity de login
             public void onClick(View v) {
-                finish();
                 Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
                 startActivity(intent);
             }
