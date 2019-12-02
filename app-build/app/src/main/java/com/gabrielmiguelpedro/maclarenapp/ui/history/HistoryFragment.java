@@ -1,4 +1,4 @@
-package com.gabrielmiguelpedro.maclarenapp.ui.wallet;
+package com.gabrielmiguelpedro.maclarenapp.ui.history;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,15 +13,15 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.gabrielmiguelpedro.maclarenapp.R;
 
-public class WalletFragment extends Fragment {
+public class HistoryFragment extends Fragment {
 
-    private WalletViewModel walletViewModel;
+    private HistoryViewModel historyViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        walletViewModel = ViewModelProviders.of(this).get(WalletViewModel.class);
+        historyViewModel = ViewModelProviders.of(this).get(HistoryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_wallet, container, false);
 
-        walletViewModel.getText().observe(this, new Observer<String>() {
+        historyViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
 
