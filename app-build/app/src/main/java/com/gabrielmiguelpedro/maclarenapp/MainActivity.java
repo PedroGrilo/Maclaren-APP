@@ -66,11 +66,9 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-        TextView navUsername = (TextView) headerView.findViewById(R.id.emailTextView);
+        TextView navUsername = headerView.findViewById(R.id.emailTextView);
         navUsername.setText(u.getEmail());
 
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_wallet, R.id.nav_settings, R.id.nav_help,R.id.nav_history)
                 .setDrawerLayout(drawer)
