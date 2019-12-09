@@ -37,7 +37,7 @@
     <string name="menu_exitaccount">Terminar sessão</string>
     <string name="menu_history">Histórico</string>
     <string name="account">Conta</string>
-    <string name="payment_method_button">Adicionar método de pagamento</string>
+    <string name="payment_method_button">Adicionar saldo</string>
     <string name="balance">Saldo:</string>
     <string name="promotions">Promoções</string>
     <string name="add_promotion_Code">Adicionar código promocional.</string>
