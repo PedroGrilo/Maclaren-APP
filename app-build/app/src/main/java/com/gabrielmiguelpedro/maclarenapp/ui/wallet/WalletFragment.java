@@ -30,7 +30,7 @@ public class WalletFragment extends Fragment {
 
             }
         });
-        
+
         return root;
     }
 

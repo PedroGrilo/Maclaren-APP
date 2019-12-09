@@ -22,7 +22,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.io.Serializable;
 
-public class MainActivity extends AppCompatActivity implements Serializable {
+public class MainActivity extends AppCompatActivity implements Serializable{
 
     private AppBarConfiguration mAppBarConfiguration;
     private Bundle infoBundle;
