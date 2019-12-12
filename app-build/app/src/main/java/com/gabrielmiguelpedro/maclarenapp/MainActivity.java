@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements Serializable{
         navUsername.setText(u.GetName()+"!");
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_wallet, R.id.nav_settings, R.id.nav_help,R.id.nav_history)
+                R.id.nav_home, R.id.nav_wallet, R.id.nav_settings, R.id.nav_help,R.id.nav_history,R.id.nav_wallet_balance)
                 .setDrawerLayout(drawer)
                 .build();
 
