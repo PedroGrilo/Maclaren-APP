@@ -26,4 +26,5 @@ interface User {
     void setLastCode(String lastCode);
 
 
+    String GetName();
 }

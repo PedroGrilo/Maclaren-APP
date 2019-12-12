@@ -71,4 +71,10 @@ public class UserClass implements User, Serializable {
         this.lastCode = lastCode;
     }
 
+    @Override
+    public String GetName(){
+        return email.split("@")[0];
+    }
+
+
 }

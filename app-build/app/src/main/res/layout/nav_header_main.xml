@@ -24,32 +24,32 @@
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:contentDescription="@string/nav_header_desc"
-            app:srcCompat="@mipmap/ic_launcher_round" />
+            app:srcCompat="@drawable/user_logo" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingStart="10dp"
-            android:orientation="vertical">
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
                 android:text="@string/nav_header_hello"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/emailTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|left"
+                android:paddingLeft="5dp"
                 android:text="@string/nav_header_email"
-                android:textColor="@color/light_grey"
-                android:textColorHighlight="@color/black"
-                android:textSize="18sp" />
+                android:textColor="@color/colorPrimary"
+                android:textColorHighlight="@color/colorPrimary"
+                android:textSize="25sp" />
         </LinearLayout>
 
     </LinearLayout>
