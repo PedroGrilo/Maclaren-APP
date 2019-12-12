@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +17,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.gabrielmiguelpedro.maclarenapp.MainActivity;
 import com.gabrielmiguelpedro.maclarenapp.R;
+import com.gabrielmiguelpedro.maclarenapp.ui.wallet.wallet_saldo.BalanceFragment;
 
 public class WalletFragment extends Fragment {
 
@@ -30,9 +33,19 @@ public class WalletFragment extends Fragment {
 
             }
         });
+        Button button = root.findViewById(R.id.button3);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "PRECISA DE ACEITAR AS PERMISSÕES PARA CONTINUAR", Toast.LENGTH_SHORT).show();
+                BalanceFragment balanceFragment= new BalanceFragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(((ViewGroup)getView().getParent()).getId(), balanceFragment, "balanceFragment")
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
 
         return root;
     }
-
-
 }
