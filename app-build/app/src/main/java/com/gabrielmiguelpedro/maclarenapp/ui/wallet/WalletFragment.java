@@ -37,12 +37,12 @@ public class WalletFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "PRECISA DE ACEITAR AS PERMISSÕES PARA CONTINUAR", Toast.LENGTH_SHORT).show();
                 BalanceFragment balanceFragment= new BalanceFragment();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(((ViewGroup)getView().getParent()).getId(), balanceFragment, "balanceFragment")
                         .addToBackStack(null)
                         .commit();
+                Toast.makeText(getContext(), "PRECISA DE ACEITAR AS PERMISSÕES PARA CONTINUAR", Toast.LENGTH_SHORT).show();
             }
         });
 
