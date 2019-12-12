@@ -59,8 +59,7 @@ public class MainActivity extends AppCompatActivity implements Serializable{
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = headerView.findViewById(R.id.emailTextView);
-
-        navUsername.setText(u.GetName()+"!");
+        navUsername.setText(u.getEmail());
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_wallet, R.id.nav_settings, R.id.nav_help,R.id.nav_history)
