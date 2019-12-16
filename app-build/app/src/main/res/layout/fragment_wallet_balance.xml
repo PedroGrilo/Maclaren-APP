@@ -19,9 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="O seu saldo disponivel:"
+            android:text="@string/o_seu_saldo_disponivel"
             android:textAlignment="center"
-            android:textSize="30sp" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/textView6"
@@ -31,7 +31,7 @@
             android:text="0€"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
-            android:textSize="70sp" />
+            android:textSize="50sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -44,9 +44,9 @@
             android:id="@+id/textView7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Adicione um Montante"
+            android:text="@string/adicione_um_montante"
             android:textAlignment="center"
-            android:textSize="30sp" />
+            android:textSize="22sp" />
 
         <EditText
             android:id="@+id/editText"
@@ -56,8 +56,9 @@
             android:layout_marginHorizontal="40dp"
             android:layout_marginVertical="15dp"
             android:layout_marginTop="28dp"
+            android:inputType="numberDecimal"
             android:ems="10"
-            android:hint="Montante"
+            android:hint="@string/montante"
             android:textColor="@color/black"
             android:textColorHint="@color/colorHint" />
     </LinearLayout>
@@ -77,9 +78,10 @@
             android:layout_marginBottom="50dp"
             android:background="@drawable/buttons"
             android:fontFamily="@font/calibri_bold"
+            android:paddingHorizontal="50px"
+            android:text="@string/confirme_o_metodo_de_pagamento"
             android:textColor="#ececec"
-            android:textSize="20sp"
-            android:text="Confirme o metodo de Pagamento" />
+            android:textSize="15sp" />
     </LinearLayout>
 
 </LinearLayout>

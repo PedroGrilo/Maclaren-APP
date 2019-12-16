@@ -42,4 +42,8 @@
     <string name="promotions">Promoções</string>
     <string name="add_promotion_Code">Adicionar código promocional.</string>
     <string name="code_value">Introduzir código</string>
+    <string name="confirme_o_metodo_de_pagamento">Confirme o metodo de Pagamento</string>
+    <string name="montante">Montante</string>
+    <string name="adicione_um_montante">Adicione um Montante</string>
+    <string name="o_seu_saldo_disponivel">O seu saldo disponivel:</string>
 </resources>
