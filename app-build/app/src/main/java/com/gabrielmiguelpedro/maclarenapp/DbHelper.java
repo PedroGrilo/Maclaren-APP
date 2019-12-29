@@ -1,12 +1,16 @@
 package com.gabrielmiguelpedro.maclarenapp;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.icu.text.SimpleDateFormat;
 import android.location.Location;
 
 import androidx.annotation.Nullable;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class DbHelper extends SQLiteOpenHelper {
@@ -32,5 +36,19 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
         onCreate(sqLiteDatabase);
+    }
+
+    public void insertValues(String email, String lastcode){
+        /*Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        formatter.format(date)*/
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_EMAIL,email);
+        contentValues.put(COL_LASTCODE,lastcode);
+        contentValues.put(COL_LOGGED,1);
+        contentValues.put(COL_LASTLOGIN, "");
+
+        db.insert(TABLE_NAME, null, contentValues);
     }
 }
