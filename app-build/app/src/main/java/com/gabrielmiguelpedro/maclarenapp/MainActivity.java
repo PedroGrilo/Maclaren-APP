@@ -28,8 +28,10 @@ public class MainActivity extends AppCompatActivity implements Serializable{
     private Bundle infoBundle;
     private User u;
 
+    DbHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        db = new DbHelper(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
