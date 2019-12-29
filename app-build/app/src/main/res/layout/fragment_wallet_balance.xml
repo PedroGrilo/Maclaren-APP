@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/textView_FWB_Saldo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -24,7 +24,7 @@
             android:textSize="25sp" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/textView_FWB_Valor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -41,7 +41,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/textView_FWB_Montante"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/adicione_um_montante"
@@ -49,16 +49,16 @@
             android:textSize="22sp" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/editText_FWB_Valor"
             style="@style/editText_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
             android:layout_marginVertical="15dp"
             android:layout_marginTop="28dp"
-            android:inputType="numberDecimal"
             android:ems="10"
-            android:hint="@string/montante"
+            android:hint="20"
+            android:inputType="numberDecimal"
             android:textColor="@color/black"
             android:textColorHint="@color/colorHint" />
     </LinearLayout>
@@ -71,7 +71,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/button_FWB_Pagamento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
