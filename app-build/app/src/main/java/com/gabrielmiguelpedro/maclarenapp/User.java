@@ -1,30 +1,86 @@
 package com.gabrielmiguelpedro.maclarenapp;
 
+
 import android.location.Location;
 
+import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
-interface User {
-    Location getLastLocation();
+public class User implements Serializable {
 
-    void setLastLocation(Location lastLocation);
+    private int userID;
+    private String email;
+    private String lastCode;
+    private int isOk;
+    private Date lastLogin;
+    private char userType;
 
-    Date getLastLogin();
+    public User(){}
 
-    void setLastLogin(Date lastLogin);
+    public User(int userID, String email, String lastCode, int isOk, Date lastLogin, char userType) {
+        this.userID = userID;
+        this.email = email;
+        this.lastCode = lastCode;
+        this.isOk = isOk;
+        this.lastLogin = lastLogin;
+        this.userType = userType;
+    }
 
-    Boolean getLogged();
+    public int getUserID() {
+        return userID;
+    }
 
-    void setLogged(Boolean logged);
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
 
-    String getEmail();
+    public String getEmail() {
+        return email;
+    }
 
-    void setEmail(String email);
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    String getLastCode();
+    public String getLastCode() {
+        return lastCode;
+    }
 
-    void setLastCode(String lastCode);
+    public void setLastCode(String lastCode) {
+        this.lastCode = lastCode;
+    }
+
+    public int getIsOk() {
+        return isOk;
+    }
+
+    public void setIsOk(int isOk) {
+        this.isOk = isOk;
+    }
+
+    public Date getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    public char getUserType() {
+        return userType;
+    }
+
+    public void setUserType(char userType) {
+        this.userType = userType;
+    }
+
+    public String GetName(){
+        return email.split("@")[0];
+    }
 
 
-    String GetName();
+
+
 }

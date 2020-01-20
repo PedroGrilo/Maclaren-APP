@@ -20,7 +20,7 @@ public class SaveInfoConfig implements Serializable {
         lastcode = sharedPref.getString(VALOR_CODE, "");
 
         if (!email.equals("") && !lastcode.equals(""))
-            return new UserClass(email, lastcode);
+            return new User(email, lastcode);
 
         return null;
 

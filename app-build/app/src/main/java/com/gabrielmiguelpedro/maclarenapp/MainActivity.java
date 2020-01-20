@@ -16,9 +16,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.io.Serializable;
 
@@ -43,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements Serializable{
             infoBundle = getIntent().getExtras();
             String email = infoBundle.getString("EMAIL");
             String code = infoBundle.getString("CODE");
-            u = new UserClass(email, code);
+            u = new User(email, code);
             SaveInfoConfig.saveUser(u, this);
         } else {
             u = SaveInfoConfig.readUser(this);
