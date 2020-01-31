@@ -2,25 +2,34 @@ package com.gabrielmiguelpedro.maclarenapp;
 
 public class BabyCar{
 
-    private int babyCarId;
+    private int id;
     private BabyCarType babyCarType;
     private boolean inUse;
     private String comments;
 
     public BabyCar(){}
 
-    public BabyCar(int babyCarId, BabyCarType babyCarType, String comments) {
-        this.babyCarId = babyCarId;
+    public BabyCar(int id, BabyCarType babyCarType, boolean inUse, String comments) {
+        this.id = id;
         this.babyCarType = babyCarType;
+        this.inUse = inUse;
         this.comments = comments;
     }
 
-    public int getBabyCarId() {
-        return babyCarId;
+    public int getId() {
+        return id;
     }
 
-    public void setBabyCarId(int babyCarId) {
-        this.babyCarId = babyCarId;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public boolean isInUse() {
+        return inUse;
+    }
+
+    public void setInUse(boolean inUse) {
+        this.inUse = inUse;
     }
 
     public BabyCarType getBabyCarType() {

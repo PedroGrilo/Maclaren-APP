@@ -2,25 +2,15 @@ package com.gabrielmiguelpedro.maclarenapp;
 
 public class BabyCarType {
 
-    private int babyCarTypeId;
+    private int id;
     private float price;
     private String name;
 
-    public BabyCarType(int babyCarTypeId, float price, String name) {
-        this.babyCarTypeId = babyCarTypeId;
+
+    public BabyCarType(int id,String name, float price) {
+        this.id = id;
         this.price = price;
         this.name = name;
-    }
-
-    public int getBabyCarTypeId() {
-        /** if(cartype ==  null) cartype = dbhelper.get(id)
-         * return cartype **/
-        return babyCarTypeId;
-
-    }
-
-    public void setBabyCarTypeId(int babyCarTypeId) {
-        this.babyCarTypeId = babyCarTypeId;
     }
 
     public float getPrice() {
@@ -37,5 +27,13 @@ public class BabyCarType {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

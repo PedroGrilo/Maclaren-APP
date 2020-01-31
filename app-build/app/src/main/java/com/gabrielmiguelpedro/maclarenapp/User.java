@@ -13,21 +13,48 @@ public class User implements Serializable {
     private int userID;
     private String email;
     private String lastCode;
-    private int isOk;
+    private boolean isOk;
     private Date lastLogin;
     private char userType;
+    private boolean logged;
 
     public User(){}
 
-    public User(int userID, String email, String lastCode, int isOk, Date lastLogin, char userType) {
+
+    public User(int userID, String email, String lastCode, boolean isOk, Date lastLogin, char userType, boolean logged) {
+
         this.userID = userID;
         this.email = email;
         this.lastCode = lastCode;
         this.isOk = isOk;
         this.lastLogin = lastLogin;
         this.userType = userType;
+        this.logged = logged;
     }
 
+
+
+
+    public boolean isOk() {
+        return isOk;
+    }
+
+
+
+    public void setOk(boolean ok) {
+        isOk = ok;
+    }
+
+
+    public boolean isLogged() {
+        return logged;
+    }
+
+
+
+    public void setLogged(boolean logged) {
+        this.logged = logged;
+    }
     public int getUserID() {
         return userID;
     }
@@ -52,13 +79,6 @@ public class User implements Serializable {
         this.lastCode = lastCode;
     }
 
-    public int getIsOk() {
-        return isOk;
-    }
-
-    public void setIsOk(int isOk) {
-        this.isOk = isOk;
-    }
 
     public Date getLastLogin() {
         return lastLogin;
@@ -79,6 +99,8 @@ public class User implements Serializable {
     public String GetName(){
         return email.split("@")[0];
     }
+
+
 
 
 
