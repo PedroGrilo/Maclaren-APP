@@ -5,14 +5,20 @@ public class Historic {
     private int date;
     private float cost;
     private HistoricCoordinates historicCoordinates;
+    private Transactions transactions;
+    private User user;
+    private BabyCar babyCar;
 
     public Historic() { }
 
-    public Historic(int id, int date, float cost, HistoricCoordinates historicCoordinates) {
+    public Historic(int id, int date, float cost, HistoricCoordinates historicCoordinates, Transactions transactions, User user, BabyCar babyCar) {
         this.id = id;
         this.date = date;
         this.cost = cost;
         this.historicCoordinates = historicCoordinates;
+        this.transactions = transactions;
+        this.user = user;
+        this.babyCar = babyCar;
     }
 
     public int getId() {
@@ -45,5 +51,29 @@ public class Historic {
 
     public void setHistoricCoordinates(HistoricCoordinates historicCoordinates) {
         this.historicCoordinates = historicCoordinates;
+    }
+
+    public Transactions getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(Transactions transactions) {
+        this.transactions = transactions;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public BabyCar getBabyCar() {
+        return babyCar;
+    }
+
+    public void setBabyCar(BabyCar babyCar) {
+        this.babyCar = babyCar;
     }
 }
