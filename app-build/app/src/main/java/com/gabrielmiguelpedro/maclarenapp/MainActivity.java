@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements Serializable{
             se sim > dá logo read
             se não > cria um novo utilizador, para que da proxima vez que iniciar a app não precisar passar pela activity de registo ou login
          */
-        if (SaveInfoConfig.readUser(this) == null) {
+        /*if (SaveInfoConfig.readUser(this) == null) {
             infoBundle = getIntent().getExtras();
             String email = infoBundle.getString("EMAIL");
             String code = infoBundle.getString("CODE");
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements Serializable{
             SaveInfoConfig.saveUser(u, this);
         } else {
             u = SaveInfoConfig.readUser(this);
-        }
+        }*/
 
 
         checkPermissions(); // verificar permissoes de localizaão

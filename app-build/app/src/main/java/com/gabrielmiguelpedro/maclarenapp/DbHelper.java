@@ -120,18 +120,21 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
     public void addBabyCar(BabyCar babyCar){
-
             SQLiteDatabase db = this.getWritableDatabase();
-
             ContentValues values = new ContentValues();
-            values.put(CARS_ID_CARTYPE, babyCar.getBabyCarType().getId()); // get id cartype
-            values.put(CARS_COMMENTS,babyCar.getComments()); // get comments
+
+            values.put(CARS_COMMENTS, babyCar.getComments());
+            //values.put(CARS_ID_CARTYPE, babyCar.getBabyCarType()); ERRO
 
             db.insert(TABLE_CARS, null, values);
             db.close();
     }
 
+    public void addHistoric(Historic historic){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
 
-
+        values.put(HIS);
+    }
 
 }
