@@ -168,7 +168,42 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(HIS);
+        values.put(HISTORIC_COST, historic.getCost());
+        values.put(HISTORIC_HISTORICDATE, historic.getDate());
+        //values.put(HISTORIC_ID_CAR, historic.getBabyCar());ERRO
+        //values.put(HISTORIC_ID_USER, historic.getUser());ERRO
+        //values.put(HISTORIC_ID_TRANSACTIONS, historic.getTransactions());ERRO
+        //values.put(HISTORIC_ID_HISTORICCOORDINATES, historic.getHistoricCoordinates());ERRO
+
+        db.insert(TABLE_HISTORIC, null, values);
+
+        db.close();
+    }
+
+    public void addHistoricCoordinates(HistoricCoordinates historicCoordinates){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(HISTORICCOORDINATES_COORLAT, historicCoordinates.getLat());
+        values.put(HISTORICCOORDINATES_COORLONG, historicCoordinates.getLonge());
+        values.put(HISTORICCOORDINATES_DATE, historicCoordinates.getDate());
+
+        db.insert(TABLE_HISTORICCOORDINATES, null, values);
+
+        db.close();
+    }
+
+    public void addTransactions(Transactions transactions){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        //values.put(TRANSACTIONS_ID_HISTORIC, transactions.getHistoric());ERRO
+        values.put(TRANSACTIONS_VALUE, transactions.getValue());
+        //values.put(TRANSACTIONS_ID_USER, transactions.getUser());ERRO
+
+        db.insert(TABLE_TRANSACTIONS, null, values);
+
+        db.close();
     }
 
 }
