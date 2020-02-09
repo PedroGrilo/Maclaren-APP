@@ -19,6 +19,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements Serializable{
 
@@ -37,15 +38,15 @@ public class MainActivity extends AppCompatActivity implements Serializable{
             se sim > dá logo read
             se não > cria um novo utilizador, para que da proxima vez que iniciar a app não precisar passar pela activity de registo ou login
          */
-        /*if (SaveInfoConfig.readUser(this) == null) {
+        if (SaveInfoConfig.readUser(this) == null) {
             infoBundle = getIntent().getExtras();
             String email = infoBundle.getString("EMAIL");
             String code = infoBundle.getString("CODE");
-            u = new User(email, code);
+            u = new User(1,email,code,true,new Date(),'C',true);
             SaveInfoConfig.saveUser(u, this);
         } else {
             u = SaveInfoConfig.readUser(this);
-        }*/
+        }
 
 
         checkPermissions(); // verificar permissoes de localizaão

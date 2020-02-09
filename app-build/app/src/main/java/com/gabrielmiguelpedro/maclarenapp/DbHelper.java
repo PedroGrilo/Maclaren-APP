@@ -61,7 +61,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TABLE_USERS = "CREATE TABLE " + TABLE_USERS
-                + " ( "+ USERS_ID + " INTEGER PRIMARYKEY AUTOINCREMENT, "
+                + " ( "+ USERS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + USERS_EMAIL + " TEXT, "
                 + USERS_LASTCODE + " INT, "
                 + USERS_isOK + " INT, "
@@ -70,23 +70,23 @@ public class DbHelper extends SQLiteOpenHelper {
                 + USERS_USERTYPE + " TEXT " + " );";
 
         String CREATE_TABLE_TRANSACTIONS = "CREATE TABLE " + TABLE_TRANSACTIONS
-                + " ( " + TRANSACTIONS_ID + " INTEGER PRIMARYKEY AUTOINCREMENT, "
+                + " ( " + TRANSACTIONS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + TRANSACTIONS_VALUE + " INT, "
                 + " FOREIGN KEY ("+TRANSACTIONS_ID_USER+") REFERENCES "+TABLE_USERS+"("+USERS_ID+"), "
                 + " FOREIGN KEY ("+TRANSACTIONS_ID_HISTORIC+") REFERENCES "+TABLE_HISTORIC+"("+HISTORIC_ID+"));";
 
         String CREATE_TABLE_CARTYPE = "CREATE TABLE " + TABLE_CARTYPE
-                + " ( " + CARTYPE_ID + " INTEGER PRIMARYKEY AUTOINCREMENT, "
+                + " ( " + CARTYPE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + CARTYPE_NAME + " TEXT, "
                 + CARTYPE_BASECOST + " REAL );";
 
         String CREATE_TABLE_CARS = "CREATE TABLE " + TABLE_CARS
-                + " ( " + CARS_ID + " INTEGER PRIMARYKEY AUTOINCREMENT, "
+                + " ( " + CARS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + CARS_COMMENTS + " TEXT, "
                 + "FOREIGN KEY ("+CARS_ID_CARTYPE+") REFERENCES "+TABLE_CARTYPE+"("+CARTYPE_ID+"));";
 
         String CREATE_TABLE_HISTORIC = "CREATE TABLE " + TABLE_HISTORIC
-                + " ( " + HISTORIC_ID + " INTEGER PRIMARYKEY AUTOINCREMENT, "
+                + " ( " + HISTORIC_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + HISTORIC_HISTORICDATE + " INT, "
                 + HISTORIC_COST + " REAL, "
                 +"FOREIGN KEY ("+HISTORIC_ID_HISTORICCOORDINATES+") REFERENCES "+TABLE_HISTORICCOORDINATES+"("+HISTORICCOORDINATES_ID+"), "
@@ -95,23 +95,17 @@ public class DbHelper extends SQLiteOpenHelper {
                 +"FOREIGN KEY ("+HISTORIC_ID_CAR+") REFERENCES "+TABLE_CARS+"("+CARS_ID+"));";
 
         String CREATE_TABLE_HISTORICCOORDINATES = "CREATE TABLE " + TABLE_HISTORICCOORDINATES
-                + " ( " + HISTORICCOORDINATES_ID + " INTEGER PRIMARYKEY AUTOINCREMENT, "
+                + " ( " + HISTORICCOORDINATES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + HISTORICCOORDINATES_DATE + " INT, "
                 + HISTORICCOORDINATES_COORLONG+" INT, "
                 + HISTORICCOORDINATES_COORLAT+" INT );";
 
-        db.execSQL(TABLE_USERS);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_USERS);
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_TRANSACTIONS);
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_CARTYPE);
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_CARS);
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_HISTORIC);
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_HISTORICCOORDINATES);
-        this.onCreate(db);
+        db.execSQL(CREATE_TABLE_USERS);
+        db.execSQL(CREATE_TABLE_TRANSACTIONS);
+        db.execSQL(CREATE_TABLE_CARTYPE);
+        db.execSQL(CREATE_TABLE_CARS);
+        db.execSQL(CREATE_TABLE_HISTORIC);
+        db.execSQL(CREATE_TABLE_HISTORICCOORDINATES);
 
         addBabyCarType(new BabyCarType(1,"Carrinho Pequeno",5));
         addBabyCarType(new BabyCarType(2,"Carrinho Médio",10));
@@ -119,10 +113,22 @@ public class DbHelper extends SQLiteOpenHelper {
         addBabyCarType(new BabyCarType(4,"Carrinho Gigante Edér",0));
     }
 
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+//        db.execSQL("DROP TABLE IF EXISTS "+TABLE_USERS);
+//        db.execSQL("DROP TABLE IF EXISTS "+TABLE_TRANSACTIONS);
+//        db.execSQL("DROP TABLE IF EXISTS "+TABLE_CARTYPE);
+//        db.execSQL("DROP TABLE IF EXISTS "+TABLE_CARS);
+//        db.execSQL("DROP TABLE IF EXISTS "+TABLE_HISTORIC);
+//        db.execSQL("DROP TABLE IF EXISTS "+TABLE_HISTORICCOORDINATES);
+//        this.onCreate(db);
+//
+    }
 
 
+// JB Parece Ok
 
-   public void addUser(User user){
+    public void addUser(User user){
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
         // 2. create ContentValues to add key "column"/value
@@ -135,7 +141,6 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(USERS_USERTYPE, user.getUserType()+""); // get usertype
 
         db.insert(TABLE_USERS, null, values);
-
         db.close();
     }
 
@@ -152,16 +157,17 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-
     public void addBabyCar(BabyCar babyCar){
-            SQLiteDatabase db = this.getWritableDatabase();
-            ContentValues values = new ContentValues();
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
 
-            values.put(CARS_COMMENTS, babyCar.getComments());
-            //values.put(CARS_ID_CARTYPE, babyCar.getBabyCarType()); ERRO
+        values.put(CARS_COMMENTS, babyCar.getComments());
+        values.put(CARS_ID_CARTYPE, babyCar.getBabyCarType().getId());      // FALTAVA O GETID
 
-            db.insert(TABLE_CARS, null, values);
-            db.close();
+        //values.put(CARS_ID_CARTYPE, babyCar.getBabyCarType())
+
+        db.insert(TABLE_CARS, null, values);
+        db.close();
     }
 
     public void addHistoric(Historic historic){
@@ -170,10 +176,10 @@ public class DbHelper extends SQLiteOpenHelper {
 
         values.put(HISTORIC_COST, historic.getCost());
         values.put(HISTORIC_HISTORICDATE, historic.getDate());
-        //values.put(HISTORIC_ID_CAR, historic.getBabyCar());ERRO
-        //values.put(HISTORIC_ID_USER, historic.getUser());ERRO
-        //values.put(HISTORIC_ID_TRANSACTIONS, historic.getTransactions());ERRO
-        //values.put(HISTORIC_ID_HISTORICCOORDINATES, historic.getHistoricCoordinates());ERRO
+        values.put(HISTORIC_ID_CAR, historic.getBabyCar().getId());
+        values.put(HISTORIC_ID_USER, historic.getUser().getUserID());
+        values.put(HISTORIC_ID_TRANSACTIONS, historic.getTransactions().getId());
+        values.put(HISTORIC_ID_HISTORICCOORDINATES, historic.getHistoricCoordinates().getId());
 
         db.insert(TABLE_HISTORIC, null, values);
 
@@ -197,13 +203,12 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        //values.put(TRANSACTIONS_ID_HISTORIC, transactions.getHistoric());ERRO
+        values.put(TRANSACTIONS_ID_HISTORIC, transactions.getHistoric().getId());
         values.put(TRANSACTIONS_VALUE, transactions.getValue());
-        //values.put(TRANSACTIONS_ID_USER, transactions.getUser());ERRO
+        values.put(TRANSACTIONS_ID_USER, transactions.getUser().getUserID());
 
         db.insert(TABLE_TRANSACTIONS, null, values);
 
         db.close();
     }
-
 }

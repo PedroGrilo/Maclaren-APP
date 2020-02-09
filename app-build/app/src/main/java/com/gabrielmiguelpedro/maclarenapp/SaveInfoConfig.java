@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class SaveInfoConfig implements Serializable {
 
@@ -20,7 +21,7 @@ public class SaveInfoConfig implements Serializable {
         lastcode = sharedPref.getString(VALOR_CODE, "");
 
         if (!email.equals("") && !lastcode.equals(""))
-            return new User(email, lastcode);
+            return new User(1,email,lastcode,true,new Date(),'C',true);
 
         return null;
 

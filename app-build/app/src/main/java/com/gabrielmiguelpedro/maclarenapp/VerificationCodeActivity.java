@@ -2,6 +2,7 @@ package com.gabrielmiguelpedro.maclarenapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,6 +30,8 @@ public class VerificationCodeActivity extends AppCompatActivity {
         info = getIntent().getExtras();
 
         generatedCode = generateRandomCode();
+
+        Toast.makeText(getApplicationContext(),String.valueOf(generatedCode),Toast.LENGTH_LONG).show();
 
         sendMaclarenCode();
 
