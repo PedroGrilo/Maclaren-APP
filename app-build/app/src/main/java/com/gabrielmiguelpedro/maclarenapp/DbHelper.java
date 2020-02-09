@@ -39,6 +39,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String CARS_ID = "ID";
     public static final String CARS_ID_CARTYPE = "ID_CARTYPE";
     public static final String CARS_COMMENTS = "COMMENTS";
+    public static final String CARS_ISUSE = "ISUSE";
 
     public static final String TABLE_HISTORIC = "historic";
     public static final String HISTORIC_ID = "ID";
@@ -83,6 +84,7 @@ public class DbHelper extends SQLiteOpenHelper {
         String CREATE_TABLE_CARS = "CREATE TABLE " + TABLE_CARS
                 + " ( " + CARS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + CARS_COMMENTS + " TEXT, "
+                + CARS_ISUSE + " INT, "
                 + "FOREIGN KEY ("+CARS_ID_CARTYPE+") REFERENCES "+TABLE_CARTYPE+"("+CARTYPE_ID+"));";
 
         String CREATE_TABLE_HISTORIC = "CREATE TABLE " + TABLE_HISTORIC
@@ -107,10 +109,20 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_HISTORIC);
         db.execSQL(CREATE_TABLE_HISTORICCOORDINATES);
 
-        addBabyCarType(new BabyCarType(1,"Carrinho Pequeno",5));
+        BabyCarType BT1 = new BabyCarType(1,"Carrinho Pequeno",5);
+        BabyCarType BT2 = new BabyCarType(2,"Carrinho Médio",10);
+        BabyCarType BT3 = new BabyCarType(3,"Carrinho Grande",20);
+        BabyCarType BT4 = new BabyCarType(4,"Carrinho Gigante Edér",0);
+
+        /*addBabyCarType(new BabyCarType(1,"Carrinho Pequeno",5));
         addBabyCarType(new BabyCarType(2,"Carrinho Médio",10));
         addBabyCarType(new BabyCarType(3,"Carrinho Grande",20));
-        addBabyCarType(new BabyCarType(4,"Carrinho Gigante Edér",0));
+        addBabyCarType(new BabyCarType(4,"Carrinho Gigante Edér",0));*/
+
+        addBabyCar(new BabyCar(1, BT1, false, "Isto é um carrinho Pequeno do tipo 1"));
+        addBabyCar(new BabyCar(2, BT2, false, "Isto é um carrinho Médio do tipo 2"));
+        addBabyCar(new BabyCar(3, BT3, false, "Isto é um carrinho Grande do tipo 3"));
+        addBabyCar(new BabyCar(4, BT4, false, "Isto é um carrinho Gigante Edér do tipo 4"));
     }
 
     @Override
@@ -122,7 +134,6 @@ public class DbHelper extends SQLiteOpenHelper {
 //        db.execSQL("DROP TABLE IF EXISTS "+TABLE_HISTORIC);
 //        db.execSQL("DROP TABLE IF EXISTS "+TABLE_HISTORICCOORDINATES);
 //        this.onCreate(db);
-//
     }
 
 
@@ -161,6 +172,7 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
+        values.put(CARS_ISUSE, babyCar.isInUse());
         values.put(CARS_COMMENTS, babyCar.getComments());
         values.put(CARS_ID_CARTYPE, babyCar.getBabyCarType().getId());      // FALTAVA O GETID
 

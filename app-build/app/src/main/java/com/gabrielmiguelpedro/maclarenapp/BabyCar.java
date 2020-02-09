@@ -7,8 +7,6 @@ public class BabyCar{
     private boolean inUse;
     private String comments;
 
-    public BabyCar(){}
-
     public BabyCar(int id, BabyCarType babyCarType, boolean inUse, String comments) {
         this.id = id;
         this.babyCarType = babyCarType;
