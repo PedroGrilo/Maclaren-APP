@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import static androidx.constraintlayout.widget.Constraints.TAG;
 import static java.sql.Types.INTEGER;
 import static org.xmlpull.v1.XmlPullParser.TEXT;
 
@@ -128,10 +130,10 @@ public class DbHelper extends SQLiteOpenHelper {
         BabyCarType BT3 = new BabyCarType(3,"Carrinho Grande",20);
         BabyCarType BT4 = new BabyCarType(4,"Carrinho Gigante Edér",0);
 
-        addBabyCarType(db, new BabyCarType(1,"Carrinho Pequeno",5));
-        addBabyCarType(db, new BabyCarType(2,"Carrinho Médio",10));
-        addBabyCarType(db, new BabyCarType(3,"Carrinho Grande",20));
-        addBabyCarType(db, new BabyCarType(4,"Carrinho Gigante Edér",0));
+        addBabyCarType(db, BT1);
+        addBabyCarType(db, BT2);
+        addBabyCarType(db, BT3);
+        addBabyCarType(db, BT4);
 
         addBabyCar(db, new BabyCar(1, BT1, false, "Isto é um carrinho Pequeno do tipo 1"));
         addBabyCar(db, new BabyCar(2, BT2, false, "Isto é um carrinho Médio do tipo 2"));
@@ -253,64 +255,33 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    /*public List<BabyCar> getAllBabyCars(){
-        List<BabyCar> babyCarsList = new LinkedList<BabyCar>();
-
-        String query = "SELECT * FROM " + TABLE_CARS;
+    public ArrayList<BabyCar> getAllBabyCars(){
+        ArrayList<BabyCar> babyCarsList = new ArrayList<BabyCar>();
+        /*                      0              1                2           3           4                 5*/
+        String query = "SELECT cars.id, cars.id_cartype, cars.comments, cars.isuse, cartype.name, cartype.basecost FROM " + TABLE_CARS + " JOIN cartype ON cars.id_cartype = cartype.id";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
-        BabyCar babyCar = null;
-
-        if (cursor.moveToFirst()) {
-            do {
-                boolean inUse = cursor.getInt(3) > 0;
-                if(!inUse){
-                    babyCar = new BabyCar();
-                    babyCar.setId(Integer.parseInt(cursor.getString(0)));
-                    babyCar.setComments(cursor.getString(2));
-                    babyCar.setInUse(false);
-                }
-                babyCarsList.add(babyCar);
-            } while (cursor.moveToNext());
-        }
-
-        db.close();
-        return babyCarsList;
-    }*/
-
-    public List<BabyCar> getAllBabyCars(){
-        int idAux;
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select * from "+TABLE_CARS, null);
         ArrayList<BabyCar> cars = new ArrayList<BabyCar>();
-
         while (cursor.moveToNext()){
             BabyCar bc = new BabyCar();
-            bc.setId(cursor.getInt(0));
-            bc.setComments(cursor.getString(1));
-            bc.setInUse(false);
+            bc.setId( cursor.getInt(0) );
+            bc.setComments(cursor.getString(2));
 
-            idAux = cursor.getInt(3);
+            /** IN USE **/
+            boolean inuse = (cursor.getString(3)).equals("1");
+            bc.setInUse(inuse);
 
-            Cursor cursorAux = db.rawQuery("select * from "+TABLE_CARTYPE, null);
-            ArrayList<BabyCarType> carsType = new ArrayList<BabyCarType>();
-            while (cursor.moveToNext()){
-                BabyCarType bct = new BabyCarType();
-                bct.setId(cursorAux.getInt(0));
-                bct.setName(cursorAux.getString(1));
-                bct.setPrice(cursorAux.getFloat(2));
+            /** GET CAR TYPE**/
+            int bctypeid = cursor.getInt(1);
+            String bctypename = cursor.getString(4);
+            Float bctypebasecost = cursor.getFloat(5);
 
-                carsType.add(bct);
-            }
+            bc.setBabyCarType(new BabyCarType(bctypeid,bctypename,bctypebasecost));
 
-            for (BabyCarType babyCarType : carsType) {
-                if(babyCarType.getId()==idAux){
-                    bc.setBabyCarType(babyCarType);
-                }
-            }
+            //Log.d(TAG, "getAllBabyCars: " + bc.getComments());
 
-            cars.add(bc);
+            cars.add( bc );
         }
         db.close();
         return cars;

@@ -42,7 +42,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener,
@@ -115,37 +117,44 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
 
             Log.d(TAG, "enableMyLocation: " + callback.getDb().getAllBabyCars()); // PERGUNTA AO STOR PQ QUE ISTO NAO DA?/ Ok eu pergunto
 
-            List<BabyCar> cars = callback.getDb().getAllBabyCars();
+            ArrayList<BabyCar> cars = callback.getDb().getAllBabyCars();
+
+
             for (BabyCar babyCar : cars) {
 
-                Toast.makeText(getContext(),""+babyCar.getBabyCarType().getName(), Toast.LENGTH_SHORT).show();
-                /*mMap.addMarker(new MarkerOptions().position(new LatLng(38.53760, -8.87806))
-                        .title(babyCar.getBabyCarType().getName().toString())
-                        .icon(bbycar_s)
-                        .snippet("A wonderful chicken"))
-                        .setTag("CHICK01");*/
+                Log.d(TAG, "cars: " + babyCar.getComments());
+
+              //  Toast.makeText(getContext(),""+babyCar.getBabyCarType().getName(), Toast.LENGTH_SHORT).show();
+
+                BitmapDescriptor icon = null;
+                double latitude = 38.53760;
+
+                double longitude = -8.87806;
+
+                switch (babyCar.getBabyCarType().getId()){
+                    case 1 : //  pequeno
+                        icon = bbycar_s;
+                        latitude += 0.00002;//para testes
+                    case 2 : // medio
+                        icon = bbycar_m;
+                        longitude += 0.00002;//para testes
+                    case 3: // grande
+                        icon = bbycar_xl;
+                        latitude += 0.00003;//para testes
+                    case 4: //giaante
+                        icon = bbycar_xl; //temos de fazer um icon;
+                        latitude += 0.00002;//para testes
+                        longitude += 0.00003;//para testes
+                }
+
+
+                mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude))
+                        .title(babyCar.getBabyCarType().getName())
+                        .icon(icon)
+                        .snippet(babyCar.getComments()))
+                        .setTag(getString(R.string.inuse)+ " - " +babyCar.isInUse());
             }
 
-            /*mMap.addMarker(new MarkerOptions().position(new LatLng(38.53760, -8.87806))
-                    .title("BabyCar S")
-                    .icon(bbycar_s)
-                    .snippet("A wonderful chicken"))
-                    .setTag("CHICK01");
-            mMap.addMarker(new MarkerOptions().position(new LatLng(38.53745, -8.87796))
-                    .title("BabyCar M")
-                    .icon(bbycar_m)
-                    .snippet("A wonderful chicken"))
-                    .setTag("CHICK02");
-            mMap.addMarker(new MarkerOptions().position(new LatLng(38.53745, -8.87816))
-                    .title("BabyCar XL")
-                    .icon(bbycar_xl)
-                    .snippet("A wonderful chicken"))
-                    .setTag("CHICK03");
-            mMap.addMarker(new MarkerOptions().position(new LatLng(38.53745, -8.87826))
-                    .title("BabyCar M")
-                    .icon(bbycar_m)
-                    .snippet("A wonderful chicken"))
-                    .setTag("CHICK04");*/
             LocationManager locationManager = (LocationManager)
                     getActivity().getSystemService(Context.LOCATION_SERVICE);
             LocationListener locationListener = new LocationListener() {

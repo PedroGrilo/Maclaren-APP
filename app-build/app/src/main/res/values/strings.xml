@@ -55,4 +55,5 @@ dispositivo.</string>
 this demo.</string>
     <string name="permission_rationale_location">Estas permissões são necessárias
 para que a aplicação funcione correctamente.</string>
+    <string name="inuse">Em uso?</string>
 </resources>
