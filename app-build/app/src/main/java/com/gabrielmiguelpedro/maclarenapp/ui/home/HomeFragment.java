@@ -26,6 +26,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.gabrielmiguelpedro.maclarenapp.Assets.BitmapUtils;
 import com.gabrielmiguelpedro.maclarenapp.Assets.PermissionUtils;
+import com.gabrielmiguelpedro.maclarenapp.BabyCar;
 import com.gabrielmiguelpedro.maclarenapp.DbHelper;
 import com.gabrielmiguelpedro.maclarenapp.MainActivity;
 import com.gabrielmiguelpedro.maclarenapp.R;
@@ -41,6 +42,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener,
@@ -111,9 +113,20 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
                     R.drawable.baby_car_aluguer_xl, 64, 64);
             // Load markers from somewhere. This is just an example!
 
-           Log.d(TAG, "enableMyLocation: " + callback.getDb().getAllBabyCars()); // PERGUNTA AO STOR PQ QUE ISTO NAO DA?/ Ok eu pergunto
+            Log.d(TAG, "enableMyLocation: " + callback.getDb().getAllBabyCars()); // PERGUNTA AO STOR PQ QUE ISTO NAO DA?/ Ok eu pergunto
 
-            mMap.addMarker(new MarkerOptions().position(new LatLng(38.53760, -8.87806))
+            List<BabyCar> cars = callback.getDb().getAllBabyCars();
+            for (BabyCar babyCar : cars) {
+
+                Toast.makeText(getContext(),""+babyCar.getBabyCarType().getName(), Toast.LENGTH_SHORT).show();
+                /*mMap.addMarker(new MarkerOptions().position(new LatLng(38.53760, -8.87806))
+                        .title(babyCar.getBabyCarType().getName().toString())
+                        .icon(bbycar_s)
+                        .snippet("A wonderful chicken"))
+                        .setTag("CHICK01");*/
+            }
+
+            /*mMap.addMarker(new MarkerOptions().position(new LatLng(38.53760, -8.87806))
                     .title("BabyCar S")
                     .icon(bbycar_s)
                     .snippet("A wonderful chicken"))
@@ -132,7 +145,7 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
                     .title("BabyCar M")
                     .icon(bbycar_m)
                     .snippet("A wonderful chicken"))
-                    .setTag("CHICK04");
+                    .setTag("CHICK04");*/
             LocationManager locationManager = (LocationManager)
                     getActivity().getSystemService(Context.LOCATION_SERVICE);
             LocationListener locationListener = new LocationListener() {

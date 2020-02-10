@@ -282,9 +282,10 @@ public class DbHelper extends SQLiteOpenHelper {
         List<BabyCar> cars = new ArrayList<BabyCar>();
         while (cursor.moveToNext()){
             BabyCar bc = new BabyCar();
-            bc.setId( cursor.getInt(0) );
-            bc.setComments(cursor.getString(2));
+            bc.setId(cursor.getInt(0));
+            bc.setComments(cursor.getString(1));
             bc.setInUse(false);
+            bc.setBabyCarType();
             cars.add( bc );
         }
         db.close();
