@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import static java.sql.Types.INTEGER;
 import static org.xmlpull.v1.XmlPullParser.TEXT;
 
@@ -64,17 +67,20 @@ public class DbHelper extends SQLiteOpenHelper {
         String CREATE_TABLE_USERS = "CREATE TABLE " + TABLE_USERS
                 + " ( "+ USERS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + USERS_EMAIL + " TEXT, "
-                + USERS_LASTCODE + " INT, "
-                + USERS_isOK + " INT, "
-                + USERS_LOGGED + " INT, "
+                + USERS_LASTCODE + " INTEGER, "
+                + USERS_isOK + " INTEGER, "
+                + USERS_LOGGED + " INTEGER, "
                 + USERS_LASTLOGIN + " INTEGER, "
                 + USERS_USERTYPE + " TEXT " + " );";
 
         String CREATE_TABLE_TRANSACTIONS = "CREATE TABLE " + TABLE_TRANSACTIONS
                 + " ( " + TRANSACTIONS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + TRANSACTIONS_VALUE + " INT, "
+                + TRANSACTIONS_ID_USER + " INTEGER, "
+                + TRANSACTIONS_VALUE + " INTEGER, "
+                + TRANSACTIONS_ID_HISTORIC + " INTEGER, "
                 + " FOREIGN KEY ("+TRANSACTIONS_ID_USER+") REFERENCES "+TABLE_USERS+"("+USERS_ID+"), "
                 + " FOREIGN KEY ("+TRANSACTIONS_ID_HISTORIC+") REFERENCES "+TABLE_HISTORIC+"("+HISTORIC_ID+"));";
+
 
         String CREATE_TABLE_CARTYPE = "CREATE TABLE " + TABLE_CARTYPE
                 + " ( " + CARTYPE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -84,13 +90,18 @@ public class DbHelper extends SQLiteOpenHelper {
         String CREATE_TABLE_CARS = "CREATE TABLE " + TABLE_CARS
                 + " ( " + CARS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + CARS_COMMENTS + " TEXT, "
-                + CARS_ISUSE + " INT, "
+                + CARS_ISUSE + " INTEGER, "
+                + CARS_ID_CARTYPE + " INTEGER, "
                 + "FOREIGN KEY ("+CARS_ID_CARTYPE+") REFERENCES "+TABLE_CARTYPE+"("+CARTYPE_ID+"));";
 
         String CREATE_TABLE_HISTORIC = "CREATE TABLE " + TABLE_HISTORIC
                 + " ( " + HISTORIC_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + HISTORIC_HISTORICDATE + " INT, "
+                + HISTORIC_HISTORICDATE + " INTEGER, "
                 + HISTORIC_COST + " REAL, "
+                + HISTORIC_ID_HISTORICCOORDINATES + " INTEGER, "
+                + HISTORIC_ID_USER + " INTEGER, "
+                + HISTORIC_ID_TRANSACTIONS + " INTEGER, "
+                + HISTORIC_ID_CAR + " INTEGER, "
                 +"FOREIGN KEY ("+HISTORIC_ID_HISTORICCOORDINATES+") REFERENCES "+TABLE_HISTORICCOORDINATES+"("+HISTORICCOORDINATES_ID+"), "
                 +"FOREIGN KEY ("+HISTORIC_ID_USER+") REFERENCES "+TABLE_USERS+"("+USERS_ID+"), "
                 +"FOREIGN KEY ("+HISTORIC_ID_TRANSACTIONS+") REFERENCES "+TABLE_TRANSACTIONS+"("+TRANSACTIONS_ID+"), "
@@ -222,5 +233,32 @@ public class DbHelper extends SQLiteOpenHelper {
         db.insert(TABLE_TRANSACTIONS, null, values);
 
         db.close();
+    }
+
+    public List<BabyCar> getAllBabyCars(){
+        List<BabyCar> babyCarsList = new LinkedList<BabyCar>();
+
+        String query = "SELECT * FROM " + TABLE_CARS;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        BabyCar babyCar = null;
+
+        if (cursor.moveToFirst()) {
+            do {
+                boolean inUse = cursor.getInt(3) > 0;
+                if(!inUse){
+                    babyCar = new BabyCar();
+                    babyCar.setId(Integer.parseInt(cursor.getString(0)));
+                    babyCar.setComments(cursor.getString(2));
+                    babyCar.setInUse(false);
+                }
+                babyCarsList.add(babyCar);
+            } while (cursor.moveToNext());
+        }
+
+        return babyCarsList;
+
+
     }
 }

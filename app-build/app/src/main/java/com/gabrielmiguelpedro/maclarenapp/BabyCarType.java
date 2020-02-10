@@ -13,6 +13,8 @@ public class BabyCarType {
         this.name = name;
     }
 
+    public BabyCarType(){}
+
     public float getPrice() {
         return price;
     }

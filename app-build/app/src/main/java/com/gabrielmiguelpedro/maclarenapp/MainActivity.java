@@ -26,8 +26,12 @@ public class MainActivity extends AppCompatActivity implements Serializable{
     private AppBarConfiguration mAppBarConfiguration;
     private Bundle infoBundle;
     private User u;
-
     DbHelper db;
+
+    public DbHelper getDb() {
+        return db;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         db = new DbHelper(this);
@@ -71,8 +75,6 @@ public class MainActivity extends AppCompatActivity implements Serializable{
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
-
 
 
     }
