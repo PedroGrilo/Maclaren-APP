@@ -235,7 +235,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public List<BabyCar> getAllBabyCars(){
+    public List<BabyCar> ggetAllBabyCars(){
         List<BabyCar> babyCarsList = new LinkedList<BabyCar>();
 
         String query = "SELECT * FROM " + TABLE_CARS;
@@ -258,7 +258,11 @@ public class DbHelper extends SQLiteOpenHelper {
         }
 
         return babyCarsList;
+    }
 
-
+    public Cursor getAllBabyCars(){//TESTE
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from "+"TABLE_CARS", null);
+        return cursor;
     }
 }

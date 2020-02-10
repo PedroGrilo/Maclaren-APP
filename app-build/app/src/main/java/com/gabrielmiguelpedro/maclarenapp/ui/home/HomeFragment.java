@@ -3,6 +3,7 @@ package com.gabrielmiguelpedro.maclarenapp.ui.home;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -55,6 +56,7 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
     private SupportMapFragment mapFragment;
     private boolean mPermissionDenied = false;
     private MainActivity callback;
+    DbHelper db;//TESTE
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -109,7 +111,18 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
                     R.drawable.baby_car_aluguer_xl, 64, 64);
             // Load markers from somewhere. This is just an example!
 
-//            Log.d(TAG, "enableMyLocation: " + callback.getDb().getAllBabyCars()); // PERGUNTA AO STOR PQ QUE ISTO NAO DA?
+           //Log.d(TAG, "enableMyLocation: " + callback.getDb().getAllBabyCars()); // PERGUNTA AO STOR PQ QUE ISTO NAO DA?/ Ok eu pergunto
+            db = new DbHelper(getContext());
+            Cursor cursor = db.getAllBabyCars();
+            if(cursor.getCount()==0){
+                Toast.makeText(getContext(),"na",Toast.LENGTH_SHORT).show();
+            }else{
+                while (cursor.moveToNext()){
+                    int i=0;
+                    i++;
+                    Toast.makeText(getContext(),"EXEMPLO:"+cursor.getString(i),Toast.LENGTH_LONG).show();
+                }
+            }
 
 
             mMap.addMarker(new MarkerOptions().position(new LatLng(38.53760, -8.87806))
