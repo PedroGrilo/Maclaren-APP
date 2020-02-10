@@ -283,7 +283,7 @@ public class DbHelper extends SQLiteOpenHelper {
         int idAux;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from "+TABLE_CARS, null);
-        List<BabyCar> cars = new ArrayList<BabyCar>();
+        ArrayList<BabyCar> cars = new ArrayList<BabyCar>();
 
         while (cursor.moveToNext()){
             BabyCar bc = new BabyCar();
@@ -294,7 +294,7 @@ public class DbHelper extends SQLiteOpenHelper {
             idAux = cursor.getInt(3);
 
             Cursor cursorAux = db.rawQuery("select * from "+TABLE_CARTYPE, null);
-            List<BabyCarType> carsType = new ArrayList<BabyCarType>();
+            ArrayList<BabyCarType> carsType = new ArrayList<BabyCarType>();
             while (cursor.moveToNext()){
                 BabyCarType bct = new BabyCarType();
                 bct.setId(cursorAux.getInt(0));
