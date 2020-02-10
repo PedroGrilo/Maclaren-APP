@@ -5,9 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -178,6 +180,7 @@ public class DbHelper extends SQLiteOpenHelper {
             db = this.getWritableDatabase();
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
+        values.put(CARTYPE_ID, babyCarType.getId());//TESTE
         values.put(CARTYPE_NAME, babyCarType.getName()); // get name
         values.put(CARTYPE_BASECOST,babyCarType.getPrice()); // get basecost
 
@@ -277,16 +280,37 @@ public class DbHelper extends SQLiteOpenHelper {
     }*/
 
     public List<BabyCar> getAllBabyCars(){
+        int idAux;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from "+TABLE_CARS, null);
         List<BabyCar> cars = new ArrayList<BabyCar>();
+
         while (cursor.moveToNext()){
             BabyCar bc = new BabyCar();
             bc.setId(cursor.getInt(0));
             bc.setComments(cursor.getString(1));
             bc.setInUse(false);
-            bc.setBabyCarType();
-            cars.add( bc );
+
+            idAux = cursor.getInt(3);
+
+            Cursor cursorAux = db.rawQuery("select * from "+TABLE_CARTYPE, null);
+            List<BabyCarType> carsType = new ArrayList<BabyCarType>();
+            while (cursor.moveToNext()){
+                BabyCarType bct = new BabyCarType();
+                bct.setId(cursorAux.getInt(0));
+                bct.setName(cursorAux.getString(1));
+                bct.setPrice(cursorAux.getFloat(2));
+
+                carsType.add(bct);
+            }
+
+            for (BabyCarType babyCarType : carsType) {
+                if(babyCarType.getId()==idAux){
+                    bc.setBabyCarType(babyCarType);
+                }
+            }
+
+            cars.add(bc);
         }
         db.close();
         return cars;
