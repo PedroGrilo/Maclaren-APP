@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -235,7 +236,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public List<BabyCar> ggetAllBabyCars(){
+    /*public List<BabyCar> getAllBabyCars(){
         List<BabyCar> babyCarsList = new LinkedList<BabyCar>();
 
         String query = "SELECT * FROM " + TABLE_CARS;
@@ -257,12 +258,22 @@ public class DbHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
 
+        db.close();
         return babyCarsList;
-    }
+    }*/
 
-    public Cursor getAllBabyCars(){//TESTE
+    public List<BabyCar> getAllBabyCars(){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from "+"TABLE_CARS", null);
-        return cursor;
+        List<BabyCar> cars = new ArrayList<BabyCar>();
+        while (cursor.moveToNext()){
+            BabyCar bc = new BabyCar();
+            bc.setId( cursor.getInt(0) );
+            bc.setComments(cursor.getString(2));
+            bc.setInUse(false);
+            cars.add( bc );
+        }
+        db.close();
+        return cars;
     }
 }
