@@ -126,15 +126,15 @@ public class DbHelper extends SQLiteOpenHelper {
         BabyCarType BT3 = new BabyCarType(3,"Carrinho Grande",20);
         BabyCarType BT4 = new BabyCarType(4,"Carrinho Gigante Edér",0);
 
-        /*addBabyCarType(new BabyCarType(1,"Carrinho Pequeno",5));
-        addBabyCarType(new BabyCarType(2,"Carrinho Médio",10));
-        addBabyCarType(new BabyCarType(3,"Carrinho Grande",20));
-        addBabyCarType(new BabyCarType(4,"Carrinho Gigante Edér",0));*/
+        addBabyCarType(db, new BabyCarType(1,"Carrinho Pequeno",5));
+        addBabyCarType(db, new BabyCarType(2,"Carrinho Médio",10));
+        addBabyCarType(db, new BabyCarType(3,"Carrinho Grande",20));
+        addBabyCarType(db, new BabyCarType(4,"Carrinho Gigante Edér",0));
 
-        addBabyCar(new BabyCar(1, BT1, false, "Isto é um carrinho Pequeno do tipo 1"));
-        addBabyCar(new BabyCar(2, BT2, false, "Isto é um carrinho Médio do tipo 2"));
-        addBabyCar(new BabyCar(3, BT3, false, "Isto é um carrinho Grande do tipo 3"));
-        addBabyCar(new BabyCar(4, BT4, false, "Isto é um carrinho Gigante Edér do tipo 4"));
+        addBabyCar(db, new BabyCar(1, BT1, false, "Isto é um carrinho Pequeno do tipo 1"));
+        addBabyCar(db, new BabyCar(2, BT2, false, "Isto é um carrinho Médio do tipo 2"));
+        addBabyCar(db, new BabyCar(3, BT3, false, "Isto é um carrinho Grande do tipo 3"));
+        addBabyCar(db, new BabyCar(4, BT4, false, "Isto é um carrinho Gigante Edér do tipo 4"));
     }
 
     @Override
@@ -168,8 +168,14 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public void addBabyCarType(BabyCarType babyCarType){
+        addBabyCarType(null, babyCarType);
+    }
+
+    public void addBabyCarType(SQLiteDatabase db, BabyCarType babyCarType){
         // 1. get reference to writable DB
-        SQLiteDatabase db = this.getWritableDatabase();
+        boolean dbopened = db != null;
+        if ( !dbopened )
+            db = this.getWritableDatabase();
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
         values.put(CARTYPE_NAME, babyCarType.getName()); // get name
@@ -177,11 +183,18 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.insert(TABLE_CARTYPE, null, values);
 
-        db.close();
+        if ( !dbopened )
+            db.close();
     }
 
     public void addBabyCar(BabyCar babyCar){
-        SQLiteDatabase db = this.getWritableDatabase();
+        addBabyCar(null, babyCar);
+    }
+
+    public void addBabyCar(SQLiteDatabase db, BabyCar babyCar){
+        boolean dbopened = db != null;
+        if ( !dbopened )
+            db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         values.put(CARS_ISUSE, babyCar.isInUse());
@@ -191,7 +204,8 @@ public class DbHelper extends SQLiteOpenHelper {
         //values.put(CARS_ID_CARTYPE, babyCar.getBabyCarType())
 
         db.insert(TABLE_CARS, null, values);
-        db.close();
+        if ( !dbopened )
+            db.close();
     }
 
     public void addHistoric(Historic historic){
@@ -264,7 +278,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public List<BabyCar> getAllBabyCars(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select * from "+"TABLE_CARS", null);
+        Cursor cursor = db.rawQuery("select * from "+TABLE_CARS, null);
         List<BabyCar> cars = new ArrayList<BabyCar>();
         while (cursor.moveToNext()){
             BabyCar bc = new BabyCar();
