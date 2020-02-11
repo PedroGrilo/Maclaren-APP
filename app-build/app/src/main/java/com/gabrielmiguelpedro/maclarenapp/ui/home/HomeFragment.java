@@ -60,7 +60,9 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
     private SupportMapFragment mapFragment;
     private boolean mPermissionDenied = false;
     private MainActivity callback;
-    DbHelper db;//TESTE
+    private int isUsing=0; //TESTE2
+    private String lastSnipet; //TESTE2
+    DbHelper db;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -121,10 +123,7 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
 
 
             for (BabyCar babyCar : cars) {
-
                 Log.d(TAG, "cars: " + babyCar.getComments());
-
-              //  Toast.makeText(getContext(),""+babyCar.getBabyCarType().getName(), Toast.LENGTH_SHORT).show();
 
                 BitmapDescriptor icon = null;
                 double latitude = 38.53760;
@@ -186,9 +185,17 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
     public void onInfoWindowClick(Marker marker) {
 
        // Log.d(TAG, "Carrinhos: " + callback.getDb().getAllBabyCars().get(1).getComments());  // NAO TA A FUNFAR, PERGUNTA AO STOR!! isto diz que chama a bd recursivamente :/
+        Toast.makeText(getContext(), "o snipet:"+marker.getSnippet()+":", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "o lastnipet:"+lastSnipet+":", Toast.LENGTH_SHORT).show();
+        if(isUsing==0 || (marker.getSnippet().equals(lastSnipet))){
+            //Toast.makeText(getContext(), "Marcador Selecionado:\n" + marker.getId(), Toast.LENGTH_SHORT).show();
+            isUsing=1;
+            marker.setSnippet("Finalizar");
+            lastSnipet = marker.getSnippet();
+        }else{
+            Toast.makeText(getContext(), "Só pode usar um carrinho.", Toast.LENGTH_LONG).show();
+        }
 
-        Toast.makeText(getContext(), "Marcador Selecionado:\n" + marker.getTag(),
-                Toast.LENGTH_SHORT).show();
     }
 
     @Override
