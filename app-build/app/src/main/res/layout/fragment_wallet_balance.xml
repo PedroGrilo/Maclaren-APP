@@ -59,6 +59,7 @@
             android:ems="10"
             android:hint="20"
             android:inputType="numberDecimal"
+            android:text="20"
             android:textColor="@color/black"
             android:textColorHint="@color/colorHint" />
     </LinearLayout>

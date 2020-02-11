@@ -244,10 +244,8 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void addTransactions(SQLiteDatabase db, Transactions transactions){
-        boolean dbopened = db != null;
-        if ( !dbopened )
-            db = this.getWritableDatabase();
+    public void addTransactions(Transactions transactions){
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         //values.put(TRANSACTIONS_ID_HISTORIC, transactions.getHistoric().getId());

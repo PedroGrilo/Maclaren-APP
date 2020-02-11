@@ -2,13 +2,13 @@ package com.gabrielmiguelpedro.maclarenapp;
 
 public class Transactions {
     private int id;
-    private float value;
+    private double value;
     private User user;
     //private Historic historic; TESTE2
 
     public Transactions() { }
 //                                                  Historic historic
-    public Transactions(int id, float value, User user) {
+    public Transactions(int id, double value, User user) {
         this.id = id;
         this.value = value;
         this.user = user;
@@ -23,7 +23,7 @@ public class Transactions {
         this.id = id;
     }
 
-    public float getValue() {
+    public double getValue() {
         return value;
     }
 
