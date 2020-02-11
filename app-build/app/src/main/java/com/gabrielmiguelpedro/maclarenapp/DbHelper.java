@@ -82,9 +82,9 @@ public class DbHelper extends SQLiteOpenHelper {
                 + " ( " + TRANSACTIONS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + TRANSACTIONS_ID_USER + " INTEGER, "
                 + TRANSACTIONS_VALUE + " INTEGER, "
-                + TRANSACTIONS_ID_HISTORIC + " INTEGER, "
-                + " FOREIGN KEY ("+TRANSACTIONS_ID_USER+") REFERENCES "+TABLE_USERS+"("+USERS_ID+"), "
-                + " FOREIGN KEY ("+TRANSACTIONS_ID_HISTORIC+") REFERENCES "+TABLE_HISTORIC+"("+HISTORIC_ID+"));";
+                //+ TRANSACTIONS_ID_HISTORIC + " INTEGER, " TESTE2
+                + " FOREIGN KEY ("+TRANSACTIONS_ID_USER+") REFERENCES "+TABLE_USERS+"("+USERS_ID+"));";
+                //+ " FOREIGN KEY ("+TRANSACTIONS_ID_HISTORIC+") REFERENCES "+TABLE_HISTORIC+"("+HISTORIC_ID+"));"; TESTE2
 
 
         String CREATE_TABLE_CARTYPE = "CREATE TABLE " + TABLE_CARTYPE
@@ -256,7 +256,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<BabyCar> getAllBabyCars(){
-        ArrayList<BabyCar> babyCarsList = new ArrayList<BabyCar>();
+        //ArrayList<BabyCar> babyCarsList = new ArrayList<BabyCar>();
         /*                      0              1                2           3           4                 5*/
         String query = "SELECT cars.id, cars.id_cartype, cars.comments, cars.isuse, cartype.name, cartype.basecost FROM " + TABLE_CARS + " JOIN cartype ON cars.id_cartype = cartype.id";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -285,5 +285,25 @@ public class DbHelper extends SQLiteOpenHelper {
         }
         db.close();
         return cars;
+    }
+
+    public ArrayList<Transactions> getAllTransactions(){
+
+        String query = "SELECT * FROM "+ TABLE_TRANSACTIONS;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        ArrayList<Transactions> transactionsList = new ArrayList<Transactions>();
+        while (cursor.moveToNext()){
+            Transactions transactions = new Transactions();
+
+            transactions.setId( cursor.getInt(0) );
+            transactions.s
+
+
+            transactionsList.add( transactions );
+        }
+        db.close();
+        return transactionsList;
     }
 }
