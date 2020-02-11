@@ -42,6 +42,7 @@ public class BalanceFragment extends Fragment {
     textView.setText(total+"");
 
     Button button = (Button)root.findViewById(R.id.button_FWB_Pagamento);
+    
     button.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -50,7 +51,6 @@ public class BalanceFragment extends Fragment {
 
             User u = new User(0,"mcpr.inf@gmail.com", "123456",true, new Date(), 'c', true);
             callback.getDb().addTransactions(new Transactions(0,value, u));
-            Toast.makeText(getContext(),"oi",Toast.LENGTH_LONG).show();
         }
     });
     return root;
