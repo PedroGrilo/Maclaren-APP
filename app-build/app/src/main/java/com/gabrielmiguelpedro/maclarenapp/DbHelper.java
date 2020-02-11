@@ -288,8 +288,8 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<Transactions> getAllTransactions(){
-
-        String query = "SELECT * FROM "+ TABLE_TRANSACTIONS;
+//                                      0                1                       2               3             4             5           6              7                8
+        String query = "SELECT transactions.id, transactions.id_users, transactions.value, users.email, users.lastcode, users.isok, users.logged, users.lastlogin, users.usertype FROM "+ TABLE_TRANSACTIONS + " JOIN users ON transactions.id_users = users.id";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
@@ -298,8 +298,21 @@ public class DbHelper extends SQLiteOpenHelper {
             Transactions transactions = new Transactions();
 
             transactions.setId( cursor.getInt(0) );
-            transactions.s
+            transactions.setValue(cursor.getFloat(2));
 
+
+            /** GET USER TYPE**/
+            int userId = cursor.getInt(1);
+            String userEmail = cursor.getString(3);
+            String userLastCode = cursor.getString(4);
+            /** IS OK **/
+            boolean isok = (cursor.getString(5)).equals("1");
+            boolean islogged = (cursor.getString(6)).equals("1");
+            int userLastLogin = cursor.getInt(7);
+            String userType = cursor.getString(8);
+
+
+            transactions.setUser(new User(userId,userEmail,userLastCode,isok,userLastLogin, userType,islogged));
 
             transactionsList.add( transactions );
         }
