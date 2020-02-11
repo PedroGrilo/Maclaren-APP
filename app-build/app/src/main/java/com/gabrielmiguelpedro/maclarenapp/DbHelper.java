@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 
 import java.io.Console;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -242,11 +244,13 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void addTransactions(Transactions transactions){
-        SQLiteDatabase db = this.getWritableDatabase();
+    public void addTransactions(SQLiteDatabase db, Transactions transactions){
+        boolean dbopened = db != null;
+        if ( !dbopened )
+            db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(TRANSACTIONS_ID_HISTORIC, transactions.getHistoric().getId());
+        //values.put(TRANSACTIONS_ID_HISTORIC, transactions.getHistoric().getId());
         values.put(TRANSACTIONS_VALUE, transactions.getValue());
         values.put(TRANSACTIONS_ID_USER, transactions.getUser().getUserID());
 
@@ -287,36 +291,15 @@ public class DbHelper extends SQLiteOpenHelper {
         return cars;
     }
 
-    public ArrayList<Transactions> getAllTransactions(){
-//                                      0                1                       2               3             4             5           6              7                8
-        String query = "SELECT transactions.id, transactions.id_users, transactions.value, users.email, users.lastcode, users.isok, users.logged, users.lastlogin, users.usertype FROM "+ TABLE_TRANSACTIONS + " JOIN users ON transactions.id_users = users.id";
+    public float getIdTransactionsValue(int id){
+        float total=0;
+
+        String query = "SELECT SUM("+TRANSACTIONS_VALUE+") FROM " + TABLE_TRANSACTIONS + " WHERE id_user="+id;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-
-        ArrayList<Transactions> transactionsList = new ArrayList<Transactions>();
-        while (cursor.moveToNext()){
-            Transactions transactions = new Transactions();
-
-            transactions.setId( cursor.getInt(0) );
-            transactions.setValue(cursor.getFloat(2));
-
-
-            /** GET USER TYPE**/
-            int userId = cursor.getInt(1);
-            String userEmail = cursor.getString(3);
-            String userLastCode = cursor.getString(4);
-            /** IS OK **/
-            boolean isok = (cursor.getString(5)).equals("1");
-            boolean islogged = (cursor.getString(6)).equals("1");
-            int userLastLogin = cursor.getInt(7);
-            String userType = cursor.getString(8);
-
-
-            transactions.setUser(new User(userId,userEmail,userLastCode,isok,userLastLogin, userType,islogged));
-
-            transactionsList.add( transactions );
-        }
+        if ( cursor.moveToNext() )
+            total = cursor.getFloat(0);
         db.close();
-        return transactionsList;
+        return total;
     }
 }

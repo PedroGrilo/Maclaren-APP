@@ -188,7 +188,13 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
         Toast.makeText(getContext(), "o snipet:"+marker.getSnippet()+":", Toast.LENGTH_SHORT).show();
         Toast.makeText(getContext(), "o lastnipet:"+lastSnipet+":", Toast.LENGTH_SHORT).show();
         if(isUsing==0 || (marker.getSnippet().equals(lastSnipet))){
-            //Toast.makeText(getContext(), "Marcador Selecionado:\n" + marker.getId(), Toast.LENGTH_SHORT).show();
+            /*TODO
+            * Verificar saldo da conta, se seim next(Verificar se há montante, criar tabela historico para guardar os dados)
+            * Adicionar ao historico de 5 em 5 segundos coordenadas(Encher tablea cooredenadas e adciona-las ao historico)
+            * Verificar se há dinhiro para a viagem senão cancelar.
+            * Permitir finalizar viagem
+            * Desconar dinheiro ao minuto(Defenir preço para cada tipo de carrinho)
+            * */
             isUsing=1;
             marker.setSnippet("Finalizar");
             lastSnipet = marker.getSnippet();
