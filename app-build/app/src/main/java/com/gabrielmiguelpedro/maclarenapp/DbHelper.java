@@ -242,6 +242,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         ContentValues values = new ContentValues();
 
         //values.put(TRANSACTIONS_ID_HISTORIC, transactions.getHistoric().getId());
+        //values.put(TRANSACTIONS_ID, transactions.getId()); TESTE3
         values.put(TRANSACTIONS_VALUE, transactions.getValue());
         values.put(TRANSACTIONS_ID_USER, transactions.getUser().getUserID());
 

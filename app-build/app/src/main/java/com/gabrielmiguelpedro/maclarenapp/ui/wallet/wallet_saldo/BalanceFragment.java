@@ -37,7 +37,7 @@ public class BalanceFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     final View root = inflater.inflate(R.layout.fragment_wallet_balance, container, false);
 
-    total = callback.getDb().getIdTransactionsValue(0);
+    total = callback.getDb().getIdTransactionsValue(callback.getUser().getUserID());
     TextView textView = (TextView) root.findViewById(R.id.textView_FWB_Valor);
     textView.setText(total+"");
 
@@ -46,6 +46,7 @@ public class BalanceFragment extends Fragment {
     button.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            Toast.makeText(getContext(),"Entrou no blance", Toast.LENGTH_SHORT);
             EditText editText = (EditText) root.findViewById(R.id.editText_FWB_Valor);
             value = Double.parseDouble(editText.getText().toString());
 
