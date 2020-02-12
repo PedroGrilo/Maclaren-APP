@@ -192,6 +192,13 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
 
     @Override
     public void onInfoWindowClick(Marker marker) {
+        String markerId = marker.getId();
+        double markerLon = marker.getPosition().longitude;
+        double markerLat = marker.getPosition().latitude;
+        bundle.putString("markerId",markerId);
+        bundle.putDouble("markerLon",markerLon);
+        bundle.putDouble("markerLat",markerLat);
+
         getPhoneLocation();
         openDialog();
     }
@@ -231,16 +238,13 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
                 .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location location) {
-
-
-
-                        Toast.makeText(getContext(),"Altitude: "+location.getAltitude()+" Longitude: "+location.getLongitude(), Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getContext(),"Altitude: "+location.getAltitude()+" Longitude: "+location.getLongitude(), Toast.LENGTH_LONG).show();
                         if (location != null) {
-                            Toast.makeText(getContext(),"222Altitude: "+location.getAltitude()+" Longitude: "+location.getLongitude(), Toast.LENGTH_LONG).show();
-                            double longe = location.getLongitude();
-                            double alt = location.getAltitude();
-                            bundle.putDouble("longe", longe);
-                            bundle.putDouble("alt", alt);
+                            //Toast.makeText(getContext(),"222Altitude: "+location.getAltitude()+" Longitude: "+location.getLongitude(), Toast.LENGTH_LONG).show();
+                            double lon = location.getLongitude();
+                            double lat = location.getAltitude();
+                            bundle.putDouble("lon", lon);
+                            bundle.putDouble("lat", lat);
                         }
                     }
                 });
