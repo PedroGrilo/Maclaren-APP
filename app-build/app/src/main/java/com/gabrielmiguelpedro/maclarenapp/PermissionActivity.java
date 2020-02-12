@@ -59,7 +59,7 @@ public class PermissionActivity extends AppCompatActivity {
             case 2: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     /* Se o utilizador aceitar as permissões de armazenamento */
-                    redirectActivity(SignInActivity.class);
+                    redirectActivity(SignUpActivity.class);
                     break;
                 } else {
                     /* Se o utilizador recusar as permissões */

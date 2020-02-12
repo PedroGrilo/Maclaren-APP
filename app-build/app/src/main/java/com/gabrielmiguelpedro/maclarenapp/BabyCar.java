@@ -1,13 +1,14 @@
 package com.gabrielmiguelpedro.maclarenapp;
 
-public class BabyCar{
+public class BabyCar {
 
     private int id;
     private BabyCarType babyCarType;
     private boolean inUse;
     private String comments;
 
-    public BabyCar(){}
+    public BabyCar() {
+    }
 
     public BabyCar(int id, BabyCarType babyCarType, boolean inUse, String comments) {
         this.id = id;

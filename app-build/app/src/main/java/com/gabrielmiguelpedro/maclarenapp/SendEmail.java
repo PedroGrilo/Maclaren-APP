@@ -67,7 +67,7 @@ public class SendEmail extends AsyncTask<Void, Void, Void> {
             //Adding subject
             mm.setSubject(subject);
             //Adding message
-            mm.setContent(message,"text/html");
+            mm.setContent(message, "text/html");
 
             //Sending email
             Transport.send(mm);

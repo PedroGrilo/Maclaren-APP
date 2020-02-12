@@ -49,8 +49,7 @@ public class BalanceFragment extends Fragment {
             EditText editText = (EditText) root.findViewById(R.id.editText_FWB_Valor);
             value = Double.parseDouble(editText.getText().toString());
 
-            User u = new User(0,"mcpr.inf@gmail.com", "123456",true, new Date(), 'c', true);
-            callback.getDb().addTransactions(new Transactions(0,value, u));
+            callback.getDb().addTransactions(new Transactions(0,value, callback.getUser()));
         }
     });
     return root;

@@ -6,7 +6,8 @@ public class HistoricCoordinates {
     private int longe;
     private int lat;
 
-    public HistoricCoordinates() {}
+    public HistoricCoordinates() {
+    }
 
     public HistoricCoordinates(int id, int date, int longe, int lat) {
         this.id = id;

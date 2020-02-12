@@ -7,7 +7,9 @@ import android.os.Handler;
 
 public class SplashScreen extends Activity {
 
-    /** Duração do splash screen **/
+    /**
+     * Duração do splash screen
+     **/
     private final int SPLASH_SCREEN_DELAY = 1500;
 
     @Override
@@ -15,12 +17,12 @@ public class SplashScreen extends Activity {
         super.onCreate(icicle);
         setContentView(R.layout.activity_splashscreen);
 
-        new Handler().postDelayed(new Runnable(){
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 /** Após occorrer o tempo da constante, a activity splash screen irá fechar e irá abrir a activity de login**/
 
-                Intent i = new Intent(SplashScreen.this,SignInActivity.class);
+                Intent i = new Intent(SplashScreen.this, SignUpActivity.class);
                 startActivity(i);
                 finish();
             }

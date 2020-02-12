@@ -7,13 +7,14 @@ public class BabyCarType {
     private String name;
 
 
-    public BabyCarType(int id,String name, float price) {
+    public BabyCarType(int id, String name, float price) {
         this.id = id;
         this.price = price;
         this.name = name;
     }
 
-    public BabyCarType(){}
+    public BabyCarType() {
+    }
 
     public float getPrice() {
         return price;

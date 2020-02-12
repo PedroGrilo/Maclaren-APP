@@ -9,7 +9,8 @@ public class Historic {
     private User user;
     private BabyCar babyCar;
 
-    public Historic() { }
+    public Historic() {
+    }
 
     public Historic(int id, int date, float cost, HistoricCoordinates historicCoordinates, Transactions transactions, User user, BabyCar babyCar) {
         this.id = id;

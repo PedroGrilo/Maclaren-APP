@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -19,56 +20,39 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.Serializable;
-import java.util.Date;
 
-public class MainActivity extends AppCompatActivity implements Serializable{
+public class MainActivity extends AppCompatActivity implements Serializable {
 
+    DBHelperClient db;
     private AppBarConfiguration mAppBarConfiguration;
     private Bundle infoBundle;
-    private User u;
-    DbHelper db;
-
-    public DbHelper getDb() {
-        return db;
-    }
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        db = new DbHelper(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /* verifica se o utilizador já existe,
-            se sim > dá logo read
-            se não > cria um novo utilizador, para que da proxima vez que iniciar a app não precisar passar pela activity de registo ou login
-         */
-        if (SaveInfoConfig.readUser(this) == null) {
-            infoBundle = getIntent().getExtras();
-            String email = infoBundle.getString("EMAIL");
-            String code = infoBundle.getString("CODE");
-            u = new User(1,email,code,true,new Date(),'C',true);
-            SaveInfoConfig.saveUser(u, this);
-        } else {
-            u = SaveInfoConfig.readUser(this);
-        }
+        db = new DbHelper(this); // basta usar isto para usar a bd
 
+        user = db.getUserByEmail(SaveInfoConfig.getEmail(this));
+
+        Toast.makeText(this, user.getEmail() + " oh yes bbay - teste bd", Toast.LENGTH_LONG).show();
 
         checkPermissions(); // verificar permissoes de localizaão
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = headerView.findViewById(R.id.emailTextView);
 
-        navUsername.setText(u.GetName()+"!");
+        navUsername.setText(user.GetName() + "!");
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_wallet, R.id.nav_settings, R.id.nav_help,R.id.nav_history,R.id.nav_wallet_balance)
+                R.id.nav_home, R.id.nav_wallet, R.id.nav_settings, R.id.nav_help, R.id.nav_history, R.id.nav_wallet_balance)
                 .setDrawerLayout(drawer)
                 .build();
 
@@ -85,14 +69,7 @@ public class MainActivity extends AppCompatActivity implements Serializable{
             finish(); // se não tiver permissão, termina a main activity, para que o utilizador não possa voltar à mesma sem permissoes
 
             Bundle info = new Bundle();
-            if (getIntent().getExtras() == null) {//se o utilizador ja existir, o intent é vazio, entao faz-se a verificação aqui
-                info.putString("EMAIL", u.getEmail());
-                info.putString("CODE", u.getLastCode());
-            } else {
-                info = getIntent().getExtras();
-            }
             info.putString("PERMISSION", "LOCATION");
-
 
             Intent i = new Intent(this, PermissionActivity.class); //vai chamar a activity de permissoes
             i.putExtras(info);
@@ -112,6 +89,15 @@ public class MainActivity extends AppCompatActivity implements Serializable{
     @Override
     protected void onStop() {
         super.onStop();
-        SaveInfoConfig.saveUser(u, this);
     }
+
+
+    public DBHelperClient getDb() {
+        return db;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
 }

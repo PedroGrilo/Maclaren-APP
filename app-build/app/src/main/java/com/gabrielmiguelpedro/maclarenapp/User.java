@@ -1,12 +1,7 @@
 package com.gabrielmiguelpedro.maclarenapp;
 
-
-import android.location.Location;
-
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 public class User implements Serializable {
 
@@ -18,7 +13,8 @@ public class User implements Serializable {
     private char userType;
     private boolean logged;
 
-    public User(){}
+    public User() {
+    }
 
 
     public User(int userID, String email, String lastCode, boolean isOk, Date lastLogin, char userType, boolean logged) {
@@ -33,12 +29,9 @@ public class User implements Serializable {
     }
 
 
-
-
     public boolean isOk() {
         return isOk;
     }
-
 
 
     public void setOk(boolean ok) {
@@ -51,10 +44,10 @@ public class User implements Serializable {
     }
 
 
-
     public void setLogged(boolean logged) {
         this.logged = logged;
     }
+
     public int getUserID() {
         return userID;
     }
@@ -96,13 +89,9 @@ public class User implements Serializable {
         this.userType = userType;
     }
 
-    public String GetName(){
+    public String GetName() {
         return email.split("@")[0];
     }
-
-
-
-
 
 
 }
