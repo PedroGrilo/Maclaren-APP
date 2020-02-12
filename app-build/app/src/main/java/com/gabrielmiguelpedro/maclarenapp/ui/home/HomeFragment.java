@@ -27,6 +27,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.gabrielmiguelpedro.maclarenapp.Assets.BitmapUtils;
 import com.gabrielmiguelpedro.maclarenapp.Assets.PermissionUtils;
 import com.gabrielmiguelpedro.maclarenapp.BabyCar;
+import com.gabrielmiguelpedro.maclarenapp.BabyCarDialog;
 import com.gabrielmiguelpedro.maclarenapp.DbHelper;
 import com.gabrielmiguelpedro.maclarenapp.MainActivity;
 import com.gabrielmiguelpedro.maclarenapp.R;
@@ -46,6 +47,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -66,6 +68,8 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
     private int isUsing=0; //TESTE2
     private String lastSnipet; //TESTE2
     private FusedLocationProviderClient fusedLocationClient; //localização atual
+    private Date rentStartTime;
+    private Date rentEndTime;
     DbHelper db;
 
     @Override
@@ -187,25 +191,7 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-        getPhoneLocation();
-        //Log.d(TAG, "Carrinhos: " + callback.getDb().getAllBabyCars().get(1).getComments());  // NAO TA A FUNFAR, PERGUNTA AO STOR!! isto diz que chama a bd recursivamente :/
-        Toast.makeText(getContext(), "o snipet:"+marker.getSnippet()+":", Toast.LENGTH_SHORT).show();
-        Toast.makeText(getContext(), "o lastnipet:"+lastSnipet+":", Toast.LENGTH_SHORT).show();
-        if(isUsing==0 || (marker.getSnippet().equals(lastSnipet))){
-            /*TODO
-            * Verificar saldo da conta, se seim next(Verificar se há montante, criar tabela historico para guardar os dados)
-            * Adicionar ao historico de 5 em 5 segundos coordenadas(Encher tablea cooredenadas e adciona-las ao historico)
-            * Verificar se há dinhiro para a viagem senão cancelar.
-            * Permitir finalizar viagem
-            * Desconar dinheiro ao minuto(Defenir preço para cada tipo de carrinho)
-            * */
-            isUsing=1;
-            marker.setSnippet("Finalizar");
-            lastSnipet = marker.getSnippet();
-        }else{
-            Toast.makeText(getContext(), "Só pode usar um carrinho.", Toast.LENGTH_LONG).show();
-        }
-
+        openDialog();
     }
 
     @Override
@@ -251,5 +237,10 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
                         }
                     }
                 });
+    }
+
+    public void openDialog(){
+        BabyCarDialog babyCarDialog = new BabyCarDialog();
+        babyCarDialog.show(getFragmentManager(),"DIALOGO");
     }
 }
