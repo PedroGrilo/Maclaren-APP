@@ -1,11 +1,13 @@
 package com.gabrielmiguelpedro.maclarenapp.ui.wallet;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,10 +25,22 @@ import com.gabrielmiguelpedro.maclarenapp.ui.wallet.wallet_saldo.BalanceFragment
 public class WalletFragment extends Fragment {
 
     private WalletViewModel walletViewModel;
+    private MainActivity callback;
+    private double total;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        callback = (MainActivity)context;
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         walletViewModel = ViewModelProviders.of(this).get(WalletViewModel.class);
         View root = inflater.inflate(R.layout.fragment_wallet, container, false);
+
+        total = callback.getDb().getIdTransactionsValue(callback.getUser().getUserID());
+        TextView textView = (TextView) root.findViewById(R.id.textViewSaldo);
+        textView.setText(total+"");
 
         walletViewModel.getText().observe(this, new Observer<String>() {
             @Override
