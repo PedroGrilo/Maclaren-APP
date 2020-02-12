@@ -12,6 +12,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 public class BabyCarDialog extends AppCompatDialogFragment {
+    private Bundle bundle;
+
+    public BabyCarDialog( Bundle bundle )
+    {
+        this.bundle = bundle;
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -22,7 +29,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //funciona
-
+                        Toast.makeText(getContext(),"Longitude: "+bundle.getDouble("longe"),Toast.LENGTH_LONG).show();
                     }
                 })
                 .setNegativeButton("Não", new DialogInterface.OnClickListener() {

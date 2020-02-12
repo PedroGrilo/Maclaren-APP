@@ -70,6 +70,7 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
     private FusedLocationProviderClient fusedLocationClient; //localização atual
     private Date rentStartTime;
     private Date rentEndTime;
+    private Bundle bundle = new Bundle();
     DbHelper db;
 
     @Override
@@ -230,16 +231,23 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
                 .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location location) {
+
+
+
                         Toast.makeText(getContext(),"Altitude: "+location.getAltitude()+" Longitude: "+location.getLongitude(), Toast.LENGTH_LONG).show();
                         if (location != null) {
                             Toast.makeText(getContext(),"222Altitude: "+location.getAltitude()+" Longitude: "+location.getLongitude(), Toast.LENGTH_LONG).show();
+                            double longe = location.getLongitude();
+                            double alt = location.getAltitude();
+                            bundle.putDouble("longe", longe);
+                            bundle.putDouble("alt", alt);
                         }
                     }
                 });
     }
 
     public void openDialog(){
-        BabyCarDialog babyCarDialog = new BabyCarDialog();
+        BabyCarDialog babyCarDialog = new BabyCarDialog(bundle);
         babyCarDialog.show(getFragmentManager(),"DIALOGO");
     }
 }
