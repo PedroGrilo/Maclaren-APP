@@ -230,9 +230,9 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
                 .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location location) {
-                        Toast.makeText(getContext(),"Localizacao"+location.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),"Altitude: "+location.getAltitude()+" Longitude: "+location.getLongitude(), Toast.LENGTH_LONG).show();
                         if (location != null) {
-                            Toast.makeText(getContext(),"2Localizacao"+location.toString(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(),"222Altitude: "+location.getAltitude()+" Longitude: "+location.getLongitude(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
