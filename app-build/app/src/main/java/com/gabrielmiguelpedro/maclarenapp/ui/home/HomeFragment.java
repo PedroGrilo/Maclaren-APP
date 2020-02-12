@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
 
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
         return inflater.inflate(R.layout.fragment_home, container, false);
 
     }
@@ -187,8 +187,8 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-
-       // Log.d(TAG, "Carrinhos: " + callback.getDb().getAllBabyCars().get(1).getComments());  // NAO TA A FUNFAR, PERGUNTA AO STOR!! isto diz que chama a bd recursivamente :/
+        getPhoneLocation();
+        //Log.d(TAG, "Carrinhos: " + callback.getDb().getAllBabyCars().get(1).getComments());  // NAO TA A FUNFAR, PERGUNTA AO STOR!! isto diz que chama a bd recursivamente :/
         Toast.makeText(getContext(), "o snipet:"+marker.getSnippet()+":", Toast.LENGTH_SHORT).show();
         Toast.makeText(getContext(), "o lastnipet:"+lastSnipet+":", Toast.LENGTH_SHORT).show();
         if(isUsing==0 || (marker.getSnippet().equals(lastSnipet))){
@@ -204,7 +204,6 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
             lastSnipet = marker.getSnippet();
         }else{
             Toast.makeText(getContext(), "Só pode usar um carrinho.", Toast.LENGTH_LONG).show();
-            getPhoneLocation();
         }
 
     }
@@ -242,7 +241,15 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
     }
 
     public void getPhoneLocation(){
-        fusedLocationClient.getLastLocation();
-        Toast.makeText(getContext(), fusedLocationClient.getLastLocation()+"",Toast.LENGTH_LONG);
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        Toast.makeText(getContext(),"Localizacao"+location.toString(), Toast.LENGTH_LONG);
+                        if (location != null) {
+                            Toast.makeText(getContext(),"2Localizacao"+location.toString(), Toast.LENGTH_LONG);
+                        }
+                    }
+                });
     }
 }
