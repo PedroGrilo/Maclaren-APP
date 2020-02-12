@@ -32,9 +32,4 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                 });
         return builder.create();
     }
-
-    public void openDialog(){
-        BabyCarDialog babyCarDialog = new BabyCarDialog();
-        babyCarDialog.show(getFragmentManager(),"DIALOGO");
-    }
 }
