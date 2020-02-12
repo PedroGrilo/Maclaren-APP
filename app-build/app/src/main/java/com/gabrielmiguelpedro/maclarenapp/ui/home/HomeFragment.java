@@ -30,6 +30,8 @@ import com.gabrielmiguelpedro.maclarenapp.BabyCar;
 import com.gabrielmiguelpedro.maclarenapp.DbHelper;
 import com.gabrielmiguelpedro.maclarenapp.MainActivity;
 import com.gabrielmiguelpedro.maclarenapp.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -40,6 +42,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -62,6 +65,7 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
     private MainActivity callback;
     private int isUsing=0; //TESTE2
     private String lastSnipet; //TESTE2
+    private FusedLocationProviderClient fusedLocationClient; //localização atual
     DbHelper db;
 
     @Override
@@ -76,7 +80,7 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
 
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
         return inflater.inflate(R.layout.fragment_home, container, false);
 
     }
@@ -200,6 +204,7 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
             lastSnipet = marker.getSnippet();
         }else{
             Toast.makeText(getContext(), "Só pode usar um carrinho.", Toast.LENGTH_LONG).show();
+            getPhoneLocation();
         }
 
     }
@@ -234,5 +239,10 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
             // Flag a "true" para mostrar o erro das permissões em falta.
             mPermissionDenied = true;
         }
+    }
+
+    public void getPhoneLocation(){
+        fusedLocationClient.getLastLocation();
+        Toast.makeText(getContext(), fusedLocationClient.getLastLocation()+"",Toast.LENGTH_LONG);
     }
 }
