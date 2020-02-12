@@ -22,6 +22,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //funciona
+
                     }
                 })
                 .setNegativeButton("Não", new DialogInterface.OnClickListener() {

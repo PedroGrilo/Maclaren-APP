@@ -191,6 +191,7 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
 
     @Override
     public void onInfoWindowClick(Marker marker) {
+        getPhoneLocation();
         openDialog();
     }
 
@@ -204,9 +205,7 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
 
     @Override
     public void onMyLocationClick(@NonNull Location location) {
-        Toast.makeText(getContext(), "Localização atual :\n" + location, Toast.LENGTH_SHORT)
-                .show();
-
+        Toast.makeText(getContext(), "Localização atual :\n" + location, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -231,9 +230,9 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
                 .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location location) {
-                        Toast.makeText(getContext(),"Localizacao"+location.toString(), Toast.LENGTH_LONG);
+                        Toast.makeText(getContext(),"Localizacao"+location.toString(), Toast.LENGTH_LONG).show();
                         if (location != null) {
-                            Toast.makeText(getContext(),"2Localizacao"+location.toString(), Toast.LENGTH_LONG);
+                            Toast.makeText(getContext(),"2Localizacao"+location.toString(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
