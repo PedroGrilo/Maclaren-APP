@@ -242,7 +242,7 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
                         if (location != null) {
                             //Toast.makeText(getContext(),"222Altitude: "+location.getAltitude()+" Longitude: "+location.getLongitude(), Toast.LENGTH_LONG).show();
                             double lon = location.getLongitude();
-                            double lat = location.getAltitude();
+                            double lat = location.getLatitude();
                             bundle.putDouble("lon", lon);
                             bundle.putDouble("lat", lat);
                         }

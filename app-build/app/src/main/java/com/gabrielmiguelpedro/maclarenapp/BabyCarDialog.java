@@ -29,25 +29,19 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //funciona
+                        String id = bundle.getString("markerId");
                         double lon1 = bundle.getDouble("lon");
                         double lat1 = bundle.getDouble("lat");
                         double lon2 = bundle.getDouble("markerLon");
                         double lat2 = bundle.getDouble("markerLat");
-                        String id = bundle.getString("markerId");
 
-                        double R = 6371e3; // metres
-                        double a1 = Math.toRadians(lat1);
-                        double a2 = Math.toRadians(lat2);
-                        double da = Math.toRadians(lat2-lat1);
-                        double dd = Math.toRadians(lon2-lon1);
+                        double d = distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2);
 
-                        double a = Math.sin(da/2) * Math.sin(da/2) +
-                                Math.cos(a1) * Math.cos(a2) *
-                                        Math.sin(dd/2) * Math.sin(dd/2);
-                        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
-                        double d = R * c;
-
+                        if(d<=5){
+                            Toast.makeText(getContext(),"Está a menos de 5m"+d, Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(getContext(),"Está a mais de 5m: "+d, Toast.LENGTH_SHORT).show();
+                        }
                     }
                 })
                 .setNegativeButton("Não", new DialogInterface.OnClickListener() {
@@ -57,5 +51,23 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                     }
                 });
         return builder.create();
+    }
+
+    public double degreesToRadians(double degrees) {
+        return degrees * Math.PI / 180;
+    }
+
+    public double distanceInKmBetweenEarthCoordinates(double lat1, double lon1, double lat2, double lon2){
+        double earthRadiusKm = 6371;
+
+        double dLat = degreesToRadians(lat2-lat1);
+        double dLon = degreesToRadians(lon2-lon1);
+
+        double lat11 = degreesToRadians(lat1);
+        double lat22 = degreesToRadians(lat2);
+
+        double a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat11) * Math.cos(lat22);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        return (earthRadiusKm * c)/0.0010000;
     }
 }
