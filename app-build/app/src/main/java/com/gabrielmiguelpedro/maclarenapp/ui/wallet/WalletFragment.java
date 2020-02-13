@@ -57,7 +57,6 @@ public class WalletFragment extends Fragment {
                 ft.replace(R.id.nav_host_fragment, balanceFragment); //o primeiro parametro é tp o atual, ou seja, a view atual e nós queremos dar replace pelo o balance fragment
                 ft.addToBackStack(null);
                 ft.commit();
-                Toast.makeText(getContext(), "PRECISA DE ACEITAR AS PERMISSÕES PARA CONTINUAR", Toast.LENGTH_SHORT).show();
             }
         });
 
