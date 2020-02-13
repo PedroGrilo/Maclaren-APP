@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,6 +37,9 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //funciona
                         String id = bundle.getString("markerId");
+                        id = id.substring(1);
+                        int markerId = Integer.parseInt(id);
+
                         double lon1 = bundle.getDouble("lon");
                         double lat1 = bundle.getDouble("lat");
                         double lon2 = bundle.getDouble("markerLon");
@@ -45,7 +47,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
                         double d = distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2);
 
-
+                        int BabyCarId = callback.db.getUseByIdBabyCar(markerId);
 
                         if(d<=5){
                             Toast.makeText(getContext(),"Está a menos de 5m"+d, Toast.LENGTH_SHORT).show();

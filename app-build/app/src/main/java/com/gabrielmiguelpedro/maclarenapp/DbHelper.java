@@ -357,7 +357,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     }
 
     @Override
-    public int getIdBabyCar(int id) {
+    public int getUseByIdBabyCar(int id) {
         int isUse=0;
 
         String query = "SELECT isuse FROM " + TABLE_CARS + " WHERE id=" + id;
