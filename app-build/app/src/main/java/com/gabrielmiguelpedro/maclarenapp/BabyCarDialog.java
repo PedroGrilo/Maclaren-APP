@@ -48,12 +48,12 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
                         double d = distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2);
 
-                        int BabyCarId = callback.db.getUseByIdBabyCar(markerId);
+                        int BabyCarUse = callback.db.getUseByIdBabyCar(markerId);
 
-                        if(d<=5){
-                            Toast.makeText(getContext(),"Está a menos de 5m"+d, Toast.LENGTH_SHORT).show();
+                        if(d<=5 && BabyCarUse==0){
+                            Toast.makeText(getContext(),"Está a menos de 5m"+d+ " ou o carro não está já está em uso.", Toast.LENGTH_SHORT).show();
                         }else{
-                            Toast.makeText(getContext(),"Está a mais de 5m: "+d, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),"Está a mais de 5m: "+d+ " ou o carro já está em uso.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
