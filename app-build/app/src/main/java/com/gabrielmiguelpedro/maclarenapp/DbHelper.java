@@ -354,7 +354,19 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         }
         db.close();
         return user;
+    }
 
+    @Override
+    public int getIdBabyCar(int id) {
+        int isUse=0;
+
+        String query = "SELECT isuse FROM " + TABLE_CARS + " WHERE id=" + id;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToNext())
+            isUse = cursor.getInt(0);
+        db.close();
+        return isUse;
     }
 
 

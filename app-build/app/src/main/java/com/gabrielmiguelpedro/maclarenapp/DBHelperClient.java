@@ -15,4 +15,6 @@ public interface DBHelperClient {
     void setLoggedIn(boolean loggedIn, String email);
 
     User getUserByEmail(String email);
+
+    int getIdBabyCar(int id);
 }

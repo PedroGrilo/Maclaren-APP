@@ -2,6 +2,7 @@ package com.gabrielmiguelpedro.maclarenapp;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,13 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 public class BabyCarDialog extends AppCompatDialogFragment {
     private Bundle bundle;
+    private MainActivity callback;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        callback = (MainActivity)context;
+    }
 
     public BabyCarDialog( Bundle bundle )
     {
@@ -36,6 +44,8 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                         double lat2 = bundle.getDouble("markerLat");
 
                         double d = distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2);
+
+
 
                         if(d<=5){
                             Toast.makeText(getContext(),"Está a menos de 5m"+d, Toast.LENGTH_SHORT).show();
