@@ -42,7 +42,7 @@
     <string name="promotions">Promoções</string>
     <string name="add_promotion_Code">Adicionar código promocional.</string>
     <string name="code_value">Introduzir código</string>
-    <string name="confirme_o_metodo_de_pagamento">Confirme o metodo de Pagamento</string>
+    <string name="confirmar_pagamento">Confirmar Pagamento</string>
     <string name="montante">Montante</string>
     <string name="adicione_um_montante">Adicione um Montante</string>
     <string name="o_seu_saldo_disponivel">O seu saldo disponivel:</string>
@@ -56,4 +56,9 @@ this demo.</string>
     <string name="permission_rationale_location">Estas permissões são necessárias
 para que a aplicação funcione correctamente.</string>
     <string name="inuse">Em uso?</string>
+    <string name="add_card">+ Adicionar cartão de pagamento</string>
+    <string name="card_selected">Cartão selecionado:</string>
+    <string name="selecione_cartao">Selecione um cartão.</string>
+
+
 </resources>
