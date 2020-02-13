@@ -160,7 +160,7 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
                         .title(babyCar.getBabyCarType().getName())
                         .icon(icon)
                         .snippet(babyCar.getComments()))
-                        .setTag(getString(R.string.inuse)+ " - " +babyCar.isInUse());
+                        .setTag(getString(R.string.inuse)+ " - " +babyCar.getInUse());
             }
 
             LocationManager locationManager = (LocationManager)

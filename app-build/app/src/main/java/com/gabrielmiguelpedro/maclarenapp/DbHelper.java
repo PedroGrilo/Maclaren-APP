@@ -129,10 +129,10 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         addBabyCarType(db, BT3);
         addBabyCarType(db, BT4);
 
-        addBabyCar(db, new BabyCar(1, BT1, false, "Isto é um carrinho Pequeno do tipo 1"));
-        addBabyCar(db, new BabyCar(2, BT2, false, "Isto é um carrinho Médio do tipo 2"));
-        addBabyCar(db, new BabyCar(3, BT3, false, "Isto é um carrinho Grande do tipo 3"));
-        addBabyCar(db, new BabyCar(4, BT4, false, "Isto é um carrinho Gigante Edér do tipo 4"));
+        addBabyCar(db, new BabyCar(1, BT1, 0, "Isto é um carrinho Pequeno do tipo 1"));
+        addBabyCar(db, new BabyCar(2, BT2, 1, "Isto é um carrinho Médio do tipo 2"));
+        addBabyCar(db, new BabyCar(3, BT3, 0, "Isto é um carrinho Grande do tipo 3"));
+        addBabyCar(db, new BabyCar(4, BT4, 1, "Isto é um carrinho Gigante Edér do tipo 4"));
     }
 
     @Override
@@ -196,7 +196,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
             db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(CARS_ISUSE, babyCar.isInUse());
+        values.put(CARS_ISUSE, babyCar.getInUse());
         values.put(CARS_COMMENTS, babyCar.getComments());
         values.put(CARS_ID_CARTYPE, babyCar.getBabyCarType().getId());      // FALTAVA O GETID
 
@@ -264,10 +264,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
             BabyCar bc = new BabyCar();
             bc.setId(cursor.getInt(0));
             bc.setComments(cursor.getString(2));
-
-            /** IN USE **/
-            boolean inuse = (cursor.getString(3)).equals("1");
-            bc.setInUse(inuse);
+            bc.setInUse(cursor.getInt(3));
 
             /** GET CAR TYPE**/
             int bctypeid = cursor.getInt(1);
@@ -357,17 +354,15 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     }
 
     @Override
-    public int getUseByIdBabyCar(int id) {
+    public int getUseByIdBabyCar(int aux) {
         int isUse=0;
 
-        String query = "SELECT isuse FROM " + TABLE_CARS + " WHERE id=" + id;
+        String query = "SELECT "+CARS_ISUSE+" FROM " + TABLE_CARS + " WHERE "+CARS_ID+"=" + aux;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToNext())
+        while (cursor.moveToNext())
             isUse = cursor.getInt(0);
         db.close();
         return isUse;
     }
-
-
 }

@@ -39,6 +39,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                         String id = bundle.getString("markerId");
                         id = id.substring(1);
                         int markerId = Integer.parseInt(id);
+                        markerId++;
 
                         double lon1 = bundle.getDouble("lon");
                         double lat1 = bundle.getDouble("lat");
