@@ -132,9 +132,9 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         addBabyCarType(db, BT4);
 
         addBabyCar(db, new BabyCar(1, BT1, 0, "Isto é um carrinho Pequeno do tipo 1"));
-        addBabyCar(db, new BabyCar(2, BT2, 1, "Isto é um carrinho Médio do tipo 2"));
+        addBabyCar(db, new BabyCar(2, BT2, 0, "Isto é um carrinho Médio do tipo 2"));
         addBabyCar(db, new BabyCar(3, BT3, 0, "Isto é um carrinho Grande do tipo 3"));
-        addBabyCar(db, new BabyCar(4, BT4, 1, "Isto é um carrinho Gigante Edér do tipo 4"));
+        addBabyCar(db, new BabyCar(4, BT4, 0, "Isto é um carrinho Gigante Edér do tipo 4"));
     }
 
     @Override
@@ -386,10 +386,14 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     }
 
     @Override
-    public void setIsUseCar(int aux){
-        String query = "UPDATE " + TABLE_CARS + " SET " + CARS_ISUSE + " = " + aux;
+    public boolean setIsUseCar(int value, String aux){
+        //String query = "UPDATE " +TABLE_CARS+" SET "+CARS_ISUSE+" = "+value+" WHERE "+CARS_ID+" = "+aux;
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-        db.close();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(CARS_ISUSE,value);
+        db.update(TABLE_CARS,contentValues,"id = ?", new String[]{aux});
+        return true;
+        //Cursor cursor = db.rawQuery(query, null);
+        //db.close();
     }
 }

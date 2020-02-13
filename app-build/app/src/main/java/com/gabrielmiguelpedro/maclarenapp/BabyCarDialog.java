@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 public class BabyCarDialog extends AppCompatDialogFragment {
     private Bundle bundle;
     private MainActivity callback;
+    private int markerId;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -38,7 +39,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                         //funciona
                         String id = bundle.getString("markerId");
                         id = id.substring(1);
-                        int markerId = Integer.parseInt(id);
+                        markerId = Integer.parseInt(id);
                         markerId++;
 
                         double lon1 = bundle.getDouble("lon");
@@ -52,12 +53,15 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
                         int isUsing = callback.getUser().getIsUsing();
 
+                        Toast.makeText(getContext(),"D: "+d+" Car: "+BabyCarUse+" User:"+isUsing, Toast.LENGTH_LONG).show();
                         if(d<=5 && BabyCarUse==0 && isUsing==0){
-                            Toast.makeText(getContext(),"Entrou", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),"Car: "+callback.db.getUseByIdBabyCar(markerId)+" User: "+callback.getUser().getIsUsing(), Toast.LENGTH_LONG).show();
 
                             //SE AS VERIFICAÇÕES ESTIVEREM CORRETAS EXECUTAR
                             callback.getUser().setIsUsing(1);//colocar o utilizador em uso!!
-                            callback.getDb().setIsUseCar(1);//colocar o carro em uso!!
+                            callback.getDb().setIsUseCar(1, String.valueOf(markerId));//colocar o carro em uso!!
+
+                            Toast.makeText(getContext(),"Car: "+callback.db.getUseByIdBabyCar(markerId)+" User: "+callback.getUser().getIsUsing(), Toast.LENGTH_LONG).show();
                         }else{
                             Toast.makeText(getContext(),"Saiu", Toast.LENGTH_SHORT).show();
                         }

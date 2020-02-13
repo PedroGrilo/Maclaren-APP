@@ -20,5 +20,5 @@ public interface DBHelperClient {
 
     int getHistoricById(int aux);
 
-    void setIsUseCar(int aux);
+    boolean setIsUseCar(int value, String aux);
 }
