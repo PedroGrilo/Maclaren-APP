@@ -50,10 +50,16 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
                         int BabyCarUse = callback.db.getUseByIdBabyCar(markerId);
 
-                        if(d<=5 && BabyCarUse==0){
-                            Toast.makeText(getContext(),"Está a menos de 5m"+d+ " ou o carro não está já está em uso.", Toast.LENGTH_SHORT).show();
+                        int isUsing = callback.getUser().getIsUsing();
+
+                        if(d<=5 && BabyCarUse==0 && isUsing==0){
+                            Toast.makeText(getContext(),"Entrou", Toast.LENGTH_SHORT).show();
+
+                            //SE AS VERIFICAÇÕES ESTIVEREM CORRETAS EXECUTAR
+                            callback.getUser().setIsUsing(1);//colocar o utilizador em uso!!
+                            callback.getDb().setIsUseCar(1);//colocar o carro em uso!!
                         }else{
-                            Toast.makeText(getContext(),"Está a mais de 5m: "+d+ " ou o carro já está em uso.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),"Saiu", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })

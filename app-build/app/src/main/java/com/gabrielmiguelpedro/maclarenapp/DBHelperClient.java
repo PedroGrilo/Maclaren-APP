@@ -17,4 +17,8 @@ public interface DBHelperClient {
     User getUserByEmail(String email);
 
     int getUseByIdBabyCar(int id);
+
+    int getHistoricById(int aux);
+
+    void setIsUseCar(int aux);
 }

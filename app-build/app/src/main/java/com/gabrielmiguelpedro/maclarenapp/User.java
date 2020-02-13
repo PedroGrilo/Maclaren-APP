@@ -12,12 +12,13 @@ public class User implements Serializable {
     private Date lastLogin;
     private char userType;
     private boolean logged;
+    private int isUsing;
 
     public User() {
     }
 
 
-    public User(int userID, String email, String lastCode, boolean isOk, Date lastLogin, char userType, boolean logged) {
+    public User(int userID, String email, String lastCode, boolean isOk, Date lastLogin, char userType, boolean logged, int isUsing) {
 
         this.userID = userID;
         this.email = email;
@@ -26,8 +27,16 @@ public class User implements Serializable {
         this.lastLogin = lastLogin;
         this.userType = userType;
         this.logged = logged;
+        this.isUsing = isUsing;
     }
 
+    public int getIsUsing() {
+        return isUsing;
+    }
+
+    public void setIsUsing(int isUsing) {
+        this.isUsing = isUsing;
+    }
 
     public boolean isOk() {
         return isOk;

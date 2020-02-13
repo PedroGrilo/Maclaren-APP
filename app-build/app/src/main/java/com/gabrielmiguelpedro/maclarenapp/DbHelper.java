@@ -22,6 +22,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     public static final String USERS_LOGGED = "LOGGED";
     public static final String USERS_LASTLOGIN = "LASTLOGIN";
     public static final String USERS_USERTYPE = "USERTYPE";  // C = Customer, U = Usher
+    public static final String USERS_ISUSING = "ISUSING";
 
     public static final String TABLE_TRANSACTIONS = "transactions";
     public static final String TRANSACTIONS_ID = "ID";
@@ -70,6 +71,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
                 + USERS_isOK + " INTEGER, "
                 + USERS_LOGGED + " INTEGER, "
                 + USERS_LASTLOGIN + " INTEGER, "
+                + USERS_ISUSING + " INTEGER, "
                 + USERS_USERTYPE + " TEXT " + " );";
 
         String CREATE_TABLE_TRANSACTIONS = "CREATE TABLE " + TABLE_TRANSACTIONS
@@ -161,6 +163,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         values.put(USERS_LOGGED, user.isLogged()); // get logged
         values.put(USERS_LASTLOGIN, user.getLastLogin() + ""); // get lastlogin
         values.put(USERS_USERTYPE, user.getUserType() + ""); // get usertype
+        values.put(USERS_ISUSING, user.getIsUsing()); // get usertype
         db.insert(TABLE_USERS, null, values);
         db.close();
     }
@@ -364,5 +367,29 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
             isUse = cursor.getInt(0);
         db.close();
         return isUse;
+    }
+
+    //TODO
+    @Override
+    public int getHistoricById(int aux) {
+        Historic historic = new Historic();
+
+        String query = "SELECT historic.HISTORICDATE, historic.COST, historic.ID_CAR, historic.ID_USER, historic.ID_TRANSACTIONS, historic.ID_HISTORICCOORDINATES FROM historic JOIN cars ON cars.id_cartype = cartype.id";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext())
+            historic.setDate(cursor.getInt(0));
+        historic.setCost(cursor.getFloat(1));
+
+        db.close();
+        return 0;
+    }
+
+    @Override
+    public void setIsUseCar(int aux){
+        String query = "UPDATE " + TABLE_CARS + " SET " + CARS_ISUSE + " = " + aux;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        db.close();
     }
 }

@@ -39,7 +39,7 @@ public class VerificationCodeActivity extends AppCompatActivity implements Seria
         db = new DbHelper(this);
 
 
-        db.addUser(new User(db.getLastID(), email, null, false, new Date(), 'C', false));
+        db.addUser(new User(db.getLastID(), email, null, false, new Date(), 'C', false, 0));
 
         generatedCode = generateRandomCode();
 
