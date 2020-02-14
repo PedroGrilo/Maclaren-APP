@@ -84,7 +84,7 @@ public class BalanceFragment extends Fragment {
             public void onClick(View view) {
                 EditText editText = root.findViewById(R.id.editText_FWB_Valor);
                 value = Double.parseDouble(editText.getText().toString());
-                callback.getDb().addTransactions(new Transactions(0, value, callback.getUser()));
+                callback.getDb().addTransactions(new Transactions(0, value, callback.getUser(),null));
                 saldoTV.setText(callback.getDb().getIdTransactionsValue(callback.getUser().getUserID()) + "€");
             }
         });
