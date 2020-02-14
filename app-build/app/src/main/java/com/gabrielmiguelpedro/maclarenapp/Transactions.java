@@ -4,15 +4,15 @@ public class Transactions {
     private int id;
     private double value;
     private User user;
-    //private Historic historic; TESTE2
+    private Historic historic;
 
     public Transactions() { }
 //                                                  Historic historic
-    public Transactions(int id, double value, User user) {
+    public Transactions(int id, double value, User user, Historic historic) {
         this.id = id;
         this.value = value;
         this.user = user;
-        //this.historic = historic; TESTE2
+        this.historic = historic;
     }
 
     public int getId() {
@@ -27,7 +27,7 @@ public class Transactions {
         return value;
     }
 
-    public void setValue(float value) {
+    public void setValue(double value) {
         this.value = value;
     }
 
@@ -39,11 +39,11 @@ public class Transactions {
         this.user = user;
     }
 
-    /*public Historic getHistoric() { TESTE2
+    public Historic getHistoric() {
         return historic;
-    }*/
+    }
 
-    /*public void setHistoric(Historic historic) { TESTE2
+    public void setHistoric(Historic historic) {
         this.historic = historic;
-    }*/
+    }
 }

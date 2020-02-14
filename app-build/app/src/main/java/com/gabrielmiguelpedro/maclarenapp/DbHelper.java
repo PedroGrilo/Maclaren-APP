@@ -79,9 +79,9 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
                 + " ( " + TRANSACTIONS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + TRANSACTIONS_ID_USER + " INTEGER, "
                 + TRANSACTIONS_VALUE + " INTEGER, "
-                //+ TRANSACTIONS_ID_HISTORIC + " INTEGER, " TESTE2
-                + " FOREIGN KEY (" + TRANSACTIONS_ID_USER + ") REFERENCES " + TABLE_USERS + "(" + USERS_ID + "));";
-        //+ " FOREIGN KEY ("+TRANSACTIONS_ID_HISTORIC+") REFERENCES "+TABLE_HISTORIC+"("+HISTORIC_ID+"));"; TESTE2
+                + TRANSACTIONS_ID_HISTORIC + " INTEGER, "
+                + " FOREIGN KEY (" + TRANSACTIONS_ID_USER + ") REFERENCES " + TABLE_USERS + "(" + USERS_ID + "), "
+                + " FOREIGN KEY ("+TRANSACTIONS_ID_HISTORIC+") REFERENCES "+TABLE_HISTORIC+"("+HISTORIC_ID+"));";
 
 
         String CREATE_TABLE_CARTYPE = "CREATE TABLE " + TABLE_CARTYPE
