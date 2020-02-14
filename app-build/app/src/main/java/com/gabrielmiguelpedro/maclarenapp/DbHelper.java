@@ -28,7 +28,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     public static final String TRANSACTIONS_ID = "ID";
     public static final String TRANSACTIONS_ID_USER = "ID_USER";
     public static final String TRANSACTIONS_VALUE = "VALOR";
-    public static final String TRANSACTIONS_ID_HISTORIC = "ID_HISTORIC";
+    public static final String TRANSACTIONS_ID_HISTORIC = "ID_HISTORIC";//é isto para ter
 
     public static final String TABLE_CARTYPE = "cartype";
     public static final String CARTYPE_ID = "ID";
@@ -47,15 +47,16 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     public static final String HISTORIC_HISTORICDATE = "HISTORICDATE";
     public static final String HISTORIC_ID_CAR = "ID_CAR";
     public static final String HISTORIC_ID_USER = "ID_USER";
-    public static final String HISTORIC_ID_TRANSACTIONS = "ID_TRANSACTIONS";
-    public static final String HISTORIC_ID_HISTORICCOORDINATES = "ID_HISTORICCOORDINATES";
-    public static final String HISTORIC_COST = "COST";
+    //public static final String HISTORIC_ID_TRANSACTIONS = "ID_TRANSACTIONS";
+    //public static final String HISTORIC_ID_HISTORICCOORDINATES = "ID_HISTORICCOORDINATES";
+    //public static final String HISTORIC_COST = "COST";
 
     public static final String TABLE_HISTORICCOORDINATES = "historiccoordinates";
     public static final String HISTORICCOORDINATES_ID = "ID";
     public static final String HISTORICCOORDINATES_DATE = "DATE";
     public static final String HISTORICCOORDINATES_COORLONG = "COORLONG";
     public static final String HISTORICCOORDINATES_COORLAT = "COORLAT";
+    //chave estrangeira para o id do aluger
 
 
     public DbHelper(@Nullable Context context) {
