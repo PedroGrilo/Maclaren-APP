@@ -83,7 +83,7 @@ public class BalanceFragment extends Fragment {
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                double date = (double) new Date().getTime();
+                Date date = new Date();
                 EditText editText = root.findViewById(R.id.editText_FWB_Valor);
                 value = Double.parseDouble(editText.getText().toString());
                 callback.getDb().addTransactionsDeposit(new Transactions(0, value, callback.getUser(), date));

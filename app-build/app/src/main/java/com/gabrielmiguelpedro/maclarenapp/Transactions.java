@@ -1,15 +1,17 @@
 package com.gabrielmiguelpedro.maclarenapp;
 
+import java.util.Date;
+
 public class Transactions {
     private int id;
     private double value;
     private User user;
     private Historic historic;
-    private double date;
+    private Date date;
 
     public Transactions() { }
 //                                                  Historic historic
-    public Transactions(int id, double value, User user, Historic historic, double date) {
+    public Transactions(int id, double value, User user, Historic historic, Date date) {
         this.id = id;
         this.value = value;
         this.user = user;
@@ -17,7 +19,7 @@ public class Transactions {
         this.date = date;
     }
 
-    public Transactions(int id, double value, User user, double date) {
+    public Transactions(int id, double value, User user, Date date) {
         this.id = id;
         this.value = value;
         this.user = user;
@@ -56,11 +58,11 @@ public class Transactions {
         this.historic = historic;
     }
 
-    public double getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(double date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 }

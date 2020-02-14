@@ -247,7 +247,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(TRANSACTIONS_DATE, transactions.getDate());
+        values.put(TRANSACTIONS_DATE, transactions.getDate()+"");
         values.put(TRANSACTIONS_ID_HISTORIC, transactions.getHistoric().getId());
         values.put(TRANSACTIONS_VALUE, transactions.getValue());
         values.put(TRANSACTIONS_ID_USER, transactions.getUser().getUserID());
@@ -262,7 +262,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(TRANSACTIONS_DATE, transactions.getDate());
+        values.put(TRANSACTIONS_DATE, transactions.getDate()+"");
         values.put(TRANSACTIONS_VALUE, transactions.getValue());
         values.put(TRANSACTIONS_ID_USER, transactions.getUser().getUserID());
 
