@@ -8,6 +8,8 @@ public interface DBHelperClient {
 
     void addTransactions(Transactions transactions);
 
+    void addTransactionsDeposit(Transactions transactions);
+
     ArrayList<BabyCar> getAllBabyCars();
 
     float getIdTransactionsValue(int id);

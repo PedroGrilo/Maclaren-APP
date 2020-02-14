@@ -29,6 +29,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     public static final String TRANSACTIONS_ID_USER = "ID_USER";
     public static final String TRANSACTIONS_VALUE = "VALOR";
     public static final String TRANSACTIONS_ID_HISTORIC = "ID_HISTORIC";//é isto para ter
+    public static final String TRANSACTIONS_DATE = "DATE";
 
     public static final String TABLE_CARTYPE = "cartype";
     public static final String CARTYPE_ID = "ID";
@@ -79,6 +80,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
                 + " ( " + TRANSACTIONS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + TRANSACTIONS_ID_USER + " INTEGER, "
                 + TRANSACTIONS_VALUE + " INTEGER, "
+                + TRANSACTIONS_DATE + " INTEGER, "
                 + TRANSACTIONS_ID_HISTORIC + " INTEGER, "
                 + " FOREIGN KEY (" + TRANSACTIONS_ID_USER + ") REFERENCES " + TABLE_USERS + "(" + USERS_ID + "), "
                 + " FOREIGN KEY ("+TRANSACTIONS_ID_HISTORIC+") REFERENCES "+TABLE_HISTORIC+"("+HISTORIC_ID+"));";
@@ -245,8 +247,22 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
+        values.put(TRANSACTIONS_DATE, transactions.getDate());
         values.put(TRANSACTIONS_ID_HISTORIC, transactions.getHistoric().getId());
-        //values.put(TRANSACTIONS_ID, transactions.getId()); TESTE3
+        values.put(TRANSACTIONS_VALUE, transactions.getValue());
+        values.put(TRANSACTIONS_ID_USER, transactions.getUser().getUserID());
+
+        db.insert(TABLE_TRANSACTIONS, null, values);
+
+        db.close();
+    }
+
+    @Override
+    public void addTransactionsDeposit(Transactions transactions) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(TRANSACTIONS_DATE, transactions.getDate());
         values.put(TRANSACTIONS_VALUE, transactions.getValue());
         values.put(TRANSACTIONS_ID_USER, transactions.getUser().getUserID());
 

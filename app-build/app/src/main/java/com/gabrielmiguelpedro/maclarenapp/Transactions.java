@@ -5,14 +5,23 @@ public class Transactions {
     private double value;
     private User user;
     private Historic historic;
+    private double date;
 
     public Transactions() { }
 //                                                  Historic historic
-    public Transactions(int id, double value, User user, Historic historic) {
+    public Transactions(int id, double value, User user, Historic historic, double date) {
         this.id = id;
         this.value = value;
         this.user = user;
         this.historic = historic;
+        this.date = date;
+    }
+
+    public Transactions(int id, double value, User user, double date) {
+        this.id = id;
+        this.value = value;
+        this.user = user;
+        this.date = date;
     }
 
     public int getId() {
@@ -45,5 +54,13 @@ public class Transactions {
 
     public void setHistoric(Historic historic) {
         this.historic = historic;
+    }
+
+    public double getDate() {
+        return date;
+    }
+
+    public void setDate(double date) {
+        this.date = date;
     }
 }
