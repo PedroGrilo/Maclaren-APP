@@ -99,14 +99,14 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         String CREATE_TABLE_HISTORIC = "CREATE TABLE " + TABLE_HISTORIC
                 + " ( " + HISTORIC_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + HISTORIC_HISTORICDATE + " INTEGER, "
-                + HISTORIC_COST + " REAL, "
-                + HISTORIC_ID_HISTORICCOORDINATES + " INTEGER, "
+                //+ HISTORIC_COST + " REAL, "
+                //+ HISTORIC_ID_HISTORICCOORDINATES + " INTEGER, "
                 + HISTORIC_ID_USER + " INTEGER, "
-                + HISTORIC_ID_TRANSACTIONS + " INTEGER, "
+                //+ HISTORIC_ID_TRANSACTIONS + " INTEGER, "
                 + HISTORIC_ID_CAR + " INTEGER, "
-                + "FOREIGN KEY (" + HISTORIC_ID_HISTORICCOORDINATES + ") REFERENCES " + TABLE_HISTORICCOORDINATES + "(" + HISTORICCOORDINATES_ID + "), "
+                //+ "FOREIGN KEY (" + HISTORIC_ID_HISTORICCOORDINATES + ") REFERENCES " + TABLE_HISTORICCOORDINATES + "(" + HISTORICCOORDINATES_ID + "), "
                 + "FOREIGN KEY (" + HISTORIC_ID_USER + ") REFERENCES " + TABLE_USERS + "(" + USERS_ID + "), "
-                + "FOREIGN KEY (" + HISTORIC_ID_TRANSACTIONS + ") REFERENCES " + TABLE_TRANSACTIONS + "(" + TRANSACTIONS_ID + "), "
+                //+ "FOREIGN KEY (" + HISTORIC_ID_TRANSACTIONS + ") REFERENCES " + TABLE_TRANSACTIONS + "(" + TRANSACTIONS_ID + "), "
                 + "FOREIGN KEY (" + HISTORIC_ID_CAR + ") REFERENCES " + TABLE_CARS + "(" + CARS_ID + "));";
 
         String CREATE_TABLE_HISTORICCOORDINATES = "CREATE TABLE " + TABLE_HISTORICCOORDINATES
@@ -215,12 +215,12 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(HISTORIC_COST, historic.getCost());
+        //values.put(HISTORIC_COST, historic.getCost());
         values.put(HISTORIC_HISTORICDATE, historic.getDate());
         values.put(HISTORIC_ID_CAR, historic.getBabyCar().getId());
         values.put(HISTORIC_ID_USER, historic.getUser().getUserID());
-        values.put(HISTORIC_ID_TRANSACTIONS, historic.getTransactions().getId());
-        values.put(HISTORIC_ID_HISTORICCOORDINATES, historic.getHistoricCoordinates().getId());
+        //values.put(HISTORIC_ID_TRANSACTIONS, historic.getTransactions().getId());
+        //values.put(HISTORIC_ID_HISTORICCOORDINATES, historic.getHistoricCoordinates().getId());
 
         db.insert(TABLE_HISTORIC, null, values);
 
@@ -380,7 +380,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext())
             historic.setDate(cursor.getInt(0));
-        historic.setCost(cursor.getFloat(1));
+            //historic.setCost(cursor.getFloat(1));
 
         db.close();
         return 0;
