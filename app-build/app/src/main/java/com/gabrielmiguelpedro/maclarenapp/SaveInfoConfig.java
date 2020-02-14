@@ -15,7 +15,6 @@ public class SaveInfoConfig implements Serializable {
 
     public static String getEmail(Context context) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-
         email = sharedPref.getString(VALOR_EMAIL, "");
         return email;
 
@@ -26,6 +25,13 @@ public class SaveInfoConfig implements Serializable {
         //guardar valores
         SharedPreferences.Editor edit = sharedPref.edit();
         edit.putString(VALOR_EMAIL, email);
+        edit.apply();
+    }
+
+    public static void logout(Context context){
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor edit = sharedPref.edit();
+        edit.remove(VALOR_EMAIL);
         edit.apply();
     }
 

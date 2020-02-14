@@ -8,4 +8,6 @@ public interface DBHelperMaster {
     void setIsOk(boolean isOk, String email);
 
     void setLastCode(String lastcode, String email);
+
+    boolean checkEmail (String email);
 }

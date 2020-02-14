@@ -59,6 +59,11 @@ para que a aplicação funcione correctamente.</string>
     <string name="add_card">+ Adicionar cartão de pagamento</string>
     <string name="card_selected">Cartão selecionado:</string>
     <string name="selecione_cartao">Selecione um cartão.</string>
+    <string name="log_out">Sair</string>
+    <string name="email_doesnt_exist">Email não existe!</string>
+    <string name="invalid_field">Campos Inválidos</string>
+    <string name="empty_field">Campo Vazio</string>
+    <string name="email_already_exists">Email já existe</string>
 
 
 </resources>

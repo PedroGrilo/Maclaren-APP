@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gabrielmiguelpedro.maclarenapp.Exceptions.EmptyFieldException;
 import com.gabrielmiguelpedro.maclarenapp.Exceptions.InvalidFieldException;
 
 import java.io.Serializable;
@@ -58,10 +59,10 @@ public class VerificationCodeActivity extends AppCompatActivity implements Seria
                         String codeS = code.getText().toString();
 
                         if (codeS.equals("")) //verifica se o campo do códgo está valido
-                            throw new InvalidFieldException();
+                            throw new EmptyFieldException(getString(R.string.empty_field));
 
                         if (!codeS.equals(String.valueOf(generatedCode)))//verifica se o campo do códgo está igual ao do mail
-                            throw new InvalidFieldException();
+                            throw new InvalidFieldException(getString(R.string.invalid_field));
 
                         db.setIsOk(true, email);
                         db.setLastCode(codeS, email);
@@ -69,12 +70,12 @@ public class VerificationCodeActivity extends AppCompatActivity implements Seria
                         SaveInfoConfig.saveUser(email, VerificationCodeActivity.this);
                         Intent
 
-                                //acaba com a activity atual e passa os valores para a main activity e inicia-a
-                                i = new Intent(VerificationCodeActivity.this, MainActivity.class);
+                        //acaba com a activity atual e passa os valores para a main activity e inicia-a
+                        i = new Intent(VerificationCodeActivity.this, MainActivity.class);
                         finish();
                         startActivity(i);
 
-                    } catch (InvalidFieldException e) {
+                    } catch (InvalidFieldException | EmptyFieldException e) {
                         Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }

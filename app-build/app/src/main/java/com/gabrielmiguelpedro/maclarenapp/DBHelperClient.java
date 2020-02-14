@@ -21,4 +21,6 @@ public interface DBHelperClient {
     int getHistoricById(int aux);
 
     boolean setIsUseCar(int value, String aux);
+
+    void logOut(User user);
 }

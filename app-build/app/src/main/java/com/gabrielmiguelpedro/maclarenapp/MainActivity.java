@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ import java.io.Serializable;
 public class MainActivity extends AppCompatActivity implements Serializable {
 
     DBHelperClient db;
+    private LinearLayout logoutbtn;
     private AppBarConfiguration mAppBarConfiguration;
     private Bundle infoBundle;
     private User user;
@@ -32,6 +35,15 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        logoutbtn = findViewById(R.id.buttonLogout);
+
+        logoutbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Logout();
+            }
+        });
 
         db = new DbHelper(this); // basta usar isto para usar a bd
 
@@ -61,6 +73,14 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         NavigationUI.setupWithNavController(navigationView, navController);
 
 
+    }
+
+    private void Logout() {
+        db.logOut(user);
+        SaveInfoConfig.logout(this);
+        Intent i = new Intent(MainActivity.this, SignUpActivity.class);
+        startActivity(i);
+        finish();
     }
 
 

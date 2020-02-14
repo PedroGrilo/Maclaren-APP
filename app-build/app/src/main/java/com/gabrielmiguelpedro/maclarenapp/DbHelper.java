@@ -396,4 +396,27 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         //Cursor cursor = db.rawQuery(query, null);
         //db.close();
     }
+
+
+    public void logOut(User user){
+        String query = "UPDATE " + TABLE_USERS + " SET " + USERS_LOGGED + " =  0 " + "WHERE " + USERS_EMAIL + " = '" + user.getEmail()+"'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        db.close();
+    }
+
+    public boolean checkEmail(String email){
+        String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + USERS_EMAIL + " = '" + email + "'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        int counter = 0;
+
+        while (cursor.moveToNext())
+            counter ++;
+
+        return counter > 1;
+
+    }
+
 }
