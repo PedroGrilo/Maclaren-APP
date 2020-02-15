@@ -455,5 +455,19 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         return isUsing;
     }
 
+    @Override
+    public Historic getHistoricById(int id){
+        Historic historic = new Historic();
+
+        String query = "SELECT " + HISTORIC_ID + " FROM " + TABLE_HISTORIC + " WHERE " + HISTORIC_ID + "=" + id;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            historic.setId(cursor.getInt(0));
+        }
+        db.close();
+        return historic;
+    }
+
 
 }

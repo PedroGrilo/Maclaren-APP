@@ -9,11 +9,13 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MyService extends Service {
-    private MainActivity callback;
+    DBHelperClient db;
     private MediaPlayer player;
 
     @Nullable
@@ -28,6 +30,7 @@ public class MyService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        db = new DbHelper(this); //
         /*player = MediaPlayer.create(this, Settings.System.DEFAULT_RINGTONE_URI);
         player.setLooping(true);
         player.start();*/
@@ -36,7 +39,8 @@ public class MyService extends Service {
             @Override
             public void run() {
                 //FUNCIONA player.start();
-
+                Date date = new Date();
+                db.addHistoricCoordinates(new HistoricCoordinates(0,date,1,1, db.getHistoricById(1))); //HARDCODED
             }
         }, 0, 10000);
         return START_STICKY;

@@ -31,4 +31,6 @@ public interface DBHelperClient {
     void setIsUsing(int i, User user);
 
     int getIsUsingById(int aux);
+
+    Historic getHistoricById(int id);
 }
