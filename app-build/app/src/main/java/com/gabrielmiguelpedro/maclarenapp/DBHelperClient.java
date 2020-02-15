@@ -6,7 +6,7 @@ public interface DBHelperClient {
 
     int getLastID();
 
-    void addHistoric(Historic historic);
+    long addHistoric(Historic historic);
 
     void addHistoricCoordinates(HistoricCoordinates historicCoordinates);
 

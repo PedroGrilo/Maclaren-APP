@@ -217,7 +217,9 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     }
 
     @Override
-    public void addHistoric(Historic historic) {
+    public long addHistoric(Historic historic) {
+        long rowId;
+
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -228,9 +230,10 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         //values.put(HISTORIC_ID_TRANSACTIONS, historic.getTransactions().getId());
         //values.put(HISTORIC_ID_HISTORICCOORDINATES, historic.getHistoricCoordinates().getId());
 
-        db.insert(TABLE_HISTORIC, null, values);
+        rowId = db.insert(TABLE_HISTORIC, null, values);
 
         db.close();
+        return rowId;
     }
 
     @Override
