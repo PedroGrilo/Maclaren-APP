@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.widget.Toast;
@@ -69,6 +71,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                                     callback.getDb().setIsUseCar(1, String.valueOf(markerId));//colocar o carro em uso!!
                                     rowId = callback.getDb().addHistoric(new Historic(0, date, callback.getUser(), callback.getDb().getBabyCarById(markerId)));
 
+                                    getActivity().startService(new Intent(getActivity(),MyService.class));
 
                                     Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
                                     Toast.makeText(getContext(), "RowId: " + rowId, Toast.LENGTH_LONG).show();
