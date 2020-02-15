@@ -17,7 +17,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
     private Bundle bundle;
     private MainActivity callback;
     private int markerId;
-    private int rowId;
+    private long rowId;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -63,9 +63,11 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
                             callback.getUser().setIsUsing(1);//colocar o utilizador em uso!!
                             callback.getDb().setIsUseCar(1, String.valueOf(markerId));//colocar o carro em uso!!
-                            callback.getDb().addHistoric(new Historic(0,date,callback.getUser(),callback.getDb().getBabyCarById(markerId)));
+                            rowId = callback.getDb().addHistoric(new Historic(0,date,callback.getUser(),callback.getDb().getBabyCarById(markerId)));
+
 
                             Toast.makeText(getContext(),"Car: "+callback.db.getUseByIdBabyCar(markerId)+" User: "+callback.getUser().getIsUsing(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(),"Car: "+rowId, Toast.LENGTH_LONG).show();
                         }else{
                             Toast.makeText(getContext(),"Saiu", Toast.LENGTH_SHORT).show();
                         }
