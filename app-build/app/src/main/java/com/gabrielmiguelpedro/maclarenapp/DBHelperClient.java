@@ -20,8 +20,6 @@ public interface DBHelperClient {
 
     int getUseByIdBabyCar(int id);
 
-    int getHistoricById(int aux);
-
     boolean setIsUseCar(int value, String aux);
 
     void logOut(User user);
