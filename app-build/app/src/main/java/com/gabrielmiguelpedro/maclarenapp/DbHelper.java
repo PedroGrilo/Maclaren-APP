@@ -218,7 +218,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         ContentValues values = new ContentValues();
 
         //values.put(HISTORIC_COST, historic.getCost());
-        values.put(HISTORIC_HISTORICDATE, historic.getDate());
+        values.put(HISTORIC_HISTORICDATE, historic.getDate()+"");
         values.put(HISTORIC_ID_CAR, historic.getBabyCar().getId());
         values.put(HISTORIC_ID_USER, historic.getUser().getUserID());
         //values.put(HISTORIC_ID_TRANSACTIONS, historic.getTransactions().getId());
@@ -384,22 +384,6 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
             isUse = cursor.getInt(0);
         db.close();
         return isUse;
-    }
-
-    //TODO
-    @Override
-    public int getHistoricById(int aux) {
-        Historic historic = new Historic();
-
-        String query = "SELECT historic.HISTORICDATE, historic.COST, historic.ID_CAR, historic.ID_USER, historic.ID_TRANSACTIONS, historic.ID_HISTORICCOORDINATES FROM historic JOIN cars ON cars.id_cartype = cartype.id";
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-        while (cursor.moveToNext())
-            historic.setDate(cursor.getInt(0));
-            //historic.setCost(cursor.getFloat(1));
-
-        db.close();
-        return 0;
     }
 
     @Override

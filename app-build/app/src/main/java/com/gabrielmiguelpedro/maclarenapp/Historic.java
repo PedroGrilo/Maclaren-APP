@@ -1,8 +1,10 @@
 package com.gabrielmiguelpedro.maclarenapp;
 
+import java.util.Date;
+
 public class Historic {
     private int id;
-    private int date;
+    private Date date;
     //private float cost;
     //private HistoricCoordinates historicCoordinates;
     //private Transactions transactions;
@@ -12,7 +14,7 @@ public class Historic {
     public Historic() {
     }
 
-    public Historic(int id, int date, User user, BabyCar babyCar) {
+    public Historic(int id, Date date, User user, BabyCar babyCar) {
         this.id = id;
         this.date = date;
         this.user = user;
@@ -27,11 +29,11 @@ public class Historic {
         this.id = id;
     }
 
-    public int getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
