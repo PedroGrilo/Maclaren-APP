@@ -64,6 +64,7 @@ para que a aplicação funcione correctamente.</string>
     <string name="invalid_field">Campos Inválidos</string>
     <string name="empty_field">Campo Vazio</string>
     <string name="email_already_exists">Email já existe</string>
+    <string name="QRCodeInvalid">QRCode Invalido</string>
 
 
 </resources>

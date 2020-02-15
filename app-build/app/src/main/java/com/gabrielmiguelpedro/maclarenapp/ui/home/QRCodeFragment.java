@@ -28,6 +28,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.gabrielmiguelpedro.maclarenapp.Assets.PermissionUtils;
 import com.gabrielmiguelpedro.maclarenapp.BabyCarDialog;
+import com.gabrielmiguelpedro.maclarenapp.Exceptions.InvalidFieldException;
 import com.gabrielmiguelpedro.maclarenapp.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
@@ -97,13 +98,21 @@ public class QRCodeFragment extends Fragment implements
 
     @Override
     public void handleResult(Result rawResult) {
-        mScannerView.stopCamera();
-        String result = rawResult.getText();
-        Bundle bundle = new Bundle();
-        bundle.putString("markerId",result);
-        HomeFragment homeFragment = new HomeFragment();
-        homeFragment.setArguments(bundle);
-        getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, homeFragment).commit();
+        try {
+            String result = rawResult.getText();
+            if(result.startsWith("m") && result.length() == 2) {
+                mScannerView.stopCamera();
+                Bundle bundle = new Bundle();
+                bundle.putString("markerId", result);
+                HomeFragment homeFragment = new HomeFragment();
+                homeFragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, homeFragment).commit();
+            }else {
+                throw new InvalidFieldException(getString(R.string.QRCodeInvalid));
+            }
+        }catch (Exception e){
+            Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void showMessageDialog(String message) {

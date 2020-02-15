@@ -105,12 +105,24 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
         mapView.onResume();
         mapView.getMapAsync(this);
         bundle = this.getArguments();
-        if(bundle.containsKey("markerId")){
-            Toast.makeText(getContext(),bundle.get("markerId")+"",Toast.LENGTH_SHORT).show();
-            // todo get coordinates quando o miguel se despacjar
+        try {
+            Toast.makeText(getContext(), bundle.get("markerId") + "", Toast.LENGTH_SHORT).show();
+            fusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            if (location != null) {
+                                double lon = location.getLongitude();
+                                double lat = location.getLatitude();
+                                bundle.putDouble("markerLon", lon);
+                                bundle.putDouble("markerLat", lat);
+                            }
+                        }
+                    });
             openDialog();
-        }
+        }catch (NullPointerException ignored){};
     }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
