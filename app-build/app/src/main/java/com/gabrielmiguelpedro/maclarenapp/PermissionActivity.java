@@ -40,8 +40,8 @@ public class PermissionActivity extends AppCompatActivity {
                 break;
             case "CAMERA":
                 titulo.setText(R.string.accept_camera_title);
-                desc.setText(R.string.accept_camera_subtitle);
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 2);
+                desc.setText(   R.string.accept_camera_subtitle);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 3);
                 break;
         }
 
@@ -65,6 +65,17 @@ public class PermissionActivity extends AppCompatActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     /* Se o utilizador aceitar as permissões de armazenamento */
                     redirectActivity(SignUpActivity.class);
+                    break;
+                } else {
+                    /* Se o utilizador recusar as permissões */
+                    Toast.makeText(getApplicationContext(), "PRECISA DE ACEITAR AS PERMISSÕES PARA CONTINUAR", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }
+            case 3: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    /* Se o utilizador aceitar as permissões de localizaçao */
+                    finish();
                     break;
                 } else {
                     /* Se o utilizador recusar as permissões */

@@ -50,13 +50,12 @@ public class QRCodeFragment extends Fragment implements
             mAutoFocus = true;
             mSelectedIndices = null;
         }
-        //setupFormats();
+        checkPermissionsCamera();
         return mScannerView;
     }
 
     private void checkPermissionsCamera() {
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            getActivity().finish();// se não tiver permissão, termina a sign in activity, para que o utilizador não possa voltar à mesma sem permissoes
             Bundle b = new Bundle();
             b.putString("PERMISSION", "CAMERA");
             Intent i = new Intent(getActivity(), PermissionActivity.class);
