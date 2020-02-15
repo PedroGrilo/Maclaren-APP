@@ -35,7 +35,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.AlertDialogCustom));
-        builder.setTitle("Alugar Carrinho")
+        builder.setTitle("Alugar Carrinho - " + bundle.getString("markerId"))
                 .setMessage("Pretende Alugar este Carrinho?")
                 .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                     @Override
@@ -58,19 +58,29 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                         int isUsing = callback.getDb().getIsUsingById(callback.getUser().getUserID());
 
                         Toast.makeText(getContext(), "D: " + d + " Car: " + BabyCarUse + " User:" + isUsing, Toast.LENGTH_LONG).show();
-                        if (d <= 10 && BabyCarUse == 0 && isUsing == 0) {
-                            Date date = new Date();
-                            Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
+                        if (d <= 10) {
+                            if (BabyCarUse == 0) {
+                                if (isUsing == 0) {
 
-                            callback.getDb().setIsUsing(1,callback.getUser());//colocar o utilizador em uso!!
-                            callback.getDb().setIsUseCar(1, String.valueOf(markerId));//colocar o carro em uso!!
-                            rowId = callback.getDb().addHistoric(new Historic(0, date, callback.getUser(), callback.getDb().getBabyCarById(markerId)));
+                                    Date date = new Date();
+                                    Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
+
+                                    callback.getDb().setIsUsing(1, callback.getUser());//colocar o utilizador em uso!!
+                                    callback.getDb().setIsUseCar(1, String.valueOf(markerId));//colocar o carro em uso!!
+                                    rowId = callback.getDb().addHistoric(new Historic(0, date, callback.getUser(), callback.getDb().getBabyCarById(markerId)));
 
 
-                            Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
-                            Toast.makeText(getContext(), "RowId: " + rowId, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(), "RowId: " + rowId, Toast.LENGTH_LONG).show();
+
+                                } else {
+                                    Toast.makeText(getContext(), R.string.isusing, Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(getContext(), R.string.babycarisused, Toast.LENGTH_SHORT).show();
+                            }
                         } else {
-                            Toast.makeText(getContext(), "Saiu", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), R.string.mindistance, Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
