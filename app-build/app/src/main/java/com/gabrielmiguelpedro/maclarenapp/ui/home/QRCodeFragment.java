@@ -85,12 +85,14 @@ public class QRCodeFragment extends Fragment implements
     public void handleResult(Result rawResult) {
         try {
             String result = rawResult.getText();
-            if (result.startsWith("m") && result.length() == 2) {
+            if (result.length() == 1) {
                 mScannerView.stopCamera();
                 Bundle bundle = new Bundle();
+
                 int aux = Integer.parseInt(result);
-                aux--;
-                bundle.putString("markerId", String.valueOf(aux));
+                aux --;
+
+                bundle.putString("markerId","m"+aux);
                 HomeFragment homeFragment = new HomeFragment();
                 homeFragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, homeFragment).commit();

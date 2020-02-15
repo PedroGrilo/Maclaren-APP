@@ -221,21 +221,21 @@ public class HomeFragment extends Fragment implements Serializable, GoogleMap.On
 
     @Override
     public void onInfoWindowClick(Marker marker) {
+        try{
         String markerId = marker.getId();
         double markerLon = marker.getPosition().longitude;
         double markerLat = marker.getPosition().latitude;
 
-        if (bundle.containsKey("markerId"))
-            bundle.putString("markerId", markerId);
+        bundle.putString("markerId", markerId);
 
-        if (bundle.containsKey("markerLon") && bundle.containsKey("markerLat")) {
-            bundle.putDouble("markerLon", markerLon);
-            bundle.putDouble("markerLat", markerLat);
-        }
-
+        bundle.putDouble("markerLon", markerLon);
+        bundle.putDouble("markerLat", markerLat);
 
         getPhoneLocation();
         openDialog();
+        }catch (Exception e){
+            Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
