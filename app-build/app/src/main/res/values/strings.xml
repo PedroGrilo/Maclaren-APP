@@ -66,10 +66,11 @@ para que a aplicação funcione correctamente.</string>
     <string name="email_already_exists">Email já existe</string>
     <string name="QRCodeInvalid">QRCode Invalido</string>
     <string name="accept_camera_title">Autorizar a Camera</string>
-    <string name="accept_camera_subtitle">Autoriza à Maclaren usar a camarea de modo a poder usar ORCode</string>
+    <string name="accept_camera_subtitle">Autoriza à Maclaren usar a camera de modo a poder usar QRCode</string>
     <string name="mindistance">A distancia minima de aluguer é de 10 metros.</string>
     <string name="isusing">Já está a alugar um carrinho.</string>
     <string name="babycarisused">O carrinho já está a ser alugado.</string>
+    <string name="nopermission">Sem permissões</string>
 
 
 </resources>

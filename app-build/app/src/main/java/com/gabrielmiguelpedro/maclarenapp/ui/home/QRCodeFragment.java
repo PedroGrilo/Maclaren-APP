@@ -50,13 +50,12 @@ public class QRCodeFragment extends Fragment implements
             mAutoFocus = true;
             mSelectedIndices = null;
         }
-        //setupFormats();
+        checkPermissionsCamera();
         return mScannerView;
     }
 
     private void checkPermissionsCamera() {
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            getActivity().finish();// se não tiver permissão, termina a sign in activity, para que o utilizador não possa voltar à mesma sem permissoes
             Bundle b = new Bundle();
             b.putString("PERMISSION", "CAMERA");
             Intent i = new Intent(getActivity(), PermissionActivity.class);
@@ -100,29 +99,20 @@ public class QRCodeFragment extends Fragment implements
     @Override
     public void handleResult(Result rawResult) {
         try {
-            String result = rawResult.getText();
-            if (result.length() == 1) {
-                mScannerView.stopCamera();
+            int result = Integer.parseInt(rawResult.getText());
+            mScannerView.stopCamera();
                 Bundle bundle = new Bundle();
-
-                int aux = Integer.parseInt(result);
-                aux --;
-
-                bundle.putString("markerId","m"+aux);
+                result--;
+                bundle.putString("markerId","m"+result);
                 HomeFragment homeFragment = new HomeFragment();
                 homeFragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, homeFragment).commit();
-            } else {
-                throw new InvalidFieldException(getString(R.string.QRCodeInvalid));
-            }
         } catch (Exception e) {
-            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.QRCodeInvalid, Toast.LENGTH_SHORT).show();
+            getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new HomeFragment()).commit();
         }
     }
 
-    public void showMessageDialog(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-    }
 
     public void closeMessageDialog() {
         closeDialog("scan_results");
@@ -140,23 +130,6 @@ public class QRCodeFragment extends Fragment implements
         }
     }
 
-
-    public void setupFormats() {
-        List<BarcodeFormat> formats = new ArrayList<BarcodeFormat>();
-        if (mSelectedIndices == null || mSelectedIndices.isEmpty()) {
-            mSelectedIndices = new ArrayList<Integer>();
-            for (int i = 0; i < ZXingScannerView.ALL_FORMATS.size(); i++) {
-                mSelectedIndices.add(i);
-            }
-        }
-
-        for (int index : mSelectedIndices) {
-            formats.add(ZXingScannerView.ALL_FORMATS.get(index));
-        }
-        if (mScannerView != null) {
-            mScannerView.setFormats(formats);
-        }
-    }
 
     @Override
     public void onPause() {

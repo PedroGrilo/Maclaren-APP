@@ -9,6 +9,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:text="@string/nopermission"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="25dp"/>
 
 </FrameLayout>

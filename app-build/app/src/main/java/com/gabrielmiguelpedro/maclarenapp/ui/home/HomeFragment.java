@@ -56,21 +56,13 @@ public class HomeFragment extends Fragment implements Serializable, GoogleMap.On
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private static final String TAG = "CARRINHOS";
     private static final int REQUEST_CAMERA = 1;
-    DbHelper db;
-    private HomeViewModel homeViewModel;
     private GoogleMap mMap;
     private MapView mapView;
-    private SupportMapFragment mapFragment;
     private boolean mPermissionDenied = false;
     private MainActivity callback;
-    private int isUsing = 0; //TESTE2
-    private String lastSnipet; //TESTE2
     private FusedLocationProviderClient fusedLocationClient; //localização atual
-    private Date rentStartTime;
-    private Date rentEndTime;
     private Bundle bundle;
     private View root;
-    private ZXingScannerView mScannerView;
     private Button buttonQRCode;
 
     @Override
@@ -84,6 +76,7 @@ public class HomeFragment extends Fragment implements Serializable, GoogleMap.On
                              Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_home, container, false);
+
         buttonQRCode = root.findViewById(R.id.buttonQRCode);
         buttonQRCode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,16 +91,16 @@ public class HomeFragment extends Fragment implements Serializable, GoogleMap.On
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        bundle = new Bundle();
         mapView = view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
         mapView.onResume();
         mapView.getMapAsync(this);
-        /**bundle = this.getArguments();
+
+        bundle = this.getArguments();
 
         if (bundle != null) {
             if (bundle.containsKey("markerId")) {
-                Toast.makeText(getContext(), bundle.get("markerId") + "", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), bundle.get("markerId") + "", Toast.LENGTH_SHORT).show();
                 fusedLocationClient.getLastLocation()
                         .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
                             @Override
@@ -125,7 +118,7 @@ public class HomeFragment extends Fragment implements Serializable, GoogleMap.On
                 openDialog();
             }
         }
-**/    }
+    }
 
 
     @Override
@@ -223,15 +216,14 @@ public class HomeFragment extends Fragment implements Serializable, GoogleMap.On
     @Override
     public void onInfoWindowClick(Marker marker) {
         try{
+        bundle = new Bundle();
         String markerId = marker.getId();
         double markerLon = marker.getPosition().longitude;
         double markerLat = marker.getPosition().latitude;
 
         bundle.putString("markerId", markerId);
-
         bundle.putDouble("markerLon", markerLon);
         bundle.putDouble("markerLat", markerLat);
-
         getPhoneLocation();
         openDialog();
         }catch (Exception e){
@@ -302,6 +294,7 @@ public class HomeFragment extends Fragment implements Serializable, GoogleMap.On
     public void openDialog() {
         BabyCarDialog babyCarDialog = new BabyCarDialog(bundle);
         babyCarDialog.show(getFragmentManager(), "DIALOGO");
+        //bundle = new Bundle();
     }
 
 
