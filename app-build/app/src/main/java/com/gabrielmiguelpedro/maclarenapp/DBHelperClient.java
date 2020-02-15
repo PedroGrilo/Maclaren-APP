@@ -6,6 +6,10 @@ public interface DBHelperClient {
 
     int getLastID();
 
+    void addHistoric(Historic historic);
+
+    void addHistoricCoordinates(HistoricCoordinates historicCoordinates);
+
     void addTransactions(Transactions transactions);
 
     void addTransactionsDeposit(Transactions transactions);
@@ -23,4 +27,6 @@ public interface DBHelperClient {
     boolean setIsUseCar(int value, String aux);
 
     void logOut(User user);
+
+    BabyCar getBabyCarById(int id);
 }

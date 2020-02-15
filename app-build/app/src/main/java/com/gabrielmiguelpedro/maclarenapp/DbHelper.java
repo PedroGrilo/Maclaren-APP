@@ -213,6 +213,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
             db.close();
     }
 
+    @Override
     public void addHistoric(Historic historic) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -229,6 +230,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         db.close();
     }
 
+    @Override
     public void addHistoricCoordinates(HistoricCoordinates historicCoordinates) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -418,6 +420,20 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
 
         return counter > 1;
 
+    }
+
+    @Override
+    public BabyCar getBabyCarById(int id) {
+        BabyCar babyCar = new BabyCar();
+
+        String query = "SELECT "+CARS_ID+" FROM " + TABLE_CARS + " WHERE "+CARS_ID+"=" + id;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            babyCar.setId(cursor.getInt(0));
+        }
+        db.close();
+        return babyCar;
     }
 
 }
