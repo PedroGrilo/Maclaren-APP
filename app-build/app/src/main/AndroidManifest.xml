@@ -46,6 +46,7 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme" />
         <activity android:name=".PermissionActivity" />
+
         <activity android:name=".VerificationCodeActivity" />
         <activity
             android:name=".SignInActivity"
