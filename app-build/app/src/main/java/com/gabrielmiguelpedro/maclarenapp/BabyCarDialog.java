@@ -67,7 +67,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
 
                             Toast.makeText(getContext(),"Car: "+callback.db.getUseByIdBabyCar(markerId)+" User: "+callback.getUser().getIsUsing(), Toast.LENGTH_LONG).show();
-                            Toast.makeText(getContext(),"Car: "+rowId, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(),"RowId: "+rowId, Toast.LENGTH_LONG).show();
                         }else{
                             Toast.makeText(getContext(),"Saiu", Toast.LENGTH_SHORT).show();
                         }
