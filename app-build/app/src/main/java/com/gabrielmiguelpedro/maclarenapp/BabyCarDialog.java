@@ -17,6 +17,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
     private Bundle bundle;
     private MainActivity callback;
     private int markerId;
+    private int rowId;
 
     @Override
     public void onAttach(@NonNull Context context) {
