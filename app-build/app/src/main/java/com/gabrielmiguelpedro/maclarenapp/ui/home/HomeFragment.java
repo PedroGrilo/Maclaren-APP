@@ -2,33 +2,24 @@ package com.gabrielmiguelpedro.maclarenapp.ui.home;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.gabrielmiguelpedro.maclarenapp.Assets.BitmapUtils;
 import com.gabrielmiguelpedro.maclarenapp.Assets.PermissionUtils;
@@ -37,7 +28,6 @@ import com.gabrielmiguelpedro.maclarenapp.BabyCarDialog;
 import com.gabrielmiguelpedro.maclarenapp.DbHelper;
 import com.gabrielmiguelpedro.maclarenapp.MainActivity;
 import com.gabrielmiguelpedro.maclarenapp.R;
-import com.gabrielmiguelpedro.maclarenapp.ui.wallet.wallet_saldo.BalanceFragment;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -46,18 +36,14 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.zxing.Result;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Random;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -98,22 +84,19 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
                              Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_home, container, false);
+
         buttonQRCode = root.findViewById(R.id.buttonQRCode);
         bundle  = new Bundle();
         buttonQRCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new QRCode()).commit();
-
+                getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new QRCodeFragment()).commit();
             }
         });
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
         return root;
-
     }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -121,6 +104,12 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
         mapView.onCreate(savedInstanceState);
         mapView.onResume();
         mapView.getMapAsync(this);
+        bundle = this.getArguments();
+        if(bundle.containsKey("markerId")){
+            Toast.makeText(getContext(),bundle.get("markerId")+"",Toast.LENGTH_SHORT).show();
+            // todo get coordinates quando o miguel se despacjar
+            openDialog();
+        }
     }
 
     @Override
@@ -220,9 +209,15 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
         String markerId = marker.getId();
         double markerLon = marker.getPosition().longitude;
         double markerLat = marker.getPosition().latitude;
-        bundle.putString("markerId",markerId);
-        bundle.putDouble("markerLon",markerLon);
-        bundle.putDouble("markerLat",markerLat);
+
+        if(bundle.containsKey("markerId"))
+            bundle.putString("markerId",markerId);
+
+        if(bundle.containsKey("markerLon") && bundle.containsKey("markerLat") ){
+            bundle.putDouble("markerLon",markerLon);
+            bundle.putDouble("markerLat",markerLat);
+        }
+
 
 
         getPhoneLocation();
@@ -240,6 +235,7 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
     @Override
     public void onMyLocationClick(@NonNull Location location) {
         Toast.makeText(getContext(), "Localização atual :\n" + location, Toast.LENGTH_SHORT).show();
+
     }
 
     @Override

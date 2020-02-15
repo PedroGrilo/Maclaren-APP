@@ -27,6 +27,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.gabrielmiguelpedro.maclarenapp.Assets.PermissionUtils;
+import com.gabrielmiguelpedro.maclarenapp.BabyCarDialog;
 import com.gabrielmiguelpedro.maclarenapp.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
@@ -36,7 +37,7 @@ import java.util.List;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
-public class QRCode extends Fragment implements
+public class QRCodeFragment extends Fragment implements
         ZXingScannerView.ResultHandler {
     private static final String FLASH_STATE = "FLASH_STATE";
     private static final String AUTO_FOCUS_STATE = "AUTO_FOCUS_STATE";
@@ -96,11 +97,13 @@ public class QRCode extends Fragment implements
 
     @Override
     public void handleResult(Result rawResult) {
+        mScannerView.stopCamera();
         String result = rawResult.getText();
-
-
-
-       showMessageDialog(result);
+        Bundle bundle = new Bundle();
+        bundle.putString("markerId",result);
+        HomeFragment homeFragment = new HomeFragment();
+        homeFragment.setArguments(bundle);
+        getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, homeFragment).commit();
     }
 
     public void showMessageDialog(String message) {
