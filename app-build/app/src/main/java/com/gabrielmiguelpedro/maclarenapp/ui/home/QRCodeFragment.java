@@ -103,7 +103,9 @@ public class QRCodeFragment extends Fragment implements
             if(result.startsWith("m") && result.length() == 2) {
                 mScannerView.stopCamera();
                 Bundle bundle = new Bundle();
-                bundle.putString("markerId", result);
+                int aux = Integer.parseInt(result);
+                aux--;
+                bundle.putString("markerId", String.valueOf(aux));
                 HomeFragment homeFragment = new HomeFragment();
                 homeFragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, homeFragment).commit();

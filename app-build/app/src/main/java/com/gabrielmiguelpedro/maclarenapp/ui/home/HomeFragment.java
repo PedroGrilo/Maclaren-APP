@@ -114,7 +114,9 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
                             if (location != null) {
                                 double lon = location.getLongitude();
                                 double lat = location.getLatitude();
+                                bundle.putDouble("lon", lon);
                                 bundle.putDouble("markerLon", lon);
+                                bundle.putDouble("lat", lat);
                                 bundle.putDouble("markerLat", lat);
                             }
                         }
