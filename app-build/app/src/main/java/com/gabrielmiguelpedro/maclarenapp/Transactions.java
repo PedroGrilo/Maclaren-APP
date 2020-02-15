@@ -9,8 +9,10 @@ public class Transactions {
     private Historic historic;
     private Date date;
 
-    public Transactions() { }
-//                                                  Historic historic
+    public Transactions() {
+    }
+
+    //                                                  Historic historic
     public Transactions(int id, double value, User user, Historic historic, Date date) {
         this.id = id;
         this.value = value;

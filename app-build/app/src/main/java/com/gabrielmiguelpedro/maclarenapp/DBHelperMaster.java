@@ -9,5 +9,5 @@ public interface DBHelperMaster {
 
     void setLastCode(String lastcode, String email);
 
-    boolean checkEmail (String email);
+    boolean checkEmail(String email);
 }

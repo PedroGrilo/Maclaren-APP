@@ -64,14 +64,14 @@ public class SignInActivity extends AppCompatActivity {
     }
 
 
-    private boolean checkFields() throws InvalidFieldException,EmptyFieldException, EmailErrorException {
+    private boolean checkFields() throws InvalidFieldException, EmptyFieldException, EmailErrorException {
         String ptr = "^[a-z0-9.]+@[a-z0-9]+\\.[a-z]+(\\.[a-z]+)?$";
-        String email =tV_email.getText().toString();
+        String email = tV_email.getText().toString();
         if (email.isEmpty())
             throw new EmptyFieldException(getString(R.string.empty_field));
         if (!email.matches(ptr))
             throw new InvalidFieldException(getString(R.string.invalid_field));
-        if(!db.checkEmail(email))
+        if (!db.checkEmail(email))
             throw new EmailErrorException(getString(R.string.email_doesnt_exist));
         return true;
     }

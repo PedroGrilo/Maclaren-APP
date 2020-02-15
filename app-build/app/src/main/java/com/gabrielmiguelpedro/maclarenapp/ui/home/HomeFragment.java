@@ -47,36 +47,36 @@ import java.util.Date;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
-public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnMyLocationButtonClickListener,
+public class HomeFragment extends Fragment implements Serializable, GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener,
         OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback,
-        GoogleMap.OnInfoWindowClickListener{
+        GoogleMap.OnInfoWindowClickListener {
 
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1 ;
-    private static final String TAG = "CARRINHOS" ;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private static final String TAG = "CARRINHOS";
+    private static final int REQUEST_CAMERA = 1;
+    DbHelper db;
     private HomeViewModel homeViewModel;
     private GoogleMap mMap;
     private MapView mapView;
     private SupportMapFragment mapFragment;
     private boolean mPermissionDenied = false;
     private MainActivity callback;
-    private int isUsing=0; //TESTE2
+    private int isUsing = 0; //TESTE2
     private String lastSnipet; //TESTE2
     private FusedLocationProviderClient fusedLocationClient; //localização atual
     private Date rentStartTime;
     private Date rentEndTime;
     private Bundle bundle;
     private View root;
-    DbHelper db;
-    private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView mScannerView;
     private Button buttonQRCode;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        callback = (MainActivity)context;
+        callback = (MainActivity) context;
     }
 
     @Override
@@ -86,7 +86,7 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
         root = inflater.inflate(R.layout.fragment_home, container, false);
 
         buttonQRCode = root.findViewById(R.id.buttonQRCode);
-        bundle  = new Bundle();
+        bundle = new Bundle();
         buttonQRCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,7 +122,8 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
                         }
                     });
             openDialog();
-        }catch (NullPointerException ignored){};
+        } catch (NullPointerException ignored) {
+        }
     }
 
 
@@ -166,12 +167,12 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
                 double latitude = 38.53760;
 
                 double longitude = -8.87806;
-                
-                switch (babyCar.getBabyCarType().getId()){
-                    case 1 : //  pequeno
+
+                switch (babyCar.getBabyCarType().getId()) {
+                    case 1: //  pequeno
                         icon = bbycar_s;
                         latitude += 0.00002;//para testes
-                    case 2 : // medio
+                    case 2: // medio
                         icon = bbycar_m;
                         longitude += 0.00002;//para testes
                     case 3: // grande
@@ -188,7 +189,7 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
                         .title(babyCar.getBabyCarType().getName())
                         .icon(icon)
                         .snippet(babyCar.getComments()))
-                        .setTag(getString(R.string.inuse)+ " - " +babyCar.getInUse());
+                        .setTag(getString(R.string.inuse) + " - " + babyCar.getInUse());
             }
 
             LocationManager locationManager = (LocationManager)
@@ -224,14 +225,13 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
         double markerLon = marker.getPosition().longitude;
         double markerLat = marker.getPosition().latitude;
 
-        if(bundle.containsKey("markerId"))
-            bundle.putString("markerId",markerId);
+        if (bundle.containsKey("markerId"))
+            bundle.putString("markerId", markerId);
 
-        if(bundle.containsKey("markerLon") && bundle.containsKey("markerLat") ){
-            bundle.putDouble("markerLon",markerLon);
-            bundle.putDouble("markerLat",markerLat);
+        if (bundle.containsKey("markerLon") && bundle.containsKey("markerLat")) {
+            bundle.putDouble("markerLon", markerLon);
+            bundle.putDouble("markerLat", markerLat);
         }
-
 
 
         getPhoneLocation();
@@ -281,12 +281,12 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
         }
     }
 
-    public void getPhoneLocation(){
+    public void getPhoneLocation() {
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location location) {
-                            //Toast.makeText(getContext(),"Altitude: "+location.getAltitude()+" Longitude: "+location.getLongitude(), Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getContext(),"Altitude: "+location.getAltitude()+" Longitude: "+location.getLongitude(), Toast.LENGTH_LONG).show();
                         if (location != null) {
                             //Toast.makeText(getContext(),"222Altitude: "+location.getAltitude()+" Longitude: "+location.getLongitude(), Toast.LENGTH_LONG).show();
                             double lon = location.getLongitude();
@@ -298,9 +298,9 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
                 });
     }
 
-    public void openDialog(){
+    public void openDialog() {
         BabyCarDialog babyCarDialog = new BabyCarDialog(bundle);
-        babyCarDialog.show(getFragmentManager(),"DIALOGO");
+        babyCarDialog.show(getFragmentManager(), "DIALOGO");
     }
 
 

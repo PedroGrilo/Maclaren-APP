@@ -70,8 +70,8 @@ public class VerificationCodeActivity extends AppCompatActivity implements Seria
                         SaveInfoConfig.saveUser(email, VerificationCodeActivity.this);
                         Intent
 
-                        //acaba com a activity atual e passa os valores para a main activity e inicia-a
-                        i = new Intent(VerificationCodeActivity.this, MainActivity.class);
+                                //acaba com a activity atual e passa os valores para a main activity e inicia-a
+                                i = new Intent(VerificationCodeActivity.this, MainActivity.class);
                         finish();
                         startActivity(i);
 

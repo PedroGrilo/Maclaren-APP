@@ -84,7 +84,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
                 + TRANSACTIONS_DATE + " INTEGER, "
                 + TRANSACTIONS_ID_HISTORIC + " INTEGER, "
                 + " FOREIGN KEY (" + TRANSACTIONS_ID_USER + ") REFERENCES " + TABLE_USERS + "(" + USERS_ID + "), "
-                + " FOREIGN KEY ("+TRANSACTIONS_ID_HISTORIC+") REFERENCES "+TABLE_HISTORIC+"("+HISTORIC_ID+"));";
+                + " FOREIGN KEY (" + TRANSACTIONS_ID_HISTORIC + ") REFERENCES " + TABLE_HISTORIC + "(" + HISTORIC_ID + "));";
 
 
         String CREATE_TABLE_CARTYPE = "CREATE TABLE " + TABLE_CARTYPE
@@ -118,7 +118,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
                 + HISTORICCOORDINATES_DATE + " INT, "
                 + HISTORICCOORDINATES_COORLONG + " INT, "
                 + HISTORICCOORDINATES_COORLAT + " INT, "
-                + "FOREIGN KEY (" + HISTORICCOORDINATES_HISTORYID + ") REFERENCES " + TABLE_HISTORIC + "("+ HISTORIC_ID +"));";
+                + "FOREIGN KEY (" + HISTORICCOORDINATES_HISTORYID + ") REFERENCES " + TABLE_HISTORIC + "(" + HISTORIC_ID + "));";
 
         db.execSQL(CREATE_TABLE_USERS);
         db.execSQL(CREATE_TABLE_TRANSACTIONS);
@@ -224,7 +224,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         ContentValues values = new ContentValues();
 
         //values.put(HISTORIC_COST, historic.getCost());
-        values.put(HISTORIC_HISTORICDATE, historic.getDate()+"");
+        values.put(HISTORIC_HISTORICDATE, historic.getDate() + "");
         values.put(HISTORIC_ID_CAR, historic.getBabyCar().getId());
         values.put(HISTORIC_ID_USER, historic.getUser().getUserID());
         //values.put(HISTORIC_ID_TRANSACTIONS, historic.getTransactions().getId());
@@ -255,7 +255,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(TRANSACTIONS_DATE, transactions.getDate()+"");
+        values.put(TRANSACTIONS_DATE, transactions.getDate() + "");
         values.put(TRANSACTIONS_ID_HISTORIC, transactions.getHistoric().getId());
         values.put(TRANSACTIONS_VALUE, transactions.getValue());
         values.put(TRANSACTIONS_ID_USER, transactions.getUser().getUserID());
@@ -270,7 +270,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(TRANSACTIONS_DATE, transactions.getDate()+"");
+        values.put(TRANSACTIONS_DATE, transactions.getDate() + "");
         values.put(TRANSACTIONS_VALUE, transactions.getValue());
         values.put(TRANSACTIONS_ID_USER, transactions.getUser().getUserID());
 
@@ -383,9 +383,9 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
 
     @Override
     public int getUseByIdBabyCar(int aux) {
-        int isUse=0;
+        int isUse = 0;
 
-        String query = "SELECT "+CARS_ISUSE+" FROM " + TABLE_CARS + " WHERE "+CARS_ID+"=" + aux;
+        String query = "SELECT " + CARS_ISUSE + " FROM " + TABLE_CARS + " WHERE " + CARS_ID + "=" + aux;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext())
@@ -395,26 +395,26 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     }
 
     @Override
-    public boolean setIsUseCar(int value, String aux){
+    public boolean setIsUseCar(int value, String aux) {
         //String query = "UPDATE " +TABLE_CARS+" SET "+CARS_ISUSE+" = "+value+" WHERE "+CARS_ID+" = "+aux;
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(CARS_ISUSE,value);
-        db.update(TABLE_CARS,contentValues,"id = ?", new String[]{aux});
+        contentValues.put(CARS_ISUSE, value);
+        db.update(TABLE_CARS, contentValues, "id = ?", new String[]{aux});
         return true;
         //Cursor cursor = db.rawQuery(query, null);
         //db.close();
     }
 
 
-    public void logOut(User user){
-        String query = "UPDATE " + TABLE_USERS + " SET " + USERS_LOGGED + " =  0 " + "WHERE " + USERS_EMAIL + " = '" + user.getEmail()+"'";
+    public void logOut(User user) {
+        String query = "UPDATE " + TABLE_USERS + " SET " + USERS_LOGGED + " =  0 " + "WHERE " + USERS_EMAIL + " = '" + user.getEmail() + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         db.close();
     }
 
-    public boolean checkEmail(String email){
+    public boolean checkEmail(String email) {
         String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + USERS_EMAIL + " = '" + email + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -422,7 +422,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         int counter = 0;
 
         while (cursor.moveToNext())
-            counter ++;
+            counter++;
 
         return counter > 1;
 
@@ -432,7 +432,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     public BabyCar getBabyCarById(int id) {
         BabyCar babyCar = new BabyCar();
 
-        String query = "SELECT "+CARS_ID+" FROM " + TABLE_CARS + " WHERE "+CARS_ID+"=" + id;
+        String query = "SELECT " + CARS_ID + " FROM " + TABLE_CARS + " WHERE " + CARS_ID + "=" + id;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {

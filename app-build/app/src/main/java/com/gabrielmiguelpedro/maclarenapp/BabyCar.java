@@ -21,16 +21,16 @@ public class BabyCar {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getInUse() {
         return inUse;
     }
 
     public void setInUse(int inUse) {
         this.inUse = inUse;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public BabyCarType getBabyCarType() {

@@ -28,7 +28,7 @@ public class SaveInfoConfig implements Serializable {
         edit.apply();
     }
 
-    public static void logout(Context context){
+    public static void logout(Context context) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor edit = sharedPref.edit();
         edit.remove(VALOR_EMAIL);
