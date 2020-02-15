@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
         user = db.getUserByEmail(SaveInfoConfig.getEmail(this));
 
+        db.setLoggedIn(true,user);
+
         Toast.makeText(this, user.getEmail() + " oh yes bbay - teste bd", Toast.LENGTH_LONG).show();
 
         checkPermissions(); // verificar permissoes de localizaão
@@ -75,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     }
 
     private void Logout() {
-        db.logOut(user);
+        db.setLoggedIn(false,user);
         SaveInfoConfig.logout(this);
         Intent i = new Intent(MainActivity.this, SignUpActivity.class);
         startActivity(i);
@@ -110,6 +112,10 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         super.onStop();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     public DBHelperClient getDb() {
         return db;
@@ -118,5 +124,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     public User getUser() {
         return user;
     }
+
+
 
 }

@@ -33,7 +33,7 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        /* 2verifica as permissoes de armazenamento*/
+        /* verifica as permissoes de armazenamento*/
         checkPermissionsStorage();
 
         tV_email = findViewById(R.id.si_email);
@@ -82,9 +82,10 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void callVerificationActivity() {
         Intent intent = new Intent(SignUpActivity.this, VerificationCodeActivity.class);
-        Bundle info = new Bundle();
-        info.putString("EMAIL", tV_email.getText().toString()); //Email
-        intent.putExtras(info);
+        Bundle bundle = new Bundle();
+        bundle.putString("EMAIL", tV_email.getText().toString()); //Email
+        bundle.putString("FROM_ACTIVITY","SIGN_UP");
+        intent.putExtras(bundle);
         finish();
         startActivity(intent);
     }

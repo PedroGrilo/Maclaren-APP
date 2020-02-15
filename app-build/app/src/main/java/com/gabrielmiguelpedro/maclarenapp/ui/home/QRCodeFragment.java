@@ -1,5 +1,8 @@
 package com.gabrielmiguelpedro.maclarenapp.ui.home;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -9,11 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.gabrielmiguelpedro.maclarenapp.Exceptions.InvalidFieldException;
+import com.gabrielmiguelpedro.maclarenapp.PermissionActivity;
 import com.gabrielmiguelpedro.maclarenapp.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
@@ -45,8 +50,19 @@ public class QRCodeFragment extends Fragment implements
             mAutoFocus = true;
             mSelectedIndices = null;
         }
-        setupFormats();
+        //setupFormats();
         return mScannerView;
+    }
+
+    private void checkPermissionsCamera() {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            getActivity().finish();// se não tiver permissão, termina a sign in activity, para que o utilizador não possa voltar à mesma sem permissoes
+            Bundle b = new Bundle();
+            b.putString("PERMISSION", "CAMERA");
+            Intent i = new Intent(getActivity(), PermissionActivity.class);
+            i.putExtras(b);
+            startActivity(i);
+        }
     }
 
     @Override

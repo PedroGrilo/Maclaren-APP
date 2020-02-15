@@ -33,22 +33,29 @@ public class VerificationCodeActivity extends AppCompatActivity implements Seria
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(activity_verification_code);
-
-        info = getIntent().getExtras();
-        email = info.getString("EMAIL");
-
-        db = new DbHelper(this);
-
-
-        db.addUser(new User(db.getLastID(), email, null, false, new Date(), 'C', false, 0));
-
-        generatedCode = generateRandomCode();
-
-        Toast.makeText(getApplicationContext(), String.valueOf(generatedCode), Toast.LENGTH_LONG).show();
-
-        sendMaclarenCode();
-
         try {
+            info = getIntent().getExtras();
+            email = info.getString("EMAIL");
+
+            db = new DbHelper(this);
+
+            String from_activity = info.getString("FROM_ACTIVITY");
+
+            db = new DbHelper(  this);
+
+
+            generatedCode = generateRandomCode();
+
+            Toast.makeText(getApplicationContext(), String.valueOf(generatedCode), Toast.LENGTH_LONG).show();
+
+            if(from_activity.equals("SIGN_UP")) {
+                int id = db.getLastID();
+                User user = new User(id, email, String.valueOf(generatedCode), false, new Date(), 'C', false, 0);
+                db.addUser(user);
+            }
+
+            sendMaclarenCode();
+
             btn_back = findViewById(R.id.btn_back_vc);
             btn_next = findViewById(R.id.btn_end_vc);
             btn_next.setOnClickListener(new View.OnClickListener() {
@@ -64,8 +71,7 @@ public class VerificationCodeActivity extends AppCompatActivity implements Seria
                         if (!codeS.equals(String.valueOf(generatedCode)))//verifica se o campo do códgo está igual ao do mail
                             throw new InvalidFieldException(getString(R.string.invalid_field));
 
-                        db.setIsOk(true, email);
-                        db.setLastCode(codeS, email);
+                        db.setIsOk(1, email);
 
                         SaveInfoConfig.saveUser(email, VerificationCodeActivity.this);
                         Intent
@@ -75,8 +81,9 @@ public class VerificationCodeActivity extends AppCompatActivity implements Seria
                         finish();
                         startActivity(i);
 
-                    } catch (InvalidFieldException | EmptyFieldException e) {
+                    } catch (Exception e) {
                         Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                        finish();
                     }
                 }
             });

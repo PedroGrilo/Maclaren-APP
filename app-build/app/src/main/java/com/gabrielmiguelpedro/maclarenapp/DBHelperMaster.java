@@ -5,9 +5,9 @@ public interface DBHelperMaster {
 
     int getLastID();
 
-    void setIsOk(boolean isOk, String email);
+    void setIsOk(int isOk, String email);
 
-    void setLastCode(String lastcode, String email);
+    /*void setLastCode(String lastcode, String email);*/
 
     boolean checkEmail(String email);
 }

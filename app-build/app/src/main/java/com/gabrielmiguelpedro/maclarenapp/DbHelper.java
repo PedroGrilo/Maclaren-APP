@@ -58,6 +58,8 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     public static final String HISTORICCOORDINATES_COORLONG = "COORLONG";
     public static final String HISTORICCOORDINATES_COORLAT = "COORLAT";
     private static final String HISTORICCOORDINATES_HISTORYID = "HISTORYID";
+
+    SQLiteDatabase db;
     //chave estrangeira para o id do aluger
 
 
@@ -67,6 +69,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
 
 
     public void onCreate(SQLiteDatabase db) {
+
         String CREATE_TABLE_USERS = "CREATE TABLE " + TABLE_USERS
                 + " ( " + USERS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + USERS_EMAIL + " TEXT, "
@@ -164,13 +167,14 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
         values.put(USERS_EMAIL, user.getEmail()); // get username
-        values.put(USERS_isOK, user.isOk()); // get isok
+        values.put(USERS_isOK, (user.isOk() ? 1 : 0)); // get isok
         values.put(USERS_LASTCODE, user.getLastCode()); // get lastcode
         values.put(USERS_LOGGED, user.isLogged()); // get logged
         values.put(USERS_LASTLOGIN, user.getLastLogin() + ""); // get lastlogin
         values.put(USERS_USERTYPE, user.getUserType() + ""); // get usertype
         values.put(USERS_ISUSING, user.getIsUsing()); // get usertype
         db.insert(TABLE_USERS, null, values);
+
         db.close();
     }
 
@@ -324,43 +328,45 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
 
     @Override
     public int getLastID() {
-
         int lastId = 0;
-
         String query = "SELECT * FROM " + TABLE_USERS + " ORDER BY ID DESC LIMIT 1";
-
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToNext())
             lastId = cursor.getInt(0);
         db.close();
-
         return lastId;
     }
 
+
     @Override
-    public void setLoggedIn(boolean loggedIn, String email) {
-        String query = "UPDATE " + TABLE_USERS + " SET " + USERS_LOGGED + " = " + loggedIn + "WHERE " + USERS_EMAIL + " = " + email;
+    public void setLoggedIn(boolean loggedIn, User user) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
+        ContentValues values = new ContentValues();
+        values.put(USERS_LOGGED, (loggedIn ? 1 : 0));
+        String selection = USERS_EMAIL + " LIKE '" + user.getEmail() +"'" ;
+        db.update(TABLE_USERS,values,selection,null);
         db.close();
     }
 
     @Override
-    public void setIsOk(boolean isOk, String email) {
-        String query = "UPDATE " + TABLE_USERS + " SET " + USERS_isOK + " = '" + isOk + "' WHERE " + USERS_EMAIL + " = '" + email + "'";
+    public void setIsOk(int isOk, String email) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
+        ContentValues values = new ContentValues();
+        values.put(USERS_isOK, isOk);
+        String selection = USERS_EMAIL + " LIKE '" + email +"'" ;
+        db.update(TABLE_USERS,values,selection,null);
         db.close();
     }
 
-    @Override
-    public void setLastCode(String lastcode, String email) {
-        String query = "UPDATE " + TABLE_USERS + " SET " + USERS_LASTCODE + " = " + lastcode + " WHERE " + USERS_EMAIL + " = '" + email + "'";
+    public void setIsUsing(int i, User user){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
+        ContentValues values = new ContentValues();
+        values.put(USERS_ISUSING, i);
+        String selection = USERS_EMAIL + " LIKE '" + user.getEmail() +"'" ;
+        db.update(TABLE_USERS,values,selection,null);
         db.close();
-    }
+    };
 
     @Override
     public User getUserByEmail(String email) {
@@ -407,13 +413,6 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     }
 
 
-    public void logOut(User user) {
-        String query = "UPDATE " + TABLE_USERS + " SET " + USERS_LOGGED + " =  0 " + "WHERE " + USERS_EMAIL + " = '" + user.getEmail() + "'";
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-        db.close();
-    }
-
     public boolean checkEmail(String email) {
         String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + USERS_EMAIL + " = '" + email + "'";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -441,5 +440,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         db.close();
         return babyCar;
     }
+
+
 
 }

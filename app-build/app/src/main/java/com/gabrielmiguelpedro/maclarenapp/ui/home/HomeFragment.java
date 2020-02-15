@@ -84,9 +84,7 @@ public class HomeFragment extends Fragment implements Serializable, GoogleMap.On
                              Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_home, container, false);
-
         buttonQRCode = root.findViewById(R.id.buttonQRCode);
-        bundle = new Bundle();
         buttonQRCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,31 +98,34 @@ public class HomeFragment extends Fragment implements Serializable, GoogleMap.On
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        bundle = new Bundle();
         mapView = view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
         mapView.onResume();
         mapView.getMapAsync(this);
-        bundle = this.getArguments();
-        try {
-            Toast.makeText(getContext(), bundle.get("markerId") + "", Toast.LENGTH_SHORT).show();
-            fusedLocationClient.getLastLocation()
-                    .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
-                        @Override
-                        public void onSuccess(Location location) {
-                            if (location != null) {
-                                double lon = location.getLongitude();
-                                double lat = location.getLatitude();
-                                bundle.putDouble("lon", lon);
-                                bundle.putDouble("markerLon", lon);
-                                bundle.putDouble("lat", lat);
-                                bundle.putDouble("markerLat", lat);
+        /**bundle = this.getArguments();
+
+        if (bundle != null) {
+            if (bundle.containsKey("markerId")) {
+                Toast.makeText(getContext(), bundle.get("markerId") + "", Toast.LENGTH_SHORT).show();
+                fusedLocationClient.getLastLocation()
+                        .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                            @Override
+                            public void onSuccess(Location location) {
+                                if (location != null) {
+                                    double lon = location.getLongitude();
+                                    double lat = location.getLatitude();
+                                    bundle.putDouble("lon", lon);
+                                    bundle.putDouble("markerLon", lon);
+                                    bundle.putDouble("lat", lat);
+                                    bundle.putDouble("markerLat", lat);
+                                }
                             }
-                        }
-                    });
-            openDialog();
-        } catch (NullPointerException ignored) {
+                        });
+                openDialog();
+            }
         }
-    }
+**/    }
 
 
     @Override

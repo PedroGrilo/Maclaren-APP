@@ -56,9 +56,10 @@ public class SignInActivity extends AppCompatActivity {
 
     public void callVerificationScene() {
         Intent intent = new Intent(SignInActivity.this, VerificationCodeActivity.class);
-        Bundle email = new Bundle();
-        email.putString("EMAIL", tV_email.getText().toString()); //Email
-        intent.putExtras(email);
+        Bundle bundle = new Bundle();
+        bundle.putString("EMAIL", tV_email.getText().toString()); //Email
+        bundle.putString("FROM_ACTIVITY","SIGN_IN");
+        intent.putExtras(bundle);
         finish();
         startActivity(intent);
     }

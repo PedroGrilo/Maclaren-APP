@@ -38,6 +38,11 @@ public class PermissionActivity extends AppCompatActivity {
                 desc.setText(R.string.accept_storage_subtext);
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
                 break;
+            case "CAMERA":
+                titulo.setText(R.string.accept_camera_title);
+                desc.setText(R.string.accept_camera_subtitle);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 2);
+                break;
         }
 
     }
@@ -68,7 +73,10 @@ public class PermissionActivity extends AppCompatActivity {
                 }
             }
 
-            // other 'case' lines to check for other
+
+
+
+                // other 'case' lines to check for other
             // permissions this app might request
         }
     }

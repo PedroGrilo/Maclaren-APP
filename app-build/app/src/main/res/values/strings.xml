@@ -21,7 +21,7 @@
     <string name="accept_gps_title">Autorizar os serviços de Localização</string>
     <string name="accept_gps_subtext">Autoriza à Maclaren usar os serviços de localização de modo a mostrar os carrinhos de bébe proximos de si.</string>
     <string name="accept_storage_title">Autorizar o Armazenamento</string>
-    <string name="accept_storage_subtext">Autoriza à Maclaren usar o armazenamento de modo a guardar informações sobre a sua conta no seu telefone?</string>
+    <string name="accept_storage_subtext">Autoriza à Maclaren usar o armazenamento de modo a guardar informações sobre a sua conta no seu telefone.</string>
     <string name="title_activity_main">Map</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -65,6 +65,8 @@ para que a aplicação funcione correctamente.</string>
     <string name="empty_field">Campo Vazio</string>
     <string name="email_already_exists">Email já existe</string>
     <string name="QRCodeInvalid">QRCode Invalido</string>
+    <string name="accept_camera_title">Autorizar a Camera</string>
+    <string name="accept_camera_subtitle">Autoriza à Maclaren usar a camarea de modo a poder usar ORCode</string>
 
 
 </resources>

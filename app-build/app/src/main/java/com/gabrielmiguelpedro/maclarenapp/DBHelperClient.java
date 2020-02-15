@@ -18,7 +18,7 @@ public interface DBHelperClient {
 
     float getIdTransactionsValue(int id);
 
-    void setLoggedIn(boolean loggedIn, String email);
+    void setLoggedIn(boolean loggedIn, User user);
 
     User getUserByEmail(String email);
 
@@ -26,7 +26,7 @@ public interface DBHelperClient {
 
     boolean setIsUseCar(int value, String aux);
 
-    void logOut(User user);
-
     BabyCar getBabyCarById(int id);
+
+    void setIsUsing(int i, User user);
 }
