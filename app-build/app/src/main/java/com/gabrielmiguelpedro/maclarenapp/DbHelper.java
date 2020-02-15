@@ -424,7 +424,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         while (cursor.moveToNext())
             counter++;
 
-        return counter > 1;
+        return counter >= 1;
 
     }
 
