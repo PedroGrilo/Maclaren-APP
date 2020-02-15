@@ -65,7 +65,7 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
         GoogleMap.OnMyLocationClickListener,
         OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback,
-        GoogleMap.OnInfoWindowClickListener, ZXingScannerView.ResultHandler{
+        GoogleMap.OnInfoWindowClickListener{
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1 ;
     private static final String TAG = "CARRINHOS" ;
@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
     private FusedLocationProviderClient fusedLocationClient; //localização atual
     private Date rentStartTime;
     private Date rentEndTime;
-    private Bundle bundle = new Bundle();
+    private Bundle bundle;
     private View root;
     DbHelper db;
     private static final int REQUEST_CAMERA = 1;
@@ -99,15 +99,13 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
 
         root = inflater.inflate(R.layout.fragment_home, container, false);
         buttonQRCode = root.findViewById(R.id.buttonQRCode);
-
+        bundle  = new Bundle();
         buttonQRCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                QRCode qr = new QRCode();
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.nav_host_fragment, qr); //o primeiro parametro é tp o atual, ou seja, a view atual e nós queremos dar replace pelo o balance fragment
-                ft.addToBackStack(null);
-                ft.commit();
+
+                getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new QRCode()).commit();
+
             }
         });
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -116,14 +114,6 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
 
     }
 
-    private void configureQRCode() {
-        if (mPermissionDenied) {
-            Toast.makeText(getContext(), "Permissões negadas", Toast.LENGTH_SHORT);
-        } else {
-            mScannerView = new ZXingScannerView(root.getContext());
-            enableScanner();
-        }
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -173,7 +163,7 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
                 double latitude = 38.53760;
 
                 double longitude = -8.87806;
-
+                
                 switch (babyCar.getBabyCarType().getId()){
                     case 1 : //  pequeno
                         icon = bbycar_s;
@@ -233,6 +223,7 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
         bundle.putString("markerId",markerId);
         bundle.putDouble("markerLon",markerLon);
         bundle.putDouble("markerLat",markerLat);
+
 
         getPhoneLocation();
         openDialog();
@@ -302,44 +293,5 @@ public class HomeFragment extends Fragment implements Serializable,GoogleMap.OnM
         babyCarDialog.show(getFragmentManager(),"DIALOGO");
     }
 
-    private void enableScanner() {
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-            // Permission to access the location is missing.
-            PermissionUtils.requestPermission(getActivity(), REQUEST_CAMERA,
-                    Manifest.permission.CAMERA, true);
-        } else {
-            mScannerView.setResultHandler(this);
-            mScannerView.startCamera();
-        }
-    }
-
-
-
-    @Override
-    public void handleResult(Result rawResult) {
-        final String result = rawResult.getText();
-        Log.d("QRCodeScanner", rawResult.getText());
-        Log.d("QRCodeScanner", rawResult.getBarcodeFormat().toString());
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Scan Result");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mScannerView.resumeCameraPreview(HomeFragment.this);
-            }
-        });
-        builder.setNeutralButton("Visit", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse(result));
-                startActivity(browserIntent);
-            }
-        });
-        builder.setMessage(rawResult.getText());
-        AlertDialog alert1 = builder.create();
-        alert1.show();
-    }
 
 }
