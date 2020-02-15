@@ -1,19 +1,23 @@
 package com.gabrielmiguelpedro.maclarenapp;
 
+import java.util.Date;
+
 public class HistoricCoordinates {
     private int id;
-    private int date;
+    private Date date;
     private int longe;
     private int lat;
+    private Historic historic;
 
     public HistoricCoordinates() {
     }
 
-    public HistoricCoordinates(int id, int date, int longe, int lat) {
+    public HistoricCoordinates(int id, Date date, int longe, int lat, Historic historic) {
         this.id = id;
         this.date = date;
         this.longe = longe;
         this.lat = lat;
+        this.historic = historic;
     }
 
     public int getId() {
@@ -24,11 +28,11 @@ public class HistoricCoordinates {
         this.id = id;
     }
 
-    public int getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -46,5 +50,13 @@ public class HistoricCoordinates {
 
     public void setLat(int lat) {
         this.lat = lat;
+    }
+
+    public Historic getHistoric() {
+        return historic;
+    }
+
+    public void setHistoric(Historic historic) {
+        this.historic = historic;
     }
 }

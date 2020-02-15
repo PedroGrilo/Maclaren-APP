@@ -247,7 +247,8 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
 
         values.put(HISTORICCOORDINATES_COORLAT, historicCoordinates.getLat());
         values.put(HISTORICCOORDINATES_COORLONG, historicCoordinates.getLonge());
-        values.put(HISTORICCOORDINATES_DATE, historicCoordinates.getDate());
+        values.put(HISTORICCOORDINATES_DATE, historicCoordinates.getDate()+"");
+        values.put(HISTORICCOORDINATES_HISTORYID, historicCoordinates.getHistoric().getId());
 
         db.insert(TABLE_HISTORICCOORDINATES, null, values);
 
