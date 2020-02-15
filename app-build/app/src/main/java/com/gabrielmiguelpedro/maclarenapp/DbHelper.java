@@ -57,6 +57,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     public static final String HISTORICCOORDINATES_DATE = "DATE";
     public static final String HISTORICCOORDINATES_COORLONG = "COORLONG";
     public static final String HISTORICCOORDINATES_COORLAT = "COORLAT";
+    private static final String HISTORICCOORDINATES_HISTORYID = "HISTORYID";
     //chave estrangeira para o id do aluger
 
 
@@ -113,9 +114,11 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
 
         String CREATE_TABLE_HISTORICCOORDINATES = "CREATE TABLE " + TABLE_HISTORICCOORDINATES
                 + " ( " + HISTORICCOORDINATES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + HISTORICCOORDINATES_HISTORYID + " INTEGER, "
                 + HISTORICCOORDINATES_DATE + " INT, "
                 + HISTORICCOORDINATES_COORLONG + " INT, "
-                + HISTORICCOORDINATES_COORLAT + " INT );";
+                + HISTORICCOORDINATES_COORLAT + " INT, "
+                + "FOREIGN KEY (" + HISTORICCOORDINATES_HISTORYID + ") REFERENCES " + TABLE_HISTORIC + "("+ HISTORIC_ID +"));";
 
         db.execSQL(CREATE_TABLE_USERS);
         db.execSQL(CREATE_TABLE_TRANSACTIONS);
