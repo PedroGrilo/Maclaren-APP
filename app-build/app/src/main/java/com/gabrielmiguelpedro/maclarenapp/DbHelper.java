@@ -441,6 +441,18 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         return babyCar;
     }
 
+    @Override
+    public int getIsUsingById(int aux) {
+        int isUsing = 0;
+
+        String query = "SELECT " + USERS_ISUSING + " FROM " + TABLE_USERS + " WHERE " + USERS_ID + "=" + aux;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext())
+            isUsing = cursor.getInt(0);
+        db.close();
+        return isUsing;
+    }
 
 
 }

@@ -55,19 +55,19 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
                         int BabyCarUse = callback.db.getUseByIdBabyCar(markerId);
 
-                        int isUsing = callback.getUser().getIsUsing();
+                        int isUsing = callback.getDb().getIsUsingById(callback.getUser().getUserID());
 
                         Toast.makeText(getContext(), "D: " + d + " Car: " + BabyCarUse + " User:" + isUsing, Toast.LENGTH_LONG).show();
                         if (d <= 10 && BabyCarUse == 0 && isUsing == 0) {
                             Date date = new Date();
-                            Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getUser().getIsUsing(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
 
                             callback.getDb().setIsUsing(1,callback.getUser());//colocar o utilizador em uso!!
                             callback.getDb().setIsUseCar(1, String.valueOf(markerId));//colocar o carro em uso!!
                             rowId = callback.getDb().addHistoric(new Historic(0, date, callback.getUser(), callback.getDb().getBabyCarById(markerId)));
 
 
-                            Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getUser().getIsUsing(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
                             Toast.makeText(getContext(), "RowId: " + rowId, Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(getContext(), "Saiu", Toast.LENGTH_SHORT).show();

@@ -29,4 +29,6 @@ public interface DBHelperClient {
     BabyCar getBabyCarById(int id);
 
     void setIsUsing(int i, User user);
+
+    int getIsUsingById(int aux);
 }
