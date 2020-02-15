@@ -12,12 +12,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import java.util.Date;
+import java.util.Timer;
 
 public class BabyCarDialog extends AppCompatDialogFragment {
     private Bundle bundle;
     private MainActivity callback;
     private int markerId;
     private long rowId;
+    private long intreval;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -65,6 +67,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                             callback.getDb().setIsUseCar(1, String.valueOf(markerId));//colocar o carro em uso!!
                             rowId = callback.getDb().addHistoric(new Historic(0,date,callback.getUser(),callback.getDb().getBabyCarById(markerId)));
 
+                            
 
                             Toast.makeText(getContext(),"Car: "+callback.db.getUseByIdBabyCar(markerId)+" User: "+callback.getUser().getIsUsing(), Toast.LENGTH_LONG).show();
                             Toast.makeText(getContext(),"RowId: "+rowId, Toast.LENGTH_LONG).show();
@@ -98,5 +101,9 @@ public class BabyCarDialog extends AppCompatDialogFragment {
         double a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat11) * Math.cos(lat22);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         return (earthRadiusKm * c)/0.0010000;
+    }
+
+    public void test(){
+        Toast.makeText(getContext(), "Teste", Toast.LENGTH_LONG);
     }
 }
