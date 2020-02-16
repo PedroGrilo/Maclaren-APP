@@ -546,7 +546,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
 
     @Override
     public ArrayList<HistoricCoordinates> getHistoricCoordinatesById(int id) {
-        String query = "SELECT historiccoordinates.COORLAT, historiccoordinates.COORLONG FROM historiccoordinates  FROM historiccoordinates JOIN historic ON historiccoordinates.HISTORYID = historic.idWHERE historiccoordinates.HISTORYID = " + id;
+        String query = "SELECT historiccoordinates.COORLAT, historiccoordinates.COORLONG FROM historiccoordinates JOIN historic ON historiccoordinates.HISTORYID = historic.id WHERE historiccoordinates.HISTORYID = " + id;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 

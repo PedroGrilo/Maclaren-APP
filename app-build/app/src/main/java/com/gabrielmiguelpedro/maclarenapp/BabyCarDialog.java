@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
@@ -31,7 +30,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
     private int isUsing;
     private String firstDate;
     private String lastDate;
-    private int finalDate;
+    private int totalTime;
     private double finalDistance;
     private double cost;
 
@@ -104,7 +103,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                         DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
                         Date fD = dateFormat.parse(firstDate);
                         Date lD = dateFormat.parse(lastDate);
-                        finalDate = lD.getMinutes() - fD.getMinutes();
+                        totalTime = lD.getMinutes() - fD.getMinutes();
                     } catch (ParseException e) {
                         Log.e("TEST", "Exception", e);
                     }
@@ -128,7 +127,11 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
                     ////////////////////////////////////////////////////////////////////////////////////////////COST
 
-                    cost = (finalDate * callback.getDb().getCarTypeCost(callback.getDb().getHistoricCarId())) + finalDistance/100;
+                    int carID = callback.getDb().getHistoricCarId();
+
+                    double baseCost= callback.getDb().getCarTypeCost(carID);
+
+                    cost = (totalTime * baseCost) + (finalDistance/100);
 
                     ////////////////////////////////////////////////////////////////////////////////////////////COST
                 } else {
