@@ -26,6 +26,8 @@ public interface DBHelperClient {
 
     boolean setIsUseCar(int value, String aux);
 
+    boolean setEmail(String id, String email);
+
     BabyCar getBabyCarById(int id);
 
     void setIsUsing(int i, User user);
