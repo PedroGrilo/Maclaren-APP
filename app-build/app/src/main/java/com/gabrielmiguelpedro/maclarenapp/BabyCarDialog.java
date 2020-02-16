@@ -128,7 +128,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
                     ////////////////////////////////////////////////////////////////////////////////////////////COST
 
-                    cost = (finalDate * getDb) + finalDistance/100;
+                    cost = (finalDate * callback.getDb().getCarTypeCost(callback.getDb().getHistoricCarId())) + finalDistance/100;
 
                     ////////////////////////////////////////////////////////////////////////////////////////////COST
                 } else {

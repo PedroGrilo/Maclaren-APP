@@ -461,7 +461,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     public Historic getHistoricById(int id) {
         Historic historic = new Historic();
 
-        String query = "SELECT " + HISTORIC_ID +" FROM " + TABLE_HISTORIC + " WHERE " + HISTORIC_ID + "=" + id;
+        String query = "SELECT " + HISTORIC_ID + " FROM " + TABLE_HISTORIC + " WHERE " + HISTORIC_ID + "=" + id;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {
@@ -479,8 +479,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         String query = "SELECT HISTORIC.ID, HISTORICDATE,cartype.ID, cartype.NAME , cartype.BASECOST,CARS.COMMENTS FROM HISTORIC JOIN cars on ID_CAR  = CARS.ID JOIN cartype ON cars.ID_CARTYPE = cartype.ID";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        ArrayList<Historic> historicList = new ArrayList<Historic>()
-                ;
+        ArrayList<Historic> historicList = new ArrayList<Historic>();
         while (cursor.moveToNext()) {
             Historic historic = new Historic();
             historic.setId(cursor.getInt(0));
@@ -547,7 +546,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
 
     @Override
     public ArrayList<HistoricCoordinates> getHistoricCoordinatesById(int id) {
-        String query = "SELECT historiccoordinates.COORLAT, historiccoordinates.COORLONG FROM historiccoordinates JOIN historic ON historiccoordinates.HISTORYID = historic.id WHERE historiccoordinates.HISTORYID = " + id;
+        String query = "SELECT historiccoordinates.COORLAT, historiccoordinates.COORLONG FROM historiccoordinates  FROM historiccoordinates JOIN historic ON historiccoordinates.HISTORYID = historic.idWHERE historiccoordinates.HISTORYID = " + id;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
@@ -564,10 +563,11 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         return historicCoordinatesArrayList;
     }
 
-    public double getCarTypeCostByHistoricId(int id){
+    @Override
+    public double getCarTypeCost(int id) {
         double cost = 0;
 
-        String query = "SELECT " + CARTYPE_BASECOST +" FROM " + TABLE_CARTYPE + " WHERE " + HISTORIC_ID_USER + "=" + id;
+        String query = "SELECT cartype.BASECOST FROM cartype JOIN cars ON cars.ID_CARTYPE = cartype.ID WHERE cars.ID = " + id;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext())
@@ -576,4 +576,17 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         return cost;
     }
 
+    @Override
+    public int getHistoricCarId(){
+        int idAux = 0;
+
+        String query = "SELECT " + HISTORIC_ID_CAR + " FROM " + TABLE_HISTORIC + " ORDER BY " + HISTORIC_ID + " DESC LIMIT 1";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext())
+            idAux = cursor.getInt(0);
+        db.close();
+        return idAux;
+    }
+\
 }

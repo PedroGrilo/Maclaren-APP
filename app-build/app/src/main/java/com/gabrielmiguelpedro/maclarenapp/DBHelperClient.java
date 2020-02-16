@@ -43,4 +43,8 @@ public interface DBHelperClient {
     String getLastDateFromCoerdenates(int id);
 
     ArrayList<HistoricCoordinates> getHistoricCoordinatesById(int id);
+
+    double getCarTypeCost(int id);
+
+    int getHistoricCarId();
 }
