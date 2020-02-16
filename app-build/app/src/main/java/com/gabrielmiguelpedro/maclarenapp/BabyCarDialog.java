@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class BabyCarDialog extends AppCompatDialogFragment {
@@ -31,6 +32,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
     private String firstDate;
     private String lastDate;
     private int finalDate;
+    private double finalDistance;
 
     public BabyCarDialog(Bundle bundle) {
         this.bundle = bundle;
@@ -75,7 +77,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                     callback.getDb().setIsUseCar(1, String.valueOf(markerId));//colocar o carro em uso!!
                     rowId = callback.getDb().addHistoric(new Historic(0, date, callback.getUser(), callback.getDb().getBabyCarById(markerId)));
 
-                   callback.startService(new Intent(getContext(), MyService.class));//chamar o service
+                    callback.startService(new Intent(getContext(), MyService.class));//chamar o service
 
                     //Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
                     //Toast.makeText(getContext(), "RowId: " + rowId, Toast.LENGTH_LONG).show();
@@ -108,10 +110,24 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
                     /////////////////////////////////////////////////////////////////////////////////////////////DATE
 
+                    /////////////////////////////////////////////////////////////////////////////////////////////DISTANCIA
+                    int aux = 0;
+
+                    ArrayList<HistoricCoordinates> arrayList = callback.getDb().getHistoricCoordinatesById(callback.getDb().getLastIdFromTableHistoric());
+                    for (HistoricCoordinates historicCoordinates : arrayList) {
+                        try {
+                            finalDistance += distanceInKmBetweenEarthCoordinates(arrayList.get(aux).getLat(), arrayList.get(aux).getLonge(), arrayList.get(++aux).getLat(), arrayList.get(++aux).getLonge());
+                        } catch (Exception e) {
+                            Toast.makeText(getContext(), "Exption", Toast.LENGTH_SHORT);
+                        }
+
+                    }
+
+                    /////////////////////////////////////////////////////////////////////////////////////////////DISTANCIA
                 } else {
                     Toast.makeText(getContext(), "Não é possivel Alugar", Toast.LENGTH_SHORT).show();
                 }
-                }
+            }
         })
                 .setNegativeButton("Não", new DialogInterface.OnClickListener() {
                     @Override
