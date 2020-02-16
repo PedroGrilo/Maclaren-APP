@@ -30,12 +30,6 @@
         tools:layout="@layout/fragment_settings" />
 
     <fragment
-        android:id="@+id/nav_help"
-        android:name="com.gabrielmiguelpedro.maclarenapp.ui.help.HelpFragment"
-        android:label="@string/menu_help"
-        tools:layout="@layout/fragment_help" />
-
-    <fragment
         android:id="@+id/nav_wallet_balance"
         android:name="com.gabrielmiguelpedro.maclarenapp.ui.help.HelpFragment"
         android:label="Adicionar Saldo"

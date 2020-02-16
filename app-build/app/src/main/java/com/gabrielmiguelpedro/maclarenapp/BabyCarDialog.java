@@ -88,7 +88,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                 if (callback.getDb().getIdTransactionsValue(callback.getUser().getUserID()) > 0) {
                     if (verifications) {
                         Toast.makeText(getContext(),R.string.estaalugar,Toast.LENGTH_LONG).show();
-                        Date date = new Date();
+                        long date = System.currentTimeMillis();
                         callback.getDb().setIsUsing(1, callback.getUser());//colocar o utilizador em uso!!
                         callback.getDb().setIsUseCar(1, String.valueOf(markerId));//colocar o carro em uso!!
                         rowId = callback.getDb().addHistoric(new Historic(0, date, callback.getUser(), callback.getDb().getBabyCarById(markerId)));

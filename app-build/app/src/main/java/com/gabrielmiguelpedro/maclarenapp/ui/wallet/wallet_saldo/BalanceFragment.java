@@ -45,10 +45,10 @@ public class BalanceFragment extends Fragment {
 
         button_add = root.findViewById(R.id.button_FWB_Pagamento);
         saldoTV = root.findViewById(R.id.textView_FWB_Valor);
-        lv = root.findViewById(R.id.lv);
+
         card_selected_text = root.findViewById(R.id.card_selected);
         editText_FWB_Valor = root.findViewById(R.id.editText_FWB_Valor);
-
+        lv = root.findViewById(R.id.lv);
         final List<String> cards_list = new ArrayList<>(Arrays.asList(getString(R.string.add_card)));
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, cards_list);
 
