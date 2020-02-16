@@ -70,20 +70,20 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
                 Boolean verifications = false;
 
-                if (d <= 10)
+                if (d > 10)
                     Toast.makeText(getContext(), R.string.mindistance, Toast.LENGTH_LONG).show();
-                else if (BabyCarUse == 0)
+                else if (BabyCarUse != 0)
                     Toast.makeText(getContext(), R.string.babycarisused, Toast.LENGTH_LONG).show();
-                else if (isUsing == 0)
+                else if (isUsing != 0)
                     Toast.makeText(getContext(), R.string.isusing, Toast.LENGTH_LONG).show();
                 else
-                    verifications = true;
+                  verifications = true;
 
 
                 if (callback.getDb().getIdTransactionsValue(callback.getUser().getUserID()) > 0) {
                     if (verifications) {
+                        Toast.makeText(getContext(),R.string.estaalugar,Toast.LENGTH_LONG).show();
                         Date date = new Date();
-
                         callback.getDb().setIsUsing(1, callback.getUser());//colocar o utilizador em uso!!
                         callback.getDb().setIsUseCar(1, String.valueOf(markerId));//colocar o carro em uso!!
                         rowId = callback.getDb().addHistoric(new Historic(0, date, callback.getUser(), callback.getDb().getBabyCarById(markerId)));

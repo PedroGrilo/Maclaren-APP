@@ -47,7 +47,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
         <style name="AlertDialogCustom" parent="@android:style/Theme.Dialog">
-            <item name="android:background">@drawable/buttons</item>
+
         </style>
 
 

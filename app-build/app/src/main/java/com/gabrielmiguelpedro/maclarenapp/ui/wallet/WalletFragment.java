@@ -37,7 +37,7 @@ public class WalletFragment extends Fragment {
 
         total = callback.getDb().getIdTransactionsValue(callback.getUser().getUserID());
         TextView textView = root.findViewById(R.id.textViewSaldo);
-        textView.setText(total + "");
+        textView.setText(total + " €");
 
         walletViewModel.getText().observe(this, new Observer<String>() {
             @Override

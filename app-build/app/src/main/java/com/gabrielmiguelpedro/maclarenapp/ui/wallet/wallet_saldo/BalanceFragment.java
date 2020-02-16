@@ -87,7 +87,7 @@ public class BalanceFragment extends Fragment {
                 Date date = new Date();
                 EditText editText = root.findViewById(R.id.editText_FWB_Valor);
                 value = Double.parseDouble(editText.getText().toString());
-                if (value < 5) {
+                if (value > 5) {
                     callback.getDb().addTransactionsDeposit(new Transactions(0, value, callback.getUser(), date));
                     saldoTV.setText(callback.getDb().getIdTransactionsValue(callback.getUser().getUserID()) + "€");
                 } else {
