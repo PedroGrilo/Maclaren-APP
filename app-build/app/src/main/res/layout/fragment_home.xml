@@ -24,9 +24,10 @@
         android:layout_marginTop="18dp"
         android:background="@drawable/buttons"
         android:paddingHorizontal="25dp"
-        android:text="@string/finalizar"
+        android:text="@string/alugarcarrinho"
         android:textColor="@color/white"
         android:textSize="18dp"
+        android:enabled="true"
         android:visibility="gone" />
 
     <com.google.android.gms.maps.MapView

@@ -8,9 +8,12 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.provider.Settings;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -23,6 +26,7 @@ public class MyService extends Service {
     private LocationManager locationManager;
     private double lat;
     private double lon;
+    MediaPlayer player;
 
     public MyService() {
         super();
@@ -41,10 +45,19 @@ public class MyService extends Service {
         listener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                lon = location.getLongitude();
-                lat = location.getLatitude();
-                Date date = new Date();
-                db.addHistoricCoordinates(new HistoricCoordinates(0, date, lon, lat, db.getHistoricById(db.getLastIdFromTableHistoric()))); //TODO coerdenadas
+                int userid = db.getUserByEmail(SaveInfoConfig.getEmail(getApplicationContext())).getUserID();
+                if (db.getIdTransactionsValue(userid) > 0) {
+                    lon = location.getLongitude();
+                    lat = location.getLatitude();
+                    Date date = new Date();
+                    db.addHistoricCoordinates(new HistoricCoordinates(0, date, lon, lat, db.getHistoricById(db.getLastIdFromTableHistoric())));
+                }else{
+                    player = MediaPlayer.create(getApplicationContext(), Settings.System.DEFAULT_NOTIFICATION_URI);
+                    player.setLooping(true);
+                    player.start();
+                    Toast.makeText(getApplicationContext(),getString(R.string.nomoney),Toast.LENGTH_LONG).show();
+                    locationManager.removeUpdates(listener);
+                }
             }
 
             @Override
@@ -65,16 +78,11 @@ public class MyService extends Service {
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 15000, 0, listener);
-
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 15000, 1, listener);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (locationManager != null) {
-            //noinspection MissingPermission
-            locationManager.removeUpdates(listener);
-        }
     }
 }

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.gabrielmiguelpedro.maclarenapp.Exceptions.EmptyFieldException;
 import com.gabrielmiguelpedro.maclarenapp.Exceptions.InvalidFieldException;
+import com.sun.mail.util.MailConnectException;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -44,6 +45,7 @@ public class VerificationCodeActivity extends AppCompatActivity implements Seria
             db = new DbHelper(this);
 
             generatedCode = generateRandomCode();
+           // Toast.makeText(getApplicationContext(),generatedCode+"",Toast.LENGTH_LONG).show();
 
            if (from_activity.equals("SIGN_UP")) {
                 int id = db.getLastID();
@@ -98,7 +100,7 @@ public class VerificationCodeActivity extends AppCompatActivity implements Seria
     }
 
     private void sendMaclarenCode() {
-        String message = "<center>"+R.string.emailwithcode+"<br><br><h2>" + generatedCode + "</h2></center>";
+        String message = "<center>"+getString(R.string.emailwithcode)+"<br><br><h2>" + generatedCode + "</h2></center>";
         SendEmail sendEmail = new SendEmail(this, info.getString("EMAIL"), "Your Maclaren Code", message);
         sendEmail.execute();
     }

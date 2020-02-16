@@ -73,8 +73,10 @@ public class ListaItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     historicViewHolder.foto.setImageResource(R.drawable.money);
                 }
 
+                double value = Math.abs(items.get(position).getValue());
+
                 historicViewHolder.data.setText((new Date(((Transactions) items.get(position)).getHistoric().getDate()))+"");
-                historicViewHolder.cost.setText(((Transactions) items.get(position)).getValue() + "€");
+                historicViewHolder.cost.setText(value  + "€");
 
                 historicViewHolder.bind(items.get(position), itemClickListener);
                 break;

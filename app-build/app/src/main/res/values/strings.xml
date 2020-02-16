@@ -84,6 +84,11 @@ this demo.</string>
     <string name="desejaalugar">Deseja alugar o</string>
     <string name="emailwithcode"><![CDATA[<h1>Verificar endereço de email</h1><br><h3>Para verificar o email, introduza este código na APP.</h3>]]></string>
     <string name="r_u_sure">Tem a certeza?</string>
+    <string name="tipo">Tipo</string>
+    <string name="descricao">Descrição</string>
+    <string name="data">Data</string>
+    <string name="custo">Custo</string>
+    <string name="alugarcarrinho">A alugar carrinho...</string>
 
 
 </resources>

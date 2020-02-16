@@ -76,12 +76,16 @@ public class HomeFragment extends Fragment implements Serializable, GoogleMap.On
         root = inflater.inflate(R.layout.fragment_home, container, false);
 
         finishButton = root.findViewById(R.id.aAlugar);
-        finishButton.setOnClickListener(new View.OnClickListener() {
+       /* finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openDialog();
             }
-        });
+        });*/
+
+
+        if(callback.getDb().getIsUsingById(callback.getUser().getUserID()) == 1)
+            setFinishButton(true);
 
         buttonQRCode = root.findViewById(R.id.buttonQRCode);
         buttonQRCode.setOnClickListener(new View.OnClickListener() {
@@ -93,8 +97,6 @@ public class HomeFragment extends Fragment implements Serializable, GoogleMap.On
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
 
-        if(callback.getUser().getIsUsing()==1)
-            setFinishButton(true);
 
         return root;
     }
@@ -128,6 +130,8 @@ public class HomeFragment extends Fragment implements Serializable, GoogleMap.On
                 openDialog();
             }
         }
+
+
     }
 
 
@@ -249,7 +253,7 @@ public class HomeFragment extends Fragment implements Serializable, GoogleMap.On
 
     @Override
     public boolean onMyLocationButtonClick() {
-        Toast.makeText(getContext(), "Botão da minha localização carregado",
+        Toast.makeText(getContext(), "A ir para a minha localização...",
                 Toast.LENGTH_SHORT).show();
 
         return false;
@@ -257,7 +261,7 @@ public class HomeFragment extends Fragment implements Serializable, GoogleMap.On
 
     @Override
     public void onMyLocationClick(@NonNull Location location) {
-        Toast.makeText(getContext(), "Localização atual :\n" + location, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "Localização atual :\n" + location, Toast.LENGTH_SHORT).show();
 
     }
 

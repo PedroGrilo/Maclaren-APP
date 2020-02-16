@@ -69,20 +69,9 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
                 isUsing = callback.getDb().getIsUsingById(callback.getUser().getUserID());
 
-                Boolean verifications = false;
-
-                if (d > 10)
-                    Toast.makeText(getContext(), R.string.mindistance, Toast.LENGTH_LONG).show();
-                else if (BabyCarUse != 0)
-                    Toast.makeText(getContext(), R.string.babycarisused, Toast.LENGTH_LONG).show();
-                else if (isUsing != 0)
-                    Toast.makeText(getContext(), R.string.isusing, Toast.LENGTH_LONG).show();
-                else
-                  verifications = true;
-
 
                 if (callback.getDb().getIdTransactionsValue(callback.getUser().getUserID()) > 0) {
-                    if (verifications) {
+                    if (d < 10 && BabyCarUse == 0 && isUsing == 0) {
                         Toast.makeText(getContext(),R.string.estaalugar,Toast.LENGTH_LONG).show();
                         long date = System.currentTimeMillis();
                         callback.getDb().setIsUsing(1, callback.getUser());//colocar o utilizador em uso!!
@@ -145,6 +134,13 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                         callback.db.addTransactions(transactions);
                         HomeFragment.setFinishButton(false);
                         /** /COST **/
+                    }else{
+                        if (d > 10)
+                            Toast.makeText(getContext(), R.string.mindistance, Toast.LENGTH_LONG).show();
+                        else if (BabyCarUse != 0)
+                            Toast.makeText(getContext(), R.string.babycarisused, Toast.LENGTH_LONG).show();
+                        else if (isUsing != 0)
+                            Toast.makeText(getContext(), R.string.isusing, Toast.LENGTH_LONG).show();
                     }
                 } else {
                     Toast.makeText(getContext(), R.string.nomoney, Toast.LENGTH_LONG).show();

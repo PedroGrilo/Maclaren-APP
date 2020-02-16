@@ -67,4 +67,9 @@
     <string name="title_activity_sign_up">Sign Up</string>
     <string name="emailwithcode"><![CDATA[<h1>Verify your email address</h1><br><h3>To verify your email address, enter this code in your app.</h3>]]></string>
     <string name="r_u_sure">Are you sure?</string>
+    <string name="tipo">Type</string>
+    <string name="descricao">Description</string>
+    <string name="data">Date</string>
+    <string name="custo">Cost</string>
+    <string name="alugarcarrinho">Renting a baby car...</string>
 </resources>
