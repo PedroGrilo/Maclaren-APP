@@ -60,30 +60,24 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                         int isUsing = callback.getDb().getIsUsingById(callback.getUser().getUserID());
 
                         Toast.makeText(getContext(), "D: " + d + " Car: " + BabyCarUse + " User:" + isUsing, Toast.LENGTH_LONG).show();
-                        if (d <= 10) {
-                            if (BabyCarUse == 0) {
-                                if (isUsing == 0) {
+                        if (d <= 10 && BabyCarUse == 0 && isUsing == 0) {
 
-                                    Date date = new Date();
-                                    Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
+                            Date date = new Date();
+                            Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
 
-                                    callback.getDb().setIsUsing(1, callback.getUser());//colocar o utilizador em uso!!
-                                    callback.getDb().setIsUseCar(1, String.valueOf(markerId));//colocar o carro em uso!!
-                                    rowId = callback.getDb().addHistoric(new Historic(0, date, callback.getUser(), callback.getDb().getBabyCarById(markerId)));
+                            callback.getDb().setIsUsing(1, callback.getUser());//colocar o utilizador em uso!!
+                            callback.getDb().setIsUseCar(1, String.valueOf(markerId));//colocar o carro em uso!!
+                            rowId = callback.getDb().addHistoric(new Historic(0, date, callback.getUser(), callback.getDb().getBabyCarById(markerId)));
 
-                                    getActivity().startService(new Intent(getActivity(),MyService.class));//chamar o service
+                            getActivity().startService(new Intent(getActivity(), MyService.class));//chamar o service
 
-                                    Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
-                                    Toast.makeText(getContext(), "RowId: " + rowId, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "RowId: " + rowId, Toast.LENGTH_LONG).show();
 
-                                } else {
-                                    Toast.makeText(getContext(), R.string.isusing, Toast.LENGTH_SHORT).show();
-                                }
-                            } else {
-                                Toast.makeText(getContext(), R.string.babycarisused, Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(getContext(), R.string.mindistance, Toast.LENGTH_SHORT).show();
+                        } else if(isUsing==1 && d <= 10){
+                            Toast.makeText(getContext(), "Acabar Aluger?", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(getContext(), "Nãoi é possivel Alugar", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
