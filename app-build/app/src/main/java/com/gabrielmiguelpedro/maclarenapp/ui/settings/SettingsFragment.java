@@ -15,6 +15,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.gabrielmiguelpedro.maclarenapp.Exceptions.EmailErrorException;
+import com.gabrielmiguelpedro.maclarenapp.Exceptions.EmptyFieldException;
+import com.gabrielmiguelpedro.maclarenapp.Exceptions.InvalidFieldException;
 import com.gabrielmiguelpedro.maclarenapp.MainActivity;
 import com.gabrielmiguelpedro.maclarenapp.R;
 
@@ -42,10 +45,28 @@ public class SettingsFragment extends Fragment {
         button_alterar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    if (checkFields() == true) {
+                        callback.getDb().setEmail(String.valueOf(callback.getUser().getUserID()),editText.getText().toString());
+                    }
+                } catch (Exception e) {
 
+                }
             }
         });
 
         return root;
+    }
+
+    private boolean checkFields() throws InvalidFieldException, EmptyFieldException, EmailErrorException {
+        String ptr = "^[a-z0-9.]+@[a-z0-9]+\\.[a-z]+(\\.[a-z]+)?$";
+        String email = editText.getText().toString();
+        if (email.isEmpty())
+            throw new EmptyFieldException(getString(R.string.empty_field));
+        if (!email.matches(ptr))
+            throw new InvalidFieldException(getString(R.string.invalid_field));
+        if (!callback.getDb().checkEmail(email))
+            throw new EmailErrorException(getString(R.string.email_doesnt_exist));
+        return true;
     }
 }

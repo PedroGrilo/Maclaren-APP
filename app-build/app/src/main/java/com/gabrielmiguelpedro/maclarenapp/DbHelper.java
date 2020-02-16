@@ -422,6 +422,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     }
 
 
+    @Override
     public boolean checkEmail(String email) {
         String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + USERS_EMAIL + " = '" + email + "'";
         SQLiteDatabase db = this.getWritableDatabase();

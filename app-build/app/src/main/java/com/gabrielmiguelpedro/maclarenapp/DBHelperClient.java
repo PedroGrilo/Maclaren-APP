@@ -28,6 +28,8 @@ public interface DBHelperClient {
 
     boolean setEmail(String id, String email);
 
+    boolean checkEmail(String email);
+
     BabyCar getBabyCarById(int id);
 
     void setIsUsing(int i, User user);
