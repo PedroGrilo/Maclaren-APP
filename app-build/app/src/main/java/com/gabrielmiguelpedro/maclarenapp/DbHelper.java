@@ -434,7 +434,6 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
             counter++;
 
         return counter >= 1;
-
     }
 
     @Override

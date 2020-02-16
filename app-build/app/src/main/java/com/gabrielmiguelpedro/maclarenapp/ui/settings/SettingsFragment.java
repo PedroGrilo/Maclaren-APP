@@ -48,11 +48,11 @@ public class SettingsFragment extends Fragment {
             public void onClick(View view) {
                 try {
                     if (checkFields() == true) {
-                        Toast.makeText(getContext(),"Alteru",Toast.LENGTH_SHORT).show();
-                        callback.getDb().setEmail(String.valueOf(callback.getUser().getUserID()),editText.getText().toString());
+                        Toast.makeText(getContext(), "Alteru", Toast.LENGTH_SHORT).show();
+                        callback.getDb().setEmail(String.valueOf(callback.getUser().getUserID()), editText.getText().toString());
                     }
                 } catch (Exception e) {
-
+                    Toast.makeText(getContext(), "Alteru", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -67,8 +67,8 @@ public class SettingsFragment extends Fragment {
             throw new EmptyFieldException(getString(R.string.empty_field));
         if (!email.matches(ptr))
             throw new InvalidFieldException(getString(R.string.invalid_field));
-        if (!callback.getDb().checkEmail(email))
-            throw new EmailErrorException(getString(R.string.email_doesnt_exist));
+        /*if (!callback.getDb().checkEmail(email))
+            throw new EmailErrorException(getString(R.string.email_doesnt_exist));*/
         return true;
     }
 }
