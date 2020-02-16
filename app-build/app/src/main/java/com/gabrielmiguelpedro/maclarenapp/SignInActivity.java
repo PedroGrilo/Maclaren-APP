@@ -58,7 +58,7 @@ public class SignInActivity extends AppCompatActivity {
         Intent intent = new Intent(SignInActivity.this, VerificationCodeActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("EMAIL", tV_email.getText().toString()); //Email
-        bundle.putString("FROM_ACTIVITY","SIGN_IN");
+        bundle.putString("FROM_ACTIVITY", "SIGN_IN");
         intent.putExtras(bundle);
         finish();
         startActivity(intent);

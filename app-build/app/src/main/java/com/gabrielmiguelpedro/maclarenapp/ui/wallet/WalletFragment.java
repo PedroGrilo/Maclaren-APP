@@ -31,7 +31,7 @@ public class WalletFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        callback = (MainActivity)context;
+        callback = (MainActivity) context;
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class WalletFragment extends Fragment {
 
         total = callback.getDb().getIdTransactionsValue(callback.getUser().getUserID());
         TextView textView = (TextView) root.findViewById(R.id.textViewSaldo);
-        textView.setText(total+"");
+        textView.setText(total + "");
 
         walletViewModel.getText().observe(this, new Observer<String>() {
             @Override
@@ -52,7 +52,7 @@ public class WalletFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BalanceFragment balanceFragment= new BalanceFragment();
+                BalanceFragment balanceFragment = new BalanceFragment();
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.nav_host_fragment, balanceFragment); //o primeiro parametro é tp o atual, ou seja, a view atual e nós queremos dar replace pelo o balance fragment
                 ft.addToBackStack(null);

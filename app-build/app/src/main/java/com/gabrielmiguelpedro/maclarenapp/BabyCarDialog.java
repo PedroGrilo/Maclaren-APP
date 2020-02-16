@@ -82,41 +82,49 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                 } else if (callback.getDb().getIsUsingById(callback.getUser().getUserID()) == 1) {
                     //Toast.makeText(getContext(), "Acabar Aluger?", Toast.LENGTH_SHORT).show();
 
+                    /////////////////////////////////////////////////////////////////////////////////////////////RESET
+
                     getActivity().stopService(new Intent(getActivity(), MyService.class));
                     callback.getDb().setIsUsing(0, callback.getUser());//tirar utilzador de uso
                     callback.getDb().setIsUseCar(0, String.valueOf(markerId));//tirar o carro em uso!!
 
+                    /////////////////////////////////////////////////////////////////////////////////////////////RESET
+
+                    /////////////////////////////////////////////////////////////////////////////////////////////DATE
+
                     firstDate = callback.getDb().getFirstDateFromCoerdenates(callback.getDb().getLastIdFromTableHistoric());
                     lastDate = callback.getDb().getLastDateFromCoerdenates(callback.getDb().getLastIdFromTableHistoric());
-                    firstDate = firstDate.substring(11,20);
-                    lastDate = lastDate.substring(11,20);
+                    firstDate = firstDate.substring(11, 20);
+                    lastDate = lastDate.substring(11, 20);
 
                     try {
-                    DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
-                    Date fD = dateFormat.parse(firstDate);
-                    Date lD = dateFormat.parse(lastDate);
-                    finalDate = lD.getMinutes()-fD.getMinutes();
+                        DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
+                        Date fD = dateFormat.parse(firstDate);
+                        Date lD = dateFormat.parse(lastDate);
+                        finalDate = lD.getMinutes() - fD.getMinutes();
                     } catch (ParseException e) {
                         Log.e("TEST", "Exception", e);
                     }
+
+                    /////////////////////////////////////////////////////////////////////////////////////////////DATE
 
                 } else {
                     Toast.makeText(getContext(), "Não é possivel Alugar", Toast.LENGTH_SHORT).show();
                 }
             }
         })
-        .setNegativeButton("Não", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                //funciona
-            }
-        });
+                .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //funciona
+                    }
+                });
         if (callback.getDb().getIsUsingById(callback.getUser().getUserID()) == 1) {
             builder.setTitle("Finalizar Aluger?")
-            .setMessage("Finalizar este Aluger?");
-        }else{
+                    .setMessage("Finalizar este Aluger?");
+        } else {
             builder.setTitle("Alugar Carrinho")
-            .setMessage("Pretende Alugar este Carrinho?");
+                    .setMessage("Pretende Alugar este Carrinho?");
         }
         return builder.create();
     }

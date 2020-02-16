@@ -28,7 +28,7 @@ public class BalanceFragment extends Fragment {
     private MainActivity callback;
     private double total;
     private double value;
-    private TextView card_selected_text,saldoTV;
+    private TextView card_selected_text, saldoTV;
     private EditText editText_FWB_Valor;
     private Button button_add;
     private ListView lv;
@@ -61,7 +61,7 @@ public class BalanceFragment extends Fragment {
                 card_selected_text.setText(lv.getItemAtPosition(position).equals(card1) ? card1 : card_selected_text.getText());
                 card_selected_text.setText(lv.getItemAtPosition(position).equals(card2) ? card2 : card_selected_text.getText());
 
-                if(!card_selected_text.getText().equals(getString(R.string.selecione_cartao))){
+                if (!card_selected_text.getText().equals(getString(R.string.selecione_cartao))) {
                     editText_FWB_Valor.setEnabled(true);
                     button_add.setEnabled(true);
                 }

@@ -40,7 +40,7 @@ public class MyService extends Service {
             public void run() {
                 //FUNCIONA player.start();
                 Date date = new Date();
-                db.addHistoricCoordinates(new HistoricCoordinates(0,date,1,1, db.getHistoricById(db.getLastIdFromTableHistoric()))); //TODO coerdenadas
+                db.addHistoricCoordinates(new HistoricCoordinates(0, date, 1, 1, db.getHistoricById(db.getLastIdFromTableHistoric()))); //TODO coerdenadas
             }
         }, 0, 10000);
         return START_STICKY;

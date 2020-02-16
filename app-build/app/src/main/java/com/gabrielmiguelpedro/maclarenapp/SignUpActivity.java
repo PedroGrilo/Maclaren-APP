@@ -84,7 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
         Intent intent = new Intent(SignUpActivity.this, VerificationCodeActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("EMAIL", tV_email.getText().toString()); //Email
-        bundle.putString("FROM_ACTIVITY","SIGN_UP");
+        bundle.putString("FROM_ACTIVITY", "SIGN_UP");
         intent.putExtras(bundle);
         finish();
         startActivity(intent);

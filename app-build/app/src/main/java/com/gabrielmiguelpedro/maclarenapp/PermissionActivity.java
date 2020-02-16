@@ -40,7 +40,7 @@ public class PermissionActivity extends AppCompatActivity {
                 break;
             case "CAMERA":
                 titulo.setText(R.string.accept_camera_title);
-                desc.setText(   R.string.accept_camera_subtitle);
+                desc.setText(R.string.accept_camera_subtitle);
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 3);
                 break;
         }
@@ -85,9 +85,7 @@ public class PermissionActivity extends AppCompatActivity {
             }
 
 
-
-
-                // other 'case' lines to check for other
+            // other 'case' lines to check for other
             // permissions this app might request
         }
     }
