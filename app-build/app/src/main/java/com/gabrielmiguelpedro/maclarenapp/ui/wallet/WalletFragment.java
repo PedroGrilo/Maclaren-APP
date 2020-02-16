@@ -17,7 +17,10 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.gabrielmiguelpedro.maclarenapp.MainActivity;
 import com.gabrielmiguelpedro.maclarenapp.R;
+import com.gabrielmiguelpedro.maclarenapp.Transactions;
 import com.gabrielmiguelpedro.maclarenapp.ui.wallet.wallet_saldo.BalanceFragment;
+
+import java.util.Date;
 
 public class WalletFragment extends Fragment {
 
@@ -41,6 +44,7 @@ public class WalletFragment extends Fragment {
 
    
         Button button = root.findViewById(R.id.button3);
+        Button button1 = root.findViewById(R.id.button4);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +56,12 @@ public class WalletFragment extends Fragment {
             }
         });
 
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callback.getDb().addTransactionsDeposit(new Transactions(0, 5, callback.getUser(), new Date()));
+            }
+        });
         return root;
     }
 }
