@@ -35,4 +35,8 @@ public interface DBHelperClient {
     Historic getHistoricById(int id);
 
     int getLastIdFromTableHistoric();
+
+    String getFirstDateFromCoerdenates(int id);
+
+    String getLastDateFromCoerdenates(int id);
 }
