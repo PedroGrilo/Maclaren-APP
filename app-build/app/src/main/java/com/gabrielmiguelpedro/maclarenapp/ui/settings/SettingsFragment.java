@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,6 +48,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View view) {
                 try {
                     if (checkFields() == true) {
+                        Toast.makeText(getContext(),"Alteru",Toast.LENGTH_SHORT).show();
                         callback.getDb().setEmail(String.valueOf(callback.getUser().getUserID()),editText.getText().toString());
                     }
                 } catch (Exception e) {
