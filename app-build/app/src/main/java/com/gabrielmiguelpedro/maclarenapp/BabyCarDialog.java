@@ -30,6 +30,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
     private int isUsing;
     private String firstDate;
     private String lastDate;
+    private int finalDate;
 
     public BabyCarDialog(Bundle bundle) {
         this.bundle = bundle;
@@ -94,8 +95,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                     DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
                     Date fD = dateFormat.parse(firstDate);
                     Date lD = dateFormat.parse(lastDate);
-                    int finalDate = lD.getMinutes()-fD.getMinutes();
-                    Toast.makeText(getContext(), "Date "+finalDate, Toast.LENGTH_SHORT);
+                    finalDate = lD.getMinutes()-fD.getMinutes();
                     } catch (ParseException e) {
                         Log.e("TEST", "Exception", e);
                     }
