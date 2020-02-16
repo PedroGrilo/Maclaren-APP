@@ -588,5 +588,4 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         db.close();
         return idAux;
     }
-\
 }
