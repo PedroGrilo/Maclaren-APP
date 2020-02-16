@@ -59,6 +59,11 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     public static final String HISTORICCOORDINATES_COORLAT = "COORLAT";
     private static final String HISTORICCOORDINATES_HISTORYID = "HISTORYID";
 
+    public static final String CAR_S = "Carrinho Pequeno";
+    public static final String CAR_M = "Carrinho Médio";
+    public static final String CAR_L = "Carrinho Grande";
+    public static final String CAR_XL = "Carrinho Gigante Edér";
+
     SQLiteDatabase db;
     //chave estrangeira para o id do aluger
 
@@ -130,10 +135,10 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         db.execSQL(CREATE_TABLE_HISTORIC);
         db.execSQL(CREATE_TABLE_HISTORICCOORDINATES);
 
-        BabyCarType BT1 = new BabyCarType(1, "Carrinho Pequeno", 5);
-        BabyCarType BT2 = new BabyCarType(2, "Carrinho Médio", 10);
-        BabyCarType BT3 = new BabyCarType(3, "Carrinho Grande", 20);
-        BabyCarType BT4 = new BabyCarType(4, "Carrinho Gigante Edér", 0);
+        BabyCarType BT1 = new BabyCarType(1, CAR_S, 5);
+        BabyCarType BT2 = new BabyCarType(2, CAR_M, 10);
+        BabyCarType BT3 = new BabyCarType(3, CAR_L, 20);
+        BabyCarType BT4 = new BabyCarType(4, CAR_XL, 0);
 
         addBabyCarType(db, BT1);
         addBabyCarType(db, BT2);
