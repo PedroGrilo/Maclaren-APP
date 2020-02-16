@@ -43,12 +43,9 @@ public class VerificationCodeActivity extends AppCompatActivity implements Seria
 
             db = new DbHelper(this);
 
-
             generatedCode = generateRandomCode();
 
-            Toast.makeText(getApplicationContext(), String.valueOf(generatedCode), Toast.LENGTH_LONG).show();
-
-            if (from_activity.equals("SIGN_UP")) {
+           if (from_activity.equals("SIGN_UP")) {
                 int id = db.getLastID();
                 User user = new User(id, email, String.valueOf(generatedCode), false, new Date(), 'C', false, 0);
                 db.addUser(user);
@@ -76,8 +73,8 @@ public class VerificationCodeActivity extends AppCompatActivity implements Seria
                         SaveInfoConfig.saveUser(email, VerificationCodeActivity.this);
                         Intent
 
-                                //acaba com a activity atual e passa os valores para a main activity e inicia-a
-                                i = new Intent(VerificationCodeActivity.this, MainActivity.class);
+                        //acaba com a activity atual e passa os valores para a main activity e inicia-a
+                        i = new Intent(VerificationCodeActivity.this, MainActivity.class);
                         finish();
                         startActivity(i);
 
@@ -101,7 +98,7 @@ public class VerificationCodeActivity extends AppCompatActivity implements Seria
     }
 
     private void sendMaclarenCode() {
-        String message = "<center><h1>Verify your email address</h1><br><h3>To verify your email address, enter this code in your app.<br><br><h2>" + generatedCode + "</h2></center>";
+        String message = "<center>"+R.string.emailwithcode+"<br><br><h2>" + generatedCode + "</h2></center>";
         SendEmail sendEmail = new SendEmail(this, info.getString("EMAIL"), "Your Maclaren Code", message);
         sendEmail.execute();
     }

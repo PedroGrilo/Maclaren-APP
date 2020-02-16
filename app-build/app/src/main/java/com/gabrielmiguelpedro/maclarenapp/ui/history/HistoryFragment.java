@@ -27,7 +27,6 @@ import java.util.List;
 
 public class HistoryFragment extends Fragment {
 
-    private HistoryViewModel historyViewModel;
     private MainActivity callback;
     private RecyclerView recyclerView;
 
@@ -39,7 +38,6 @@ public class HistoryFragment extends Fragment {
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        historyViewModel = ViewModelProviders.of(this).get(HistoryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_history, container, false);
 
          List<Transactions> historicList = callback.getDb().getHistoricByUserId(callback.getUser().getUserID());

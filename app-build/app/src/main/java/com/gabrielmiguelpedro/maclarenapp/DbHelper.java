@@ -444,13 +444,16 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     @Override
     public BabyCar getBabyCarById(int id) {
         BabyCar babyCar = new BabyCar();
+        BabyCarType babyCarType = new BabyCarType();
 
-        String query = "SELECT " + CARS_ID + " FROM " + TABLE_CARS + " WHERE " + CARS_ID + "=" + id;
+        String query = "SELECT " +TABLE_CARS+"."+CARS_ID + " , " + CARTYPE_NAME + " FROM " + TABLE_CARS + " JOIN "+ TABLE_CARTYPE +" ON "+ CARS_ID_CARTYPE +" = " + TABLE_CARTYPE+"."+CARTYPE_ID + " WHERE " + TABLE_CARS+"."+CARS_ID + " = " + id;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {
             babyCar.setId(cursor.getInt(0));
+            babyCarType.setName(cursor.getString(1));
         }
+        babyCar.setBabyCarType(babyCarType);
         db.close();
         return babyCar;
     }

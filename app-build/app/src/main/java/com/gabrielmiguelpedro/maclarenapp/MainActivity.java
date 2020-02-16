@@ -51,8 +51,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
         db.setLoggedIn(true, user);
 
-        Toast.makeText(this, user.getEmail() + " oh yes bbay - teste bd", Toast.LENGTH_LONG).show();
-
         checkPermissions(); // verificar permissoes de localizaão
 
         Toolbar toolbar = findViewById(R.id.toolbar);

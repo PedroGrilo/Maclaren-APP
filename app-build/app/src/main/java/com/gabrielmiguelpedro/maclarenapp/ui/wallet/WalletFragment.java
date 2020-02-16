@@ -24,7 +24,6 @@ import java.util.Date;
 
 public class WalletFragment extends Fragment {
 
-    private WalletViewModel walletViewModel;
     private MainActivity callback;
     private double total;
     TextView textView;
@@ -36,12 +35,10 @@ public class WalletFragment extends Fragment {
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        walletViewModel = ViewModelProviders.of(this).get(WalletViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_wallet, container, false);
+       View root = inflater.inflate(R.layout.fragment_wallet, container, false);
         textView = root.findViewById(R.id.textViewSaldo);
 
         updateWallet();
-
 
         Button button = root.findViewById(R.id.button3);
         Button button1 = root.findViewById(R.id.button4);

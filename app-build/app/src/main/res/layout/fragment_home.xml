@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="18dp"
         android:background="@drawable/buttons"
         android:paddingHorizontal="25dp"
         android:text="QR Code"
@@ -21,13 +21,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|top"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="18dp"
         android:background="@drawable/buttons"
         android:paddingHorizontal="25dp"
-        android:text="Cancelar"
+        android:text="@string/finalizar"
         android:textColor="@color/white"
         android:textSize="18dp"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/map"

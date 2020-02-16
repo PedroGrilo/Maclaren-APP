@@ -50,16 +50,14 @@ public class BabyCarDialog extends AppCompatDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        String id = bundle.getString("markerId");
+        id = id.substring(1);
+        markerId = Integer.parseInt(id);
+        markerId++;
         final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getContext(),getTheme()));
         builder.setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                //funciona
-                String id = bundle.getString("markerId");
-                id = id.substring(1);
-                markerId = Integer.parseInt(id);
-                markerId++;
-
                 double lon1 = bundle.getDouble("lon");
                 double lat1 = bundle.getDouble("lat");
                 double lon2 = bundle.getDouble("markerLon");
@@ -89,6 +87,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                         long date = System.currentTimeMillis();
                         callback.getDb().setIsUsing(1, callback.getUser());//colocar o utilizador em uso!!
                         callback.getDb().setIsUseCar(1, String.valueOf(markerId));//colocar o carro em uso!!
+                        callback.getUser().setIsUsing(1);
                         rowId = callback.getDb().addHistoric(new Historic(0, date, callback.getUser(), callback.getDb().getBabyCarById(markerId)));
 
                        HomeFragment.setFinishButton(true);
@@ -99,6 +98,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                         callback.stopService(new Intent(getContext(), MyService.class));
                         callback.getDb().setIsUsing(0, callback.getUser());//tirar utilzador de uso
                         callback.getDb().setIsUseCar(0, String.valueOf(markerId));//tirar o carro em uso!!
+                        callback.getUser().setIsUsing(0);
 
                         firstDate = callback.getDb().getFirstDateFromCoerdenates(callback.getDb().getLastIdFromTableHistoric());
                         lastDate = callback.getDb().getLastDateFromCoerdenates(callback.getDb().getLastIdFromTableHistoric());
@@ -160,10 +160,10 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                 });
         if (callback.getDb().getIsUsingById(callback.getUser().getUserID()) == 1) {
             builder.setTitle(R.string.finalizarAluguer)
-                    .setMessage("");
+                    .setMessage(getString(R.string.r_u_sure));
         } else {
             builder.setTitle(R.string.alugarCarro)
-                    .setMessage("");
+                    .setMessage(getString(R.string.desejaalugar) + " " + callback.getDb().getBabyCarById(markerId).getBabyCarType().getName()+ "?") ;
         }
         return builder.create();
     }

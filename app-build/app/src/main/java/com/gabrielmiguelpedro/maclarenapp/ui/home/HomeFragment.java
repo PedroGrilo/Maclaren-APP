@@ -74,8 +74,8 @@ public class HomeFragment extends Fragment implements Serializable, GoogleMap.On
                              Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_home, container, false);
-        finishButton = root.findViewById(R.id.aAlugar);
 
+        finishButton = root.findViewById(R.id.aAlugar);
         finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,6 +92,10 @@ public class HomeFragment extends Fragment implements Serializable, GoogleMap.On
         });
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
+
+        if(callback.getUser().getIsUsing()==1)
+            setFinishButton(true);
+
         return root;
     }
 

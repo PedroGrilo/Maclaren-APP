@@ -8,13 +8,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="user_maclaren_com">user@maclaren.com</string>
+    <string name="user_maclaren_com" translatable="false">user@maclaren.com</string>
     <string name="est_quase_no_fim">Está quase no fim!</string>
     <string name="introduza_o_c_digo_recebido_no_email">Introduza o código recebido no email.</string>
     <string name="code">123456</string>
     <string name="finalizar">Finalizar</string>
-    <string name="title_activity_inpute_email">inpute_email</string>
-    <string name="title_activity_sign_up">SignUp</string>
+    <string name="title_activity_inpute_email" translatable="false">inpute_email</string>
+    <string name="title_activity_sign_up">Criar conta</string>
     <string name="hello_again">Olá, outra vez!</string>
     <string name="sign_up_email_text">Inicie sessão a partir do endereço de email.</string>
     <string name="back">Voltar</string>
@@ -22,15 +22,15 @@
     <string name="accept_gps_subtext">Autoriza à Maclaren usar os serviços de localização de modo a mostrar os carrinhos de bébe proximos de si.</string>
     <string name="accept_storage_title">Autorizar o Armazenamento</string>
     <string name="accept_storage_subtext">Autoriza à Maclaren usar o armazenamento de modo a guardar informações sobre a sua conta no seu telefone.</string>
-    <string name="title_activity_main">Map</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_main" translatable="false">Map</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
     <string name="nav_header_hello">Olá,</string>
-    <string name="nav_header_email">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_email" translatable="false">android.studio@android.com</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
+    <string name="menu_home" translatable="false">Home</string>
     <string name="menu_wallet">Carteira</string>
     <string name="menu_settings">Opções</string>
     <string name="menu_help">Ajuda and FAQs</string>
@@ -45,16 +45,15 @@
     <string name="confirmar_pagamento">Confirmar Pagamento</string>
     <string name="montante">Montante</string>
     <string name="adicione_um_montante">Adicione um Montante</string>
-    <string name="o_seu_saldo_disponivel">O seu saldo disponivel:</string>
+    <string name="o_seu_saldo_disponivel">O seu saldo disponível:</string>
     <string name="location_permission_denied">Estas permissões são necessárias
 para que a aplicação funcione correctamente. Por favor tente de novo e dê as
 permissões necessárias à aplicação. Se as permissões foram negadas de forma
 definitiva poderá alterar essa decisão manualmente nas definições do seu
 dispositivo.</string>
-    <string name="permission_required_toast">Location permission is required for
+    <string name="permission_required_toast" translatable="false">Location permission is required for
 this demo.</string>
-    <string name="permission_rationale_location">Estas permissões são necessárias
-para que a aplicação funcione correctamente.</string>
+    <string name="permission_rationale_location">Estas permissões são necessárias para que a aplicação funcione corretamente.</string>
     <string name="inuse">Em uso?</string>
     <string name="add_card">+ Adicionar cartão de pagamento</string>
     <string name="card_selected">Cartão selecionado:</string>
@@ -82,6 +81,9 @@ para que a aplicação funcione correctamente.</string>
     <string name="alugarCarro">Alugar Carrinho de Bébé</string>
     <string name="nao">Não</string>
     <string name="sim">Sim</string>
+    <string name="desejaalugar">Deseja alugar o</string>
+    <string name="emailwithcode"><![CDATA[<h1>Verificar endereço de email</h1><br><h3>Para verificar o email, introduza este código na APP.</h3>]]></string>
+    <string name="r_u_sure">Tem a certeza?</string>
 
 
 </resources>
