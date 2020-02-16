@@ -148,7 +148,7 @@ public class HomeFragment extends Fragment implements Serializable, GoogleMap.On
                     R.drawable.baby_car_aluguer_s, 64, 64);
 
             BitmapDescriptor bbycar_m = BitmapUtils.bitmapDescriptorFromVector(getContext(),
-                    R.drawable.baby_car_aluguer_m, 64, 64);
+                    R.drawable.baby_car_aluguer_l, 64, 64);
 
             BitmapDescriptor bbycar_xl = BitmapUtils.bitmapDescriptorFromVector(getContext(),
                     R.drawable.baby_car_aluguer_xl, 64, 64);
