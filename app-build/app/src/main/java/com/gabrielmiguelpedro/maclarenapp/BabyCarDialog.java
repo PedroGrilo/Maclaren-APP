@@ -54,8 +54,6 @@ public class BabyCarDialog extends AppCompatDialogFragment {
         builder.setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
-
                 //funciona
                 String id = bundle.getString("markerId");
                 id = id.substring(1);

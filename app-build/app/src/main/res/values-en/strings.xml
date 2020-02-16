@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MacLaren</string>
+    <string name="QRCodeInvalid">Invalid QRCode</string>
+    <string name="accept_camera_subtitle">"Authorizes Maclaren to use the camera in order to use QRCode "</string>
+    <string name="accept_camera_title">"Authorize the Camera "</string>
+    <string name="accept_gps_subtext">You authorize Maclaren to use location services to show baby strollers near you.</string>
+    <string name="accept_gps_title">Authorize Location Services</string>
+    <string name="accept_storage_subtext">You authorize Maclaren to use storage to store information about your account on your phone.</string>
+    <string name="accept_storage_title">Authorize Storage</string>
+    <string name="account">"Account "</string>
+    <string name="action_settings">Settings</string>
+    <string name="add_card">+ Add payment card</string>
+    <string name="add_promotion_Code">Add promotional code.</string>
+    <string name="adicione_um_montante">Add an Amount</string>
+    <string name="alterar">Change</string>
+    <string name="alterarEmail">Change Email</string>
+    <string name="alterarEmailConteudo">Enter the new desired email.</string>
+    <string name="alugarCarro">Rent Baby Stroller</string>
+    <string name="babycarisused">The cart is already being rented.</string>
+    <string name="back">Back</string>
+    <string name="balance">Balance:</string>
+    <string name="bem_vindo">Welcome</string>
+    <string name="card_selected">Selected Card:</string>
+    <string name="code">123456</string>
+    <string name="code_value">"Enter code "</string>
+    <string name="confirmar_pagamento">Confirm Payment</string>
+</resources>
