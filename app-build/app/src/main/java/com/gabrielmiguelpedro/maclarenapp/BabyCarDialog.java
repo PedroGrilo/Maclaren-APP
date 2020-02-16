@@ -146,8 +146,4 @@ public class BabyCarDialog extends AppCompatDialogFragment {
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return (earthRadiusKm * c) / 0.0010000;
     }
-
-    public void test() {
-        Toast.makeText(getContext(), "Teste", Toast.LENGTH_LONG);
-    }
 }
