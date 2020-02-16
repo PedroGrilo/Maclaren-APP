@@ -21,6 +21,7 @@ import com.gabrielmiguelpedro.maclarenapp.Exceptions.EmptyFieldException;
 import com.gabrielmiguelpedro.maclarenapp.Exceptions.InvalidFieldException;
 import com.gabrielmiguelpedro.maclarenapp.MainActivity;
 import com.gabrielmiguelpedro.maclarenapp.R;
+import com.gabrielmiguelpedro.maclarenapp.SaveInfoConfig;
 
 public class SettingsFragment extends Fragment {
     private MainActivity callback;
@@ -46,13 +47,20 @@ public class SettingsFragment extends Fragment {
         button_alterar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 try {
                     if (checkFields() == true) {
                         Toast.makeText(getContext(), "Alteru", Toast.LENGTH_SHORT).show();
-                        callback.getDb().setEmail(String.valueOf(callback.getUser().getUserID()), editText.getText().toString());
+                        String email = editText.getText().toString();
+                        callback.getDb().setEmail(String.valueOf(callback.getUser().getUserID()),email );
+                        SaveInfoConfig.saveUser(email,getContext());
                     }
-                } catch (Exception e) {
-                    Toast.makeText(getContext(), "Alteru", Toast.LENGTH_SHORT).show();
+                } catch (InvalidFieldException e) {
+                    e.printStackTrace();
+                } catch (EmptyFieldException e) {
+                    e.printStackTrace();
+                } catch (EmailErrorException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -67,8 +75,8 @@ public class SettingsFragment extends Fragment {
             throw new EmptyFieldException(getString(R.string.empty_field));
         if (!email.matches(ptr))
             throw new InvalidFieldException(getString(R.string.invalid_field));
-        /*if (!callback.getDb().checkEmail(email))
-            throw new EmailErrorException(getString(R.string.email_doesnt_exist));*/
+        if (callback.getDb().checkEmail(email))
+            throw new EmailErrorException(getString(R.string.email_doesnt_exist));
         return true;
     }
 }
