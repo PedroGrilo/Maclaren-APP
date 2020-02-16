@@ -68,83 +68,87 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
                 isUsing = callback.getDb().getIsUsingById(callback.getUser().getUserID());
 
-                //Toast.makeText(getContext(), "D: " + d + " Car: " + BabyCarUse + " User:" + isUsing, Toast.LENGTH_LONG).show();
-                if (d <= 10 && BabyCarUse == 0 && isUsing == 0) {
-                    Date date = new Date();
-                    //Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
+                if(callback.getDb().getIdTransactionsValue(callback.getUser().getUserID())>0) {
+                    //Toast.makeText(getContext(), "D: " + d + " Car: " + BabyCarUse + " User:" + isUsing, Toast.LENGTH_LONG).show();
+                    if (d <= 10 && BabyCarUse == 0 && isUsing == 0) {
+                        Date date = new Date();
+                        //Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
 
-                    callback.getDb().setIsUsing(1, callback.getUser());//colocar o utilizador em uso!!
-                    callback.getDb().setIsUseCar(1, String.valueOf(markerId));//colocar o carro em uso!!
-                    rowId = callback.getDb().addHistoric(new Historic(0, date, callback.getUser(), callback.getDb().getBabyCarById(markerId)));
+                        callback.getDb().setIsUsing(1, callback.getUser());//colocar o utilizador em uso!!
+                        callback.getDb().setIsUseCar(1, String.valueOf(markerId));//colocar o carro em uso!!
+                        rowId = callback.getDb().addHistoric(new Historic(0, date, callback.getUser(), callback.getDb().getBabyCarById(markerId)));
 
-                    callback.startService(new Intent(getContext(), MyService.class));//chamar o service
+                        callback.startService(new Intent(getContext(), MyService.class));//chamar o service
 
-                    //Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
-                    //Toast.makeText(getContext(), "RowId: " + rowId, Toast.LENGTH_LONG).show();
-                } else if (callback.getDb().getIsUsingById(callback.getUser().getUserID()) == 1) {
-                    //Toast.makeText(getContext(), "Acabar Aluger?", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getContext(), "RowId: " + rowId, Toast.LENGTH_LONG).show();
+                    } else if (callback.getDb().getIsUsingById(callback.getUser().getUserID()) == 1) {
+                        //Toast.makeText(getContext(), "Acabar Aluger?", Toast.LENGTH_SHORT).show();
 
-                    /////////////////////////////////////////////////////////////////////////////////////////////RESET
+                        /////////////////////////////////////////////////////////////////////////////////////////////RESET
 
-                    callback.stopService(new Intent(getContext(), MyService.class));
-                    callback.getDb().setIsUsing(0, callback.getUser());//tirar utilzador de uso
-                    callback.getDb().setIsUseCar(0, String.valueOf(markerId));//tirar o carro em uso!!
+                        callback.stopService(new Intent(getContext(), MyService.class));
+                        callback.getDb().setIsUsing(0, callback.getUser());//tirar utilzador de uso
+                        callback.getDb().setIsUseCar(0, String.valueOf(markerId));//tirar o carro em uso!!
 
-                    /////////////////////////////////////////////////////////////////////////////////////////////RESET
+                        /////////////////////////////////////////////////////////////////////////////////////////////RESET
 
-                    /////////////////////////////////////////////////////////////////////////////////////////////DATE
+                        /////////////////////////////////////////////////////////////////////////////////////////////DATE
 
-                    firstDate = callback.getDb().getFirstDateFromCoerdenates(callback.getDb().getLastIdFromTableHistoric());
-                    lastDate = callback.getDb().getLastDateFromCoerdenates(callback.getDb().getLastIdFromTableHistoric());
-                    firstDate = firstDate.substring(11, 20);
-                    lastDate = lastDate.substring(11, 20);
+                        firstDate = callback.getDb().getFirstDateFromCoerdenates(callback.getDb().getLastIdFromTableHistoric());
+                        lastDate = callback.getDb().getLastDateFromCoerdenates(callback.getDb().getLastIdFromTableHistoric());
+                        firstDate = firstDate.substring(11, 20);
+                        lastDate = lastDate.substring(11, 20);
 
-                    try {
-                        DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
-                        Date fD = dateFormat.parse(firstDate);
-                        Date lD = dateFormat.parse(lastDate);
-                        totalTime = lD.getMinutes() - fD.getMinutes();
-                    } catch (ParseException e) {
-                        Log.e("TEST", "Exception", e);
-                    }
-
-                    /////////////////////////////////////////////////////////////////////////////////////////////DATE
-
-                    /////////////////////////////////////////////////////////////////////////////////////////////DISTANCIA
-                    int aux = 0;
-
-                    ArrayList<HistoricCoordinates> arrayList = callback.getDb().getHistoricCoordinatesById(callback.getDb().getLastIdFromTableHistoric());
-                    for (HistoricCoordinates historicCoordinates : arrayList) {
                         try {
-                            finalDistance += distanceInKmBetweenEarthCoordinates(arrayList.get(aux).getLat(), arrayList.get(aux).getLonge(), arrayList.get(++aux).getLat(), arrayList.get(++aux).getLonge());
-                        } catch (Exception e) {
-                            Toast.makeText(getContext(), "Exption", Toast.LENGTH_SHORT);
+                            DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
+                            Date fD = dateFormat.parse(firstDate);
+                            Date lD = dateFormat.parse(lastDate);
+                            totalTime = lD.getMinutes() - fD.getMinutes();
+                        } catch (ParseException e) {
+                            Log.e("TEST", "Exception", e);
                         }
 
+                        /////////////////////////////////////////////////////////////////////////////////////////////DATE
+
+                        /////////////////////////////////////////////////////////////////////////////////////////////DISTANCIA
+                        int aux = 0;
+
+                        ArrayList<HistoricCoordinates> arrayList = callback.getDb().getHistoricCoordinatesById(callback.getDb().getLastIdFromTableHistoric());
+                        for (HistoricCoordinates historicCoordinates : arrayList) {
+                            try {
+                                finalDistance += distanceInKmBetweenEarthCoordinates(arrayList.get(aux).getLat(), arrayList.get(aux).getLonge(), arrayList.get(++aux).getLat(), arrayList.get(++aux).getLonge());
+                            } catch (Exception e) {
+                                Toast.makeText(getContext(), "Exption", Toast.LENGTH_SHORT);
+                            }
+
+                        }
+
+                        /////////////////////////////////////////////////////////////////////////////////////////////DISTANCIA
+
+                        ////////////////////////////////////////////////////////////////////////////////////////////COST
+
+                        int carID = callback.getDb().getHistoricCarId();
+
+                        double baseCost = callback.getDb().getCarTypeCost(carID);
+
+                        cost = (totalTime * baseCost) + (finalDistance / 100);
+
+                        int id_historic = callback.getDb().getLastIdFromTableHistoric();
+                        Historic historic = new Historic();
+                        historic.setId(id_historic);
+
+                        Transactions transactions = new Transactions(1, -cost, callback.getUser(), historic, new Date());
+                        callback.db.addTransactions(transactions);
+
+                        ////////////////////////////////////////////////////////////////////////////////////////////COST
+                    } else {
+                        Toast.makeText(getContext(), "Não é possivel Alugar", Toast.LENGTH_SHORT).show();
                     }
-
-                    /////////////////////////////////////////////////////////////////////////////////////////////DISTANCIA
-
-                    ////////////////////////////////////////////////////////////////////////////////////////////COST
-
-                    int carID = callback.getDb().getHistoricCarId();
-
-                    double baseCost= callback.getDb().getCarTypeCost(carID);
-
-                    cost = (totalTime * baseCost) + (finalDistance/100);
-
-                    int id_historic = callback.getDb().getLastIdFromTableHistoric();
-                    Historic historic = new Historic();
-                    historic.setId(id_historic);
-
-                    Transactions transactions = new Transactions(1,cost,callback.getUser(),historic,new Date());
-
-                    callback.db.addTransactions(transactions);
-
-                    ////////////////////////////////////////////////////////////////////////////////////////////COST
-                } else {
-                    Toast.makeText(getContext(), "Não é possivel Alugar", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getContext(),R.string.nomoney,Toast.LENGTH_LONG).show();
                 }
+
             }
         })
                 .setNegativeButton("Não", new DialogInterface.OnClickListener() {

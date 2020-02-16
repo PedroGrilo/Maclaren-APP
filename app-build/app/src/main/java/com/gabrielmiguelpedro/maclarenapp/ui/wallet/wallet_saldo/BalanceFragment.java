@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -83,11 +84,16 @@ public class BalanceFragment extends Fragment {
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Date date = new Date();
                 EditText editText = root.findViewById(R.id.editText_FWB_Valor);
                 value = Double.parseDouble(editText.getText().toString());
-                callback.getDb().addTransactionsDeposit(new Transactions(0, value, callback.getUser(), date));
-                saldoTV.setText(callback.getDb().getIdTransactionsValue(callback.getUser().getUserID()) + "€");
+                if(value <5) {
+                    callback.getDb().addTransactionsDeposit(new Transactions(0, value, callback.getUser(), date));
+                    saldoTV.setText(callback.getDb().getIdTransactionsValue(callback.getUser().getUserID()) + "€");
+                }else {
+                    Toast.makeText(getContext(),R.string.min_montante,Toast.LENGTH_SHORT).show();
+                }
             }
         });
         return root;
