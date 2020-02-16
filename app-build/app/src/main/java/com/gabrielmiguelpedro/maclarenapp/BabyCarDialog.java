@@ -24,6 +24,8 @@ public class BabyCarDialog extends AppCompatDialogFragment {
     private double d;
     private int BabyCarUse;
     private int isUsing;
+    private String firstDate;
+    private String lastDate;
 
     public BabyCarDialog(Bundle bundle) {
         this.bundle = bundle;
@@ -84,6 +86,9 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                     getActivity().stopService(new Intent(getActivity(), MyService.class));
                     callback.getDb().setIsUsing(0, callback.getUser());//tirar utilzador de uso
                     callback.getDb().setIsUseCar(0, String.valueOf(markerId));//tirar o carro em uso!!
+
+                    firstDate = callback.getDb().getFirstDateFromCoerdenates(callback.getDb().getLastIdFromTableHistoric());
+                    lastDate = callback.getDb().getLastDateFromCoerdenates(callback.getDb().getLastIdFromTableHistoric());
 
                 } else {
                     Toast.makeText(getContext(), "Não é possivel Alugar", Toast.LENGTH_SHORT).show();
