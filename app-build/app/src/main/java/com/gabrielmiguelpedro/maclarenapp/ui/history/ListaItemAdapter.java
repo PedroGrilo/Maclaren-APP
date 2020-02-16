@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gabrielmiguelpedro.maclarenapp.DbHelper;
 import com.gabrielmiguelpedro.maclarenapp.Historic;
 import com.gabrielmiguelpedro.maclarenapp.R;
 
@@ -59,13 +60,13 @@ public class ListaItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 historicViewHolder.nome.setText(bbycar);
                 historicViewHolder.desc.setText(((Historic) items.get(position)).getBabyCar().getComments());
 
-                if(bbycar.equals("Carrinho Pequeno")){
+                if(bbycar.equals(DbHelper.CAR_S)){
                     historicViewHolder.foto.setImageResource(R.drawable.baby_car_aluguer_s);
-                }else if(bbycar.equals("Carrinho Médio")){
+                }else if(bbycar.equals(DbHelper.CAR_M)){
                     historicViewHolder.foto.setImageResource(R.drawable.baby_car_aluguer_m);
-                }else if(bbycar.equals("Carrinho Grande")){
+                }else if(bbycar.equals(DbHelper.CAR_L)){
                     historicViewHolder.foto.setImageResource(R.drawable.baby_car_aluguer_l);
-                }else if(bbycar.equals("Carrinho Gigante Edér")){
+                }else if(bbycar.equals(DbHelper.CAR_XL)){
                     historicViewHolder.foto.setImageResource(R.drawable.baby_car_aluguer_xl);
                 }
 
