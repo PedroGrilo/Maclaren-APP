@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.widget.Toast;
 
@@ -14,6 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BabyCarDialog extends AppCompatDialogFragment {
@@ -61,11 +65,10 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
                 isUsing = callback.getDb().getIsUsingById(callback.getUser().getUserID());
 
-                Toast.makeText(getContext(), "D: " + d + " Car: " + BabyCarUse + " User:" + isUsing, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(), "D: " + d + " Car: " + BabyCarUse + " User:" + isUsing, Toast.LENGTH_LONG).show();
                 if (d <= 10 && BabyCarUse == 0 && isUsing == 0) {
-
                     Date date = new Date();
-                    Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
 
                     callback.getDb().setIsUsing(1, callback.getUser());//colocar o utilizador em uso!!
                     callback.getDb().setIsUseCar(1, String.valueOf(markerId));//colocar o carro em uso!!
@@ -73,23 +76,29 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
                     getActivity().startService(new Intent(getActivity(), MyService.class));//chamar o service
 
-                    Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
-                    Toast.makeText(getContext(), "RowId: " + rowId, Toast.LENGTH_LONG).show();
-
+                    //Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getContext(), "RowId: " + rowId, Toast.LENGTH_LONG).show();
                 } else if (callback.getDb().getIsUsingById(callback.getUser().getUserID()) == 1) {
-                    Toast.makeText(getContext(), "Acabar Aluger?", Toast.LENGTH_SHORT).show();
-                    //TODO
-                    //terminar serviço S
-                    //Calcular Tempo
-                    //Calcular distancia
-                    //Set ao arrinho e user S
-                    //trasacao
+                    //Toast.makeText(getContext(), "Acabar Aluger?", Toast.LENGTH_SHORT).show();
+
                     getActivity().stopService(new Intent(getActivity(), MyService.class));
                     callback.getDb().setIsUsing(0, callback.getUser());//tirar utilzador de uso
                     callback.getDb().setIsUseCar(0, String.valueOf(markerId));//tirar o carro em uso!!
 
                     firstDate = callback.getDb().getFirstDateFromCoerdenates(callback.getDb().getLastIdFromTableHistoric());
                     lastDate = callback.getDb().getLastDateFromCoerdenates(callback.getDb().getLastIdFromTableHistoric());
+                    firstDate = firstDate.substring(11,20);
+                    lastDate = lastDate.substring(11,20);
+
+                    try {
+                    DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
+                    Date fD = dateFormat.parse(firstDate);
+                    Date lD = dateFormat.parse(lastDate);
+                    int finalDate = lD.getMinutes()-fD.getMinutes();
+                    Toast.makeText(getContext(), "Date "+finalDate, Toast.LENGTH_SHORT);
+                    } catch (ParseException e) {
+                        Log.e("TEST", "Exception", e);
+                    }
 
                 } else {
                     Toast.makeText(getContext(), "Não é possivel Alugar", Toast.LENGTH_SHORT).show();
