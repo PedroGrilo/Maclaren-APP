@@ -409,7 +409,20 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         //db.close();
     }
 
+    @Override
+    public boolean setEmail(String id, String email) {
+        //String query = "UPDATE " +TABLE_CARS+" SET "+CARS_ISUSE+" = "+value+" WHERE "+CARS_ID+" = "+aux;
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(USERS_EMAIL, email);
+        db.update(TABLE_USERS, contentValues, "id = ?", new String[]{id});
+        return true;
+        //Cursor cursor = db.rawQuery(query, null);
+        //db.close();
+    }
 
+
+    @Override
     public boolean checkEmail(String email) {
         String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + USERS_EMAIL + " = '" + email + "'";
         SQLiteDatabase db = this.getWritableDatabase();
