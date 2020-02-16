@@ -564,4 +564,16 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         return historicCoordinatesArrayList;
     }
 
+    public double getCarTypeCostByHistoricId(int id){
+        double cost = 0;
+
+        String query = "SELECT " + CARTYPE_BASECOST +" FROM " + TABLE_CARTYPE + " WHERE " + HISTORIC_ID_USER + "=" + id;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext())
+            cost = cursor.getDouble(0);
+        db.close();
+        return cost;
+    }
+
 }
