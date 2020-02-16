@@ -227,13 +227,9 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        //values.put(HISTORIC_COST, historic.getCost());
         values.put(HISTORIC_HISTORICDATE, historic.getDate() + "");
         values.put(HISTORIC_ID_CAR, historic.getBabyCar().getId());
         values.put(HISTORIC_ID_USER, historic.getUser().getUserID());
-        //values.put(HISTORIC_ID_TRANSACTIONS, historic.getTransactions().getId());
-        //values.put(HISTORIC_ID_HISTORICCOORDINATES, historic.getHistoricCoordinates().getId());
-
         rowId = db.insert(TABLE_HISTORIC, null, values);
 
         db.close();
@@ -479,7 +475,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         while (cursor.moveToNext()) {
             Historic historic = new Historic();
             historic.setId(cursor.getInt(0));
-            historic.setDate(new Date(cursor.getLong(1)));
+            historic.setDate(cursor.getLong(1));
 
             BabyCarType babyCarType = new BabyCarType();
             babyCarType.setId(cursor.getInt(2));

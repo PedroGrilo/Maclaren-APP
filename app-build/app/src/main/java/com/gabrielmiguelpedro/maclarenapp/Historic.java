@@ -4,17 +4,14 @@ import java.util.Date;
 
 public class Historic {
     private int id;
-    private Date date;
-    //private float cost;
-    //private HistoricCoordinates historicCoordinates;
-    //private Transactions transactions;
+    private long date;
     private User user;
     private BabyCar babyCar;
 
     public Historic() {
     }
 
-    public Historic(int id, Date date, User user, BabyCar babyCar) {
+    public Historic(int id, long date, User user, BabyCar babyCar) {
         this.id = id;
         this.date = date;
         this.user = user;
@@ -29,11 +26,11 @@ public class Historic {
         this.id = id;
     }
 
-    public Date getDate() {
+    public long getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(long date) {
         this.date = date;
     }
 
