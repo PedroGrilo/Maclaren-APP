@@ -33,4 +33,6 @@ public interface DBHelperClient {
     int getIsUsingById(int aux);
 
     Historic getHistoricById(int id);
+
+    int getLastIdFromTableHistoric();
 }
