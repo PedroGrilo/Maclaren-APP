@@ -133,6 +133,14 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
                     cost = (totalTime * baseCost) + (finalDistance/100);
 
+                    int id_historic = callback.getDb().getLastIdFromTableHistoric();
+                    Historic historic = new Historic();
+                    historic.setId(id_historic);
+
+                    Transactions transactions = new Transactions(1,cost,callback.getUser(),historic,new Date());
+
+                    callback.db.addTransactions(transactions);
+
                     ////////////////////////////////////////////////////////////////////////////////////////////COST
                 } else {
                     Toast.makeText(getContext(), "Não é possivel Alugar", Toast.LENGTH_SHORT).show();

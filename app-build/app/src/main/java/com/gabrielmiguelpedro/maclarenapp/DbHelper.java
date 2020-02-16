@@ -474,8 +474,6 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
 
     @Override
     public ArrayList<Historic> getHistoricByUserId(int id) {
-
-
         String query = "SELECT HISTORIC.ID, HISTORICDATE,cartype.ID, cartype.NAME , cartype.BASECOST,CARS.COMMENTS FROM HISTORIC JOIN cars on ID_CAR  = CARS.ID JOIN cartype ON cars.ID_CARTYPE = cartype.ID";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
