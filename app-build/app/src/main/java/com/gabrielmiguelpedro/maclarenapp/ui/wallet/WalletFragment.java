@@ -39,12 +39,7 @@ public class WalletFragment extends Fragment {
         TextView textView = root.findViewById(R.id.textViewSaldo);
         textView.setText(String.format("%10.2f", total) + " €");
 
-        walletViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-
-            }
-        });
+   
         Button button = root.findViewById(R.id.button3);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
