@@ -91,7 +91,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
             builder.setTitle("Finalizar Aluger? - " + bundle.getString("markerId"))
             .setMessage("Finalizar este Aluger?");
         }else{
-            builder.setTitle("Alugar Carrinho - " + bundle.getString("markerId"))
+            builder.setTitle("Alugar Carrinho")
             .setMessage("Pretende Alugar este Carrinho?");
         }
         return builder.create();
