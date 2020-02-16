@@ -68,38 +68,39 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
                 isUsing = callback.getDb().getIsUsingById(callback.getUser().getUserID());
 
+                Boolean verifications = false;
+
+                if(d<=10)
+                    Toast.makeText(getContext(),R.string.mindistance,Toast.LENGTH_LONG).show();
+                else if(BabyCarUse == 0)
+                    Toast.makeText(getContext(), R.string.babycarisused, Toast.LENGTH_LONG).show();
+                else if(isUsing == 0)
+                    Toast.makeText(getContext(), R.string.isusing, Toast.LENGTH_LONG).show();
+                else
+                    verifications = true;
+
+
                 if(callback.getDb().getIdTransactionsValue(callback.getUser().getUserID())>0) {
-                    //Toast.makeText(getContext(), "D: " + d + " Car: " + BabyCarUse + " User:" + isUsing, Toast.LENGTH_LONG).show();
-                    if (d <= 10 && BabyCarUse == 0 && isUsing == 0) {
+                    if (verifications) {
                         Date date = new Date();
-                        //Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
 
                         callback.getDb().setIsUsing(1, callback.getUser());//colocar o utilizador em uso!!
                         callback.getDb().setIsUseCar(1, String.valueOf(markerId));//colocar o carro em uso!!
                         rowId = callback.getDb().addHistoric(new Historic(0, date, callback.getUser(), callback.getDb().getBabyCarById(markerId)));
 
                         callback.startService(new Intent(getContext(), MyService.class));//chamar o service
-
-                        //Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
-                        //Toast.makeText(getContext(), "RowId: " + rowId, Toast.LENGTH_LONG).show();
                     } else if (callback.getDb().getIsUsingById(callback.getUser().getUserID()) == 1) {
-                        //Toast.makeText(getContext(), "Acabar Aluger?", Toast.LENGTH_SHORT).show();
-
-                        /////////////////////////////////////////////////////////////////////////////////////////////RESET
 
                         callback.stopService(new Intent(getContext(), MyService.class));
                         callback.getDb().setIsUsing(0, callback.getUser());//tirar utilzador de uso
                         callback.getDb().setIsUseCar(0, String.valueOf(markerId));//tirar o carro em uso!!
-
-                        /////////////////////////////////////////////////////////////////////////////////////////////RESET
-
-                        /////////////////////////////////////////////////////////////////////////////////////////////DATE
 
                         firstDate = callback.getDb().getFirstDateFromCoerdenates(callback.getDb().getLastIdFromTableHistoric());
                         lastDate = callback.getDb().getLastDateFromCoerdenates(callback.getDb().getLastIdFromTableHistoric());
                         firstDate = firstDate.substring(11, 20);
                         lastDate = lastDate.substring(11, 20);
 
+                        /** DATE **/
                         try {
                             DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
                             Date fD = dateFormat.parse(firstDate);
@@ -108,10 +109,9 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                         } catch (ParseException e) {
                             Log.e("TEST", "Exception", e);
                         }
+                        /** /DATE **/
 
-                        /////////////////////////////////////////////////////////////////////////////////////////////DATE
-
-                        /////////////////////////////////////////////////////////////////////////////////////////////DISTANCIA
+                        /** DISTANCIA **/
                         int aux = 0;
 
                         ArrayList<HistoricCoordinates> arrayList = callback.getDb().getHistoricCoordinatesById(callback.getDb().getLastIdFromTableHistoric());
@@ -123,11 +123,9 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                             }
 
                         }
+                        /** /DISTANCIA **/
 
-                        /////////////////////////////////////////////////////////////////////////////////////////////DISTANCIA
-
-                        ////////////////////////////////////////////////////////////////////////////////////////////COST
-
+                        /** COST **/
                         int carID = callback.getDb().getHistoricCarId();
 
                         double baseCost = callback.getDb().getCarTypeCost(carID);
@@ -140,10 +138,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
                         Transactions transactions = new Transactions(1, -cost, callback.getUser(), historic, new Date());
                         callback.db.addTransactions(transactions);
-
-                        ////////////////////////////////////////////////////////////////////////////////////////////COST
-                    } else {
-                        Toast.makeText(getContext(), "Não é possivel Alugar", Toast.LENGTH_SHORT).show();
+                        /** /COST **/
                     }
                 }else{
                     Toast.makeText(getContext(),R.string.nomoney,Toast.LENGTH_LONG).show();
