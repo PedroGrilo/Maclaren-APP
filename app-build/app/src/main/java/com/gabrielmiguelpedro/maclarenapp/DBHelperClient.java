@@ -39,4 +39,6 @@ public interface DBHelperClient {
     String getFirstDateFromCoerdenates(int id);
 
     String getLastDateFromCoerdenates(int id);
+
+    ArrayList<HistoricCoordinates> getHistoricCoordinatesById(int id);
 }

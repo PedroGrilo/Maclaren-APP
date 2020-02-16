@@ -119,8 +119,8 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
                 + " ( " + HISTORICCOORDINATES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + HISTORICCOORDINATES_HISTORYID + " INTEGER, "
                 + HISTORICCOORDINATES_DATE + " INT, "
-                + HISTORICCOORDINATES_COORLONG + " INT, "
-                + HISTORICCOORDINATES_COORLAT + " INT, "
+                + HISTORICCOORDINATES_COORLONG + " REAL, "
+                + HISTORICCOORDINATES_COORLAT + " REAL, "
                 + "FOREIGN KEY (" + HISTORICCOORDINATES_HISTORYID + ") REFERENCES " + TABLE_HISTORIC + "(" + HISTORIC_ID + "));";
 
         db.execSQL(CREATE_TABLE_USERS);
@@ -247,7 +247,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
 
         values.put(HISTORICCOORDINATES_COORLAT, historicCoordinates.getLat());
         values.put(HISTORICCOORDINATES_COORLONG, historicCoordinates.getLonge());
-        values.put(HISTORICCOORDINATES_DATE, historicCoordinates.getDate()+"");
+        values.put(HISTORICCOORDINATES_DATE, historicCoordinates.getDate() + "");
         values.put(HISTORICCOORDINATES_HISTORYID, historicCoordinates.getHistoric().getId());
 
         db.insert(TABLE_HISTORICCOORDINATES, null, values);
@@ -345,8 +345,8 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(USERS_LOGGED, (loggedIn ? 1 : 0));
-        String selection = USERS_EMAIL + " LIKE '" + user.getEmail() +"'" ;
-        db.update(TABLE_USERS,values,selection,null);
+        String selection = USERS_EMAIL + " LIKE '" + user.getEmail() + "'";
+        db.update(TABLE_USERS, values, selection, null);
         db.close();
     }
 
@@ -355,19 +355,21 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(USERS_isOK, isOk);
-        String selection = USERS_EMAIL + " LIKE '" + email +"'" ;
-        db.update(TABLE_USERS,values,selection,null);
+        String selection = USERS_EMAIL + " LIKE '" + email + "'";
+        db.update(TABLE_USERS, values, selection, null);
         db.close();
     }
 
-    public void setIsUsing(int i, User user){
+    public void setIsUsing(int i, User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(USERS_ISUSING, i);
-        String selection = USERS_EMAIL + " LIKE '" + user.getEmail() +"'" ;
-        db.update(TABLE_USERS,values,selection,null);
+        String selection = USERS_EMAIL + " LIKE '" + user.getEmail() + "'";
+        db.update(TABLE_USERS, values, selection, null);
         db.close();
-    };
+    }
+
+    ;
 
     @Override
     public User getUserByEmail(String email) {
@@ -456,7 +458,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     }
 
     @Override
-    public Historic getHistoricById(int id){
+    public Historic getHistoricById(int id) {
         Historic historic = new Historic();
 
         String query = "SELECT " + HISTORIC_ID + " FROM " + TABLE_HISTORIC + " WHERE " + HISTORIC_ID + "=" + id;
@@ -470,10 +472,10 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     }
 
     @Override
-    public int getLastIdFromTableHistoric(){
-        int id=0;
+    public int getLastIdFromTableHistoric() {
+        int id = 0;
 
-        String query = "SELECT " + HISTORIC_ID + " FROM " + TABLE_HISTORIC + " ORDER BY " + HISTORIC_ID +" DESC LIMIT 1";
+        String query = "SELECT " + HISTORIC_ID + " FROM " + TABLE_HISTORIC + " ORDER BY " + HISTORIC_ID + " DESC LIMIT 1";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext())
@@ -484,8 +486,8 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
 
 
     @Override
-    public String getFirstDateFromCoerdenates(int id){
-        String date="";
+    public String getFirstDateFromCoerdenates(int id) {
+        String date = "";
 
         //String query = "SELECT " + HISTORICCOORDINATES_DATE + " FROM " + TABLE_HISTORICCOORDINATES + " JOIN " + TABLE_HISTORIC + " ON " + HISTORICCOORDINATES_HISTORYID +"="+ HISTORIC_ID + " WHERE " + HISTORICCOORDINATES_HISTORYID + "=" + id +" ORDER BY " + HISTORICCOORDINATES_ID +" DESC LIMIT 1";
         String query = "SELECT historiccoordinates.date FROM historiccoordinates JOIN historic ON historiccoordinates.HISTORYID = historic.id WHERE historiccoordinates.HISTORYID = " + id + " ORDER BY historiccoordinates.id ASC LIMIT 1";
@@ -499,8 +501,8 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     }
 
     @Override
-    public String getLastDateFromCoerdenates(int id){
-        String date="";
+    public String getLastDateFromCoerdenates(int id) {
+        String date = "";
 
         String query = "SELECT historiccoordinates.date FROM historiccoordinates JOIN historic ON historiccoordinates.HISTORYID = historic.id WHERE historiccoordinates.HISTORYID = " + id + " ORDER BY historiccoordinates.id DESC LIMIT 1";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -509,6 +511,25 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
             date = cursor.getString(0);
         db.close();
         return date;
+    }
+
+    @Override
+    public ArrayList<HistoricCoordinates> getHistoricCoordinatesById(int id) {
+        String query = "SELECT historiccoordinates.COORLAT, historiccoordinates.COORLONG FROM historiccoordinates JOIN historic ON historiccoordinates.HISTORYID = historic.id WHERE historiccoordinates.HISTORYID = " + id;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        ArrayList<HistoricCoordinates> historicCoordinatesArrayList = new ArrayList<HistoricCoordinates>();
+        while (cursor.moveToNext()) {
+            HistoricCoordinates historicCoordinates = new HistoricCoordinates();
+
+            historicCoordinates.setLat(cursor.getDouble(0));
+            historicCoordinates.setLonge(cursor.getDouble(0));
+
+            historicCoordinatesArrayList.add(historicCoordinates);
+        }
+        db.close();
+        return historicCoordinatesArrayList;
     }
 
 }

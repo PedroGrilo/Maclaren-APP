@@ -5,14 +5,14 @@ import java.util.Date;
 public class HistoricCoordinates {
     private int id;
     private Date date;
-    private int longe;
-    private int lat;
+    private double longe;
+    private double lat;
     private Historic historic;
 
     public HistoricCoordinates() {
     }
 
-    public HistoricCoordinates(int id, Date date, int longe, int lat, Historic historic) {
+    public HistoricCoordinates(int id, Date date, double longe, double lat, Historic historic) {
         this.id = id;
         this.date = date;
         this.longe = longe;
@@ -36,19 +36,19 @@ public class HistoricCoordinates {
         this.date = date;
     }
 
-    public int getLonge() {
+    public double getLonge() {
         return longe;
     }
 
-    public void setLonge(int longe) {
+    public void setLonge(double longe) {
         this.longe = longe;
     }
 
-    public int getLat() {
+    public double getLat() {
         return lat;
     }
 
-    public void setLat(int lat) {
+    public void setLat(double lat) {
         this.lat = lat;
     }
 
