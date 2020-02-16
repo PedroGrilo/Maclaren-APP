@@ -25,6 +25,7 @@ import com.gabrielmiguelpedro.maclarenapp.Assets.BitmapUtils;
 import com.gabrielmiguelpedro.maclarenapp.Assets.PermissionUtils;
 import com.gabrielmiguelpedro.maclarenapp.BabyCar;
 import com.gabrielmiguelpedro.maclarenapp.BabyCarDialog;
+import com.gabrielmiguelpedro.maclarenapp.DbHelper;
 import com.gabrielmiguelpedro.maclarenapp.MainActivity;
 import com.gabrielmiguelpedro.maclarenapp.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -144,45 +145,51 @@ public class HomeFragment extends Fragment implements Serializable, GoogleMap.On
         } else if (mMap != null) {
             // Access to the location has been granted to the app.
             mMap.setMyLocationEnabled(true);
+
             BitmapDescriptor bbycar_s = BitmapUtils.bitmapDescriptorFromVector(getContext(),
                     R.drawable.baby_car_aluguer_s, 64, 64);
 
             BitmapDescriptor bbycar_m = BitmapUtils.bitmapDescriptorFromVector(getContext(),
+                    R.drawable.baby_car_aluguer_m, 64, 64);
+
+            BitmapDescriptor bbycar_l = BitmapUtils.bitmapDescriptorFromVector(getContext(),
                     R.drawable.baby_car_aluguer_l, 64, 64);
 
             BitmapDescriptor bbycar_xl = BitmapUtils.bitmapDescriptorFromVector(getContext(),
                     R.drawable.baby_car_aluguer_xl, 64, 64);
-            // Load markers from somewhere. This is just an example!
 
-            Log.d(TAG, "enableMyLocation: " + callback.getDb().getAllBabyCars()); // PERGUNTA AO STOR PQ QUE ISTO NAO DA?/ Ok eu pergunto
+            // Load markers from somewhere. This is just an example!
 
             ArrayList<BabyCar> cars = callback.getDb().getAllBabyCars();
 
 
             for (BabyCar babyCar : cars) {
-                Log.d(TAG, "cars: " + babyCar.getComments());
 
                 BitmapDescriptor icon = null;
+
                 double latitude = 38.53760;
 
                 double longitude = -8.87806;
 
-                switch (babyCar.getBabyCarType().getId()) {
-                    case 1: //  pequeno
+                switch (String.valueOf(babyCar.getBabyCarType().getName())) {
+                    case DbHelper.CAR_S: //  pequeno
                         icon = bbycar_s;
-                        latitude += 0.00002;//para testes
-                    case 2: // medio
+                        latitude += 0.00005;    //para testes
+                        break;
+                    case DbHelper.CAR_M: // medio
                         icon = bbycar_m;
-                        longitude += 0.00002;//para testes
-                    case 3: // grande
-                        icon = bbycar_xl;
-                        latitude += 0.00003;//para testes
-                    case 4: //giaante
+                        longitude += 0.00005;   //para testes
+                        break;
+                    case DbHelper.CAR_L: // grande
+                        icon = bbycar_l;
+                        latitude += 0.000010;   //para testes
+                        break;
+                    case DbHelper.CAR_XL: //giaante
                         icon = bbycar_xl; //temos de fazer um icon;
-                        latitude += 0.00002;//para testes
-                        longitude += 0.00003;//para testes
+                        latitude += 0.00005;    //para testes
+                        longitude += 0.00005;   //para testes
+                        break;
                 }
-
 
                 mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude))
                         .title(babyCar.getBabyCarType().getName())
