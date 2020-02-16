@@ -16,6 +16,19 @@
         android:textColor="@color/white"
         android:textSize="18dp" />
 
+    <Button
+        android:id="@+id/aAlugar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/buttons"
+        android:paddingHorizontal="25dp"
+        android:text="Cancelar"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:visibility="gone"/>
+
     <com.google.android.gms.maps.MapView
         android:id="@+id/map"
         android:layout_width="match_parent"

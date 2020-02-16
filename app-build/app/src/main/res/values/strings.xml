@@ -73,7 +73,7 @@ para que a aplicação funcione correctamente.</string>
     <string name="nopermission">Sem permissões</string>
     <string name="nomoney">Não tens dinheiro na tua carteira.</string>
     <string name="min_montante">O montante mínimo é de 5€</string>
-    <string name="estaalugar">Está a alugar um carrinho.</string>
+    <string name="estaalugar">Está agora a alugar um carrinho.</string>
 
 
 </resources>

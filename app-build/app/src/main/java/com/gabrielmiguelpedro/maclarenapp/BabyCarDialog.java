@@ -13,6 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.fragment.app.FragmentManager;
+
+import com.gabrielmiguelpedro.maclarenapp.ui.home.HomeFragment;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -51,6 +54,8 @@ public class BabyCarDialog extends AppCompatDialogFragment {
         builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+
+
                 //funciona
                 String id = bundle.getString("markerId");
                 id = id.substring(1);
@@ -87,6 +92,8 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                         callback.getDb().setIsUsing(1, callback.getUser());//colocar o utilizador em uso!!
                         callback.getDb().setIsUseCar(1, String.valueOf(markerId));//colocar o carro em uso!!
                         rowId = callback.getDb().addHistoric(new Historic(0, date, callback.getUser(), callback.getDb().getBabyCarById(markerId)));
+
+                       HomeFragment.setFinishButton(true);
 
                         callback.startService(new Intent(getContext(), MyService.class));//chamar o service
                     } else if (callback.getDb().getIsUsingById(callback.getUser().getUserID()) == 1) {
@@ -138,6 +145,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
                         Transactions transactions = new Transactions(1, -cost, callback.getUser(), historic, new Date());
                         callback.db.addTransactions(transactions);
+                        HomeFragment.setFinishButton(false);
                         /** /COST **/
                     }
                 } else {

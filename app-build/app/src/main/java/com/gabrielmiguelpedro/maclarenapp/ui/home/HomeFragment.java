@@ -59,6 +59,8 @@ public class HomeFragment extends Fragment implements Serializable, GoogleMap.On
     private Bundle bundle;
     private View root;
     private Button buttonQRCode;
+    private static Button finishButton;
+
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -71,6 +73,14 @@ public class HomeFragment extends Fragment implements Serializable, GoogleMap.On
                              Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_home, container, false);
+        finishButton = root.findViewById(R.id.aAlugar);
+
+        finishButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog();
+            }
+        });
 
         buttonQRCode = root.findViewById(R.id.buttonQRCode);
         buttonQRCode.setOnClickListener(new View.OnClickListener() {
@@ -293,4 +303,10 @@ public class HomeFragment extends Fragment implements Serializable, GoogleMap.On
     }
 
 
+    public static void setFinishButton(boolean b) {
+        if(b)
+            finishButton.setVisibility(View.VISIBLE);
+        else
+            finishButton.setVisibility(View.GONE);
+    }
 }
