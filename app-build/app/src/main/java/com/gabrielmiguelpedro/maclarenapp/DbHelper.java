@@ -484,12 +484,13 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
 
 
     @Override
-    public ArrayList<Historic> getHistoricByUserId(int id) {
-        String query = "SELECT HISTORIC.ID, HISTORICDATE,cartype.ID, cartype.NAME , cartype.BASECOST,CARS.COMMENTS FROM HISTORIC JOIN cars on ID_CAR  = CARS.ID JOIN cartype ON cars.ID_CARTYPE = cartype.ID";
+    public ArrayList<Transactions> getHistoricByUserId(int id) {
+        String query = "SELECT historic.ID, historic.HISTORICDATE, cartype.ID, cartype.NAME , cartype.BASECOST,CARS.COMMENTS,transactions.valor FROM transactions JOIN historic ON transactions.ID_HISTORIC = historic.id JOIN cars on ID_CAR  = CARS.ID JOIN cartype ON cars.ID_CARTYPE = cartype.ID";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        ArrayList<Historic> historicList = new ArrayList<Historic>();
+        ArrayList<Transactions> transactionsList = new ArrayList<Transactions>();
         while (cursor.moveToNext()) {
+            Transactions transactions = new Transactions();
             Historic historic = new Historic();
             historic.setId(cursor.getInt(0));
             historic.setDate(cursor.getLong(1));
@@ -502,13 +503,15 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
             BabyCar babyCar = new BabyCar();
             babyCar.setComments(cursor.getString(5));
             babyCar.setBabyCarType(babyCarType);
-
             historic.setBabyCar(babyCar);
-            historicList.add(historic);
+
+            transactions.setHistoric(historic);
+            transactions.setValue(cursor.getDouble(6));
+            transactionsList.add(transactions);
         }
 
         db.close();
-        return historicList;
+        return transactionsList;
     }
 
     @Override

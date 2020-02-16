@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gabrielmiguelpedro.maclarenapp.Historic;
 import com.gabrielmiguelpedro.maclarenapp.MainActivity;
 import com.gabrielmiguelpedro.maclarenapp.R;
+import com.gabrielmiguelpedro.maclarenapp.Transactions;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,7 +42,7 @@ public class HistoryFragment extends Fragment {
         historyViewModel = ViewModelProviders.of(this).get(HistoryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_history, container, false);
 
-         List<Historic> historicList = callback.getDb().getHistoricByUserId(callback.getUser().getUserID());
+         List<Transactions> historicList = callback.getDb().getHistoricByUserId(callback.getUser().getUserID());
 
         recyclerView= root.findViewById(R.id.historico);
 

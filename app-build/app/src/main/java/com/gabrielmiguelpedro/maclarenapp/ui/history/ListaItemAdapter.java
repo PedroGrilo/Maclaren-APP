@@ -12,15 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gabrielmiguelpedro.maclarenapp.DbHelper;
 import com.gabrielmiguelpedro.maclarenapp.Historic;
 import com.gabrielmiguelpedro.maclarenapp.R;
+import com.gabrielmiguelpedro.maclarenapp.Transactions;
 
 import java.util.Date;
 import java.util.List;
 
 public class ListaItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private final List<Historic> items;
+    private final List<Transactions> items;
     private final OnItemClickListener itemClickListener;
 
-    public ListaItemAdapter(List<Historic> items, OnItemClickListener clickListener) {
+    public ListaItemAdapter(List<Transactions> items, OnItemClickListener clickListener) {
         this.items = items;
         this.itemClickListener = clickListener;
     }
@@ -55,10 +56,10 @@ public class ListaItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             case 1:
             default:
                 HistoricViewHolder historicViewHolder = (HistoricViewHolder) holder;
-                String bbycar = ((Historic) items.get(position)).getBabyCar().getBabyCarType().getName();
+                String bbycar = ((Transactions) items.get(position)).getHistoric().getBabyCar().getBabyCarType().getName();
 
                 historicViewHolder.nome.setText(bbycar);
-                historicViewHolder.desc.setText(((Historic) items.get(position)).getBabyCar().getComments());
+                historicViewHolder.desc.setText(((Transactions) items.get(position)).getHistoric().getBabyCar().getComments());
 
                 if(bbycar.equals(DbHelper.CAR_S)){
                     historicViewHolder.foto.setImageResource(R.drawable.baby_car_aluguer_s);
@@ -68,10 +69,12 @@ public class ListaItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     historicViewHolder.foto.setImageResource(R.drawable.baby_car_aluguer_l);
                 }else if(bbycar.equals(DbHelper.CAR_XL)){
                     historicViewHolder.foto.setImageResource(R.drawable.baby_car_aluguer_xl);
+                }else{
+                    historicViewHolder.foto.setImageResource(R.drawable.money);
                 }
 
-                historicViewHolder.data.setText("" + new Date(((Historic) items.get(position)).getDate()));
-
+                historicViewHolder.data.setText((new Date(((Transactions) items.get(position)).getHistoric().getDate()))+"");
+                historicViewHolder.cost.setText(((Transactions) items.get(position)).getValue() + "€");
 
                 historicViewHolder.bind(items.get(position), itemClickListener);
                 break;
@@ -88,7 +91,7 @@ public class ListaItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     class HistoricViewHolder extends RecyclerView.ViewHolder {
-        TextView nome, desc,data;
+        TextView nome, desc,data,cost;
         ImageView foto;
 
         HistoricViewHolder(View view) {
@@ -97,6 +100,7 @@ public class ListaItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             nome = view.findViewById(R.id.textoNome);
             desc = view.findViewById(R.id.textoDesc);
             data = view.findViewById(R.id.textoData);
+            cost = view.findViewById(R.id.textoCost);
         }
 
         public void bind(final Object item, final OnItemClickListener listener) {

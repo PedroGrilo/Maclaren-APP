@@ -38,7 +38,7 @@ public interface DBHelperClient {
 
     Historic getHistoricById(int id);
 
-    ArrayList<Historic> getHistoricByUserId(int id);
+    ArrayList<Transactions> getHistoricByUserId(int id);
 
     int getLastIdFromTableHistoric();
 
