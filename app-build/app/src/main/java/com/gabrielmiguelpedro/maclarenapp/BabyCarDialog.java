@@ -74,10 +74,11 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                     Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
                     Toast.makeText(getContext(), "RowId: " + rowId, Toast.LENGTH_LONG).show();
 
-                } else if (isUsing == 1 && d <= 10) {
+                } else if (isUsing == 1) {
                     Toast.makeText(getContext(), "Acabar Aluger?", Toast.LENGTH_SHORT).show();
+
                 } else {
-                    Toast.makeText(getContext(), "Nãoi é possivel Alugar", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Não é possivel Alugar", Toast.LENGTH_SHORT).show();
                 }
             }
         })
@@ -88,7 +89,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
             }
         });
         if (callback.getDb().getIsUsingById(callback.getUser().getUserID()) == 1) {
-            builder.setTitle("Finalizar Aluger? - " + bundle.getString("markerId"))
+            builder.setTitle("Finalizar Aluger?")
             .setMessage("Finalizar este Aluger?");
         }else{
             builder.setTitle("Alugar Carrinho")
