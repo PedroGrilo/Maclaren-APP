@@ -487,7 +487,9 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     public String getFirstDateFromCoerdenates(int id){
         String date="";
 
-        String query = "SELECT " + HISTORICCOORDINATES_DATE + " FROM " + TABLE_HISTORICCOORDINATES + " JOIN " + TABLE_HISTORIC + " ON " + HISTORICCOORDINATES_HISTORYID +"="+ HISTORIC_ID + " WHERE " + HISTORICCOORDINATES_HISTORYID + "=" + id +" ORDER BY " + HISTORICCOORDINATES_ID +" DESC LIMIT 1";
+        //String query = "SELECT " + HISTORICCOORDINATES_DATE + " FROM " + TABLE_HISTORICCOORDINATES + " JOIN " + TABLE_HISTORIC + " ON " + HISTORICCOORDINATES_HISTORYID +"="+ HISTORIC_ID + " WHERE " + HISTORICCOORDINATES_HISTORYID + "=" + id +" ORDER BY " + HISTORICCOORDINATES_ID +" DESC LIMIT 1";
+        String query = "SELECT historiccoordinates.date FROM historiccoordinates JOIN historic ON historiccoordinates.HISTORYID = historic.id WHERE historiccoordinates.HISTORYID = " + id + " ORDER BY historiccoordinates.id ASC LIMIT 1";
+
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext())
@@ -500,7 +502,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     public String getLastDateFromCoerdenates(int id){
         String date="";
 
-        String query = "SELECT " + HISTORICCOORDINATES_DATE + " FROM " + TABLE_HISTORICCOORDINATES + " JOIN " + TABLE_HISTORIC + " ON " + HISTORICCOORDINATES_HISTORYID +"="+ HISTORIC_ID + " WHERE " + HISTORICCOORDINATES_HISTORYID + "=" + id +" ORDER BY " + HISTORICCOORDINATES_ID +" DESC LIMIT 1";
+        String query = "SELECT historiccoordinates.date FROM historiccoordinates JOIN historic ON historiccoordinates.HISTORYID = historic.id WHERE historiccoordinates.HISTORYID = " + id + " ORDER BY historiccoordinates.id DESC LIMIT 1";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext())
