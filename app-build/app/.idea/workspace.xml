@@ -7,8 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="343a5309-1e10-42aa-afd1-844cc403be17" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/DbHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/DbHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/home/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/home/HomeFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/wallet/WalletFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/wallet/WalletFragment.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,37 +40,67 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_history.xml">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/home/HomeFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="8" column="34" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="34" />
+            <state relative-caret-position="287">
+              <caret line="190" column="30" selection-start-line="190" selection-start-column="30" selection-end-line="190" selection-end-column="30" />
             </state>
           </provider>
-          <provider editor-type-id="android-designer2" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/home/HomeFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="173" column="26" lean-forward="true" selection-start-line="173" selection-start-column="26" selection-end-line="173" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/DbHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
+            <state relative-caret-position="212">
               <caret line="140" column="51" selection-start-line="140" selection-start-column="51" selection-end-line="140" selection-end-column="51" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_verification_code.xml">
-          <provider selected="true" editor-type-id="text-editor" />
-          <provider editor-type-id="android-designer2" />
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/history/HistoryFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-199">
+              <caret line="44" selection-start-line="44" selection-end-line="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/history/HistoryViewModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/history/ListaItemAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-145">
+              <caret line="68" column="54" selection-start-line="68" selection-start-column="54" selection-end-line="68" selection-end-column="54" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/wallet/WalletFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="62" column="31" selection-start-line="62" selection-start-column="31" selection-end-line="62" selection-end-column="31" />
+              <folding>
+                <element signature="e#2298#2530#0" expanded="true" />
+                <element signature="e#2529#2530#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -96,20 +126,6 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/debug/res/values/google_maps_api.xml">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/res/values/styles.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="48" selection-start-line="48" selection-end-line="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
@@ -125,7 +141,6 @@
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/history/ListInitializer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/history/HistoryViewModel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/history/ListaItemAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/list_historic.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/settings/SettingsFragment.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/MainActivity.java" />
@@ -135,6 +150,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/BabyCarDialog.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/home/HomeFragment.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/DbHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/history/ListaItemAdapter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/wallet/WalletFragment.java" />
       </list>
     </option>
   </component>
@@ -334,6 +351,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
@@ -569,33 +587,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/history/HistoryViewModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/history/ListaItemAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="71" column="53" selection-start-line="71" selection-start-column="53" selection-end-line="71" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/history/HistoryFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="44" selection-start-line="44" selection-end-line="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/settings/SettingsFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -681,15 +672,53 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/home/HomeFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="173" column="26" lean-forward="true" selection-start-line="173" selection-start-column="26" selection-end-line="173" selection-end-column="26" />
+        <state relative-caret-position="287">
+          <caret line="190" column="30" selection-start-line="190" selection-start-column="30" selection-end-line="190" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/DbHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
+        <state relative-caret-position="212">
           <caret line="140" column="51" selection-start-line="140" selection-start-column="51" selection-end-line="140" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/history/HistoryFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-199">
+          <caret line="44" selection-start-line="44" selection-end-line="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/history/HistoryViewModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/history/ListaItemAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-145">
+          <caret line="68" column="54" selection-start-line="68" selection-start-column="54" selection-end-line="68" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gabrielmiguelpedro/maclarenapp/ui/wallet/WalletFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="62" column="31" selection-start-line="62" selection-start-column="31" selection-end-line="62" selection-end-column="31" />
+          <folding>
+            <element signature="e#2298#2530#0" expanded="true" />
+            <element signature="e#2529#2530#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

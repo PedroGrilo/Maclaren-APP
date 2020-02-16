@@ -27,6 +27,7 @@ public class WalletFragment extends Fragment {
     private WalletViewModel walletViewModel;
     private MainActivity callback;
     private double total;
+    TextView textView;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -37,12 +38,11 @@ public class WalletFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         walletViewModel = ViewModelProviders.of(this).get(WalletViewModel.class);
         View root = inflater.inflate(R.layout.fragment_wallet, container, false);
+        textView = root.findViewById(R.id.textViewSaldo);
 
-        total = callback.getDb().getIdTransactionsValue(callback.getUser().getUserID());
-        TextView textView = root.findViewById(R.id.textViewSaldo);
-        textView.setText(String.format("%10.2f", total) + " €");
+        updateWallet();
 
-   
+
         Button button = root.findViewById(R.id.button3);
         Button button1 = root.findViewById(R.id.button4);
         button.setOnClickListener(new View.OnClickListener() {
@@ -60,8 +60,14 @@ public class WalletFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 callback.getDb().addTransactionsDeposit(new Transactions(0, 5, callback.getUser(), new Date()));
+                updateWallet();
             }
         });
         return root;
+    }
+
+    private void updateWallet() {
+        total = callback.getDb().getIdTransactionsValue(callback.getUser().getUserID());
+        textView.setText(String.format("%10.2f", total) + " €");
     }
 }
