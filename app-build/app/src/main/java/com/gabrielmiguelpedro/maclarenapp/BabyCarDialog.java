@@ -33,6 +33,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
     private String lastDate;
     private int finalDate;
     private double finalDistance;
+    private double cost;
 
     public BabyCarDialog(Bundle bundle) {
         this.bundle = bundle;
@@ -124,6 +125,12 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                     }
 
                     /////////////////////////////////////////////////////////////////////////////////////////////DISTANCIA
+
+                    ////////////////////////////////////////////////////////////////////////////////////////////COST
+
+                    cost = (finalDate * getDb) + finalDistance/100;
+
+                    ////////////////////////////////////////////////////////////////////////////////////////////COST
                 } else {
                     Toast.makeText(getContext(), "Não é possivel Alugar", Toast.LENGTH_SHORT).show();
                 }
