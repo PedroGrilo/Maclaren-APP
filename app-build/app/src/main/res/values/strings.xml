@@ -74,6 +74,9 @@ para que a aplicação funcione correctamente.</string>
     <string name="nomoney">Não tens dinheiro na tua carteira.</string>
     <string name="min_montante">O montante mínimo é de 5€</string>
     <string name="estaalugar">Está agora a alugar um carrinho.</string>
+    <string name="alterar">Alterar</string>
+    <string name="alterarEmail">Alterar Email</string>
+    <string name="alterarEmailConteudo">Introduza o novo email desejado.</string>
 
 
 </resources>
