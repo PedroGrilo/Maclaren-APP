@@ -78,6 +78,10 @@ para que a aplicação funcione correctamente.</string>
     <string name="alterarEmail">Alterar Email</string>
     <string name="alterarEmailConteudo">Introduza o novo email desejado.</string>
     <string name="email_changed">Email alterado com sucesso!</string>
+    <string name="finalizarAluguer">Finalizar Aluguer?</string>
+    <string name="alugarCarro">Alugar Carrinho de Bébé</string>
+    <string name="nao">Não</string>
+    <string name="sim">Sim</string>
 
 
 </resources>
