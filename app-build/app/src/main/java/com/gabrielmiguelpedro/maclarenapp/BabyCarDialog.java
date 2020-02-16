@@ -76,6 +76,14 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
                 } else if (isUsing == 1) {
                     Toast.makeText(getContext(), "Acabar Aluger?", Toast.LENGTH_SHORT).show();
+                    //TODO
+                    //terminar serviço S
+                    //Calcular Tempo e distancia
+                    //Set ao arrinho e user S
+                    //trasacao
+                    getActivity().stopService(new Intent(getActivity(), MyService.class));
+                    callback.getDb().setIsUsing(0, callback.getUser());//tirar utilzador de uso
+                    callback.getDb().setIsUseCar(0, String.valueOf(markerId));//tirar o carro em uso!!
 
                 } else {
                     Toast.makeText(getContext(), "Não é possivel Alugar", Toast.LENGTH_SHORT).show();
