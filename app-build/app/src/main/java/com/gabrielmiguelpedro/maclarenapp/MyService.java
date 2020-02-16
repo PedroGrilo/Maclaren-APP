@@ -1,7 +1,6 @@
 package com.gabrielmiguelpedro.maclarenapp;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -9,23 +8,14 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.provider.Settings;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
-
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.tasks.OnSuccessListener;
-
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MyService extends Service {
     DBHelperClient db;
@@ -34,14 +24,14 @@ public class MyService extends Service {
     private double lat;
     private double lon;
 
+    public MyService() {
+        super();
+    }
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
-    }
-
-    public MyService() {
-        super();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -58,17 +48,20 @@ public class MyService extends Service {
             }
 
             @Override
-            public void onStatusChanged(String s, int i, Bundle bundle) { }
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+            }
 
             @Override
-            public void onProviderEnabled(String s) {}
+            public void onProviderEnabled(String s) {
+            }
 
             @Override
-            public void onProviderDisabled(String s) {}
+            public void onProviderDisabled(String s) {
+            }
         };
 
         LocationManager locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
-        
+
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
@@ -79,7 +72,7 @@ public class MyService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(locationManager != null){
+        if (locationManager != null) {
             //noinspection MissingPermission
             locationManager.removeUpdates(listener);
         }

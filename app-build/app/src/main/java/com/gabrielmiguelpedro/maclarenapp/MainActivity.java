@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
         user = db.getUserByEmail(SaveInfoConfig.getEmail(this));
 
-        db.setLoggedIn(true,user);
+        db.setLoggedIn(true, user);
 
         Toast.makeText(this, user.getEmail() + " oh yes bbay - teste bd", Toast.LENGTH_LONG).show();
 
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     }
 
     private void Logout() {
-        db.setLoggedIn(false,user);
+        db.setLoggedIn(false, user);
         SaveInfoConfig.logout(this);
         Intent i = new Intent(MainActivity.this, SignUpActivity.class);
         startActivity(i);
@@ -124,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     public User getUser() {
         return user;
     }
-
 
 
 }

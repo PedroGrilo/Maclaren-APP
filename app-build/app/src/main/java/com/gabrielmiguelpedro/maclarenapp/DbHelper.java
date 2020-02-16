@@ -369,8 +369,6 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         db.close();
     }
 
-    ;
-
     @Override
     public User getUserByEmail(String email) {
         User user = new User();
@@ -575,7 +573,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     }
 
     @Override
-    public int getHistoricCarId(){
+    public int getHistoricCarId() {
         int idAux = 0;
 
         String query = "SELECT " + HISTORIC_ID_CAR + " FROM " + TABLE_HISTORIC + " ORDER BY " + HISTORIC_ID + " DESC LIMIT 1";

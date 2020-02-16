@@ -17,14 +17,11 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.gabrielmiguelpedro.maclarenapp.Exceptions.InvalidFieldException;
 import com.gabrielmiguelpedro.maclarenapp.PermissionActivity;
 import com.gabrielmiguelpedro.maclarenapp.R;
-import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -101,12 +98,12 @@ public class QRCodeFragment extends Fragment implements
         try {
             int result = Integer.parseInt(rawResult.getText());
             mScannerView.stopCamera();
-                Bundle bundle = new Bundle();
-                result--;
-                bundle.putString("markerId","m"+result);
-                HomeFragment homeFragment = new HomeFragment();
-                homeFragment.setArguments(bundle);
-                getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, homeFragment).commit();
+            Bundle bundle = new Bundle();
+            result--;
+            bundle.putString("markerId", "m" + result);
+            HomeFragment homeFragment = new HomeFragment();
+            homeFragment.setArguments(bundle);
+            getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, homeFragment).commit();
         } catch (Exception e) {
             Toast.makeText(getContext(), R.string.QRCodeInvalid, Toast.LENGTH_SHORT).show();
             getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new HomeFragment()).commit();

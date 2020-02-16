@@ -41,14 +41,14 @@ public class VerificationCodeActivity extends AppCompatActivity implements Seria
 
             String from_activity = info.getString("FROM_ACTIVITY");
 
-            db = new DbHelper(  this);
+            db = new DbHelper(this);
 
 
             generatedCode = generateRandomCode();
 
             Toast.makeText(getApplicationContext(), String.valueOf(generatedCode), Toast.LENGTH_LONG).show();
 
-            if(from_activity.equals("SIGN_UP")) {
+            if (from_activity.equals("SIGN_UP")) {
                 int id = db.getLastID();
                 User user = new User(id, email, String.valueOf(generatedCode), false, new Date(), 'C', false, 0);
                 db.addUser(user);

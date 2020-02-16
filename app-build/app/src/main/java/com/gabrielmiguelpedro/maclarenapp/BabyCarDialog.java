@@ -70,17 +70,17 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
                 Boolean verifications = false;
 
-                if(d<=10)
-                    Toast.makeText(getContext(),R.string.mindistance,Toast.LENGTH_LONG).show();
-                else if(BabyCarUse == 0)
+                if (d <= 10)
+                    Toast.makeText(getContext(), R.string.mindistance, Toast.LENGTH_LONG).show();
+                else if (BabyCarUse == 0)
                     Toast.makeText(getContext(), R.string.babycarisused, Toast.LENGTH_LONG).show();
-                else if(isUsing == 0)
+                else if (isUsing == 0)
                     Toast.makeText(getContext(), R.string.isusing, Toast.LENGTH_LONG).show();
                 else
                     verifications = true;
 
 
-                if(callback.getDb().getIdTransactionsValue(callback.getUser().getUserID())>0) {
+                if (callback.getDb().getIdTransactionsValue(callback.getUser().getUserID()) > 0) {
                     if (verifications) {
                         Date date = new Date();
 
@@ -140,8 +140,8 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                         callback.db.addTransactions(transactions);
                         /** /COST **/
                     }
-                }else{
-                    Toast.makeText(getContext(),R.string.nomoney,Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getContext(), R.string.nomoney, Toast.LENGTH_LONG).show();
                 }
 
             }

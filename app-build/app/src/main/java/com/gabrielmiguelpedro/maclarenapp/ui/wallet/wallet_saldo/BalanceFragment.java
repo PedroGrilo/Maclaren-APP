@@ -49,7 +49,7 @@ public class BalanceFragment extends Fragment {
         card_selected_text = root.findViewById(R.id.card_selected);
         editText_FWB_Valor = root.findViewById(R.id.editText_FWB_Valor);
 
-        final List<String> cards_list = new ArrayList<>(Arrays.asList(new String[]{getString(R.string.add_card)}));
+        final List<String> cards_list = new ArrayList<>(Arrays.asList(getString(R.string.add_card)));
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, cards_list);
 
         lv.setAdapter(arrayAdapter);
@@ -87,11 +87,11 @@ public class BalanceFragment extends Fragment {
                 Date date = new Date();
                 EditText editText = root.findViewById(R.id.editText_FWB_Valor);
                 value = Double.parseDouble(editText.getText().toString());
-                if(value < 5) {
+                if (value < 5) {
                     callback.getDb().addTransactionsDeposit(new Transactions(0, value, callback.getUser(), date));
                     saldoTV.setText(callback.getDb().getIdTransactionsValue(callback.getUser().getUserID()) + "€");
-                }else {
-                    Toast.makeText(getContext(),R.string.min_montante,Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), R.string.min_montante, Toast.LENGTH_SHORT).show();
                 }
             }
         });

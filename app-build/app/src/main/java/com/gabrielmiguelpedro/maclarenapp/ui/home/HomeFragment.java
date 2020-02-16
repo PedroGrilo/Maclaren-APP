@@ -25,7 +25,6 @@ import com.gabrielmiguelpedro.maclarenapp.Assets.BitmapUtils;
 import com.gabrielmiguelpedro.maclarenapp.Assets.PermissionUtils;
 import com.gabrielmiguelpedro.maclarenapp.BabyCar;
 import com.gabrielmiguelpedro.maclarenapp.BabyCarDialog;
-import com.gabrielmiguelpedro.maclarenapp.DbHelper;
 import com.gabrielmiguelpedro.maclarenapp.MainActivity;
 import com.gabrielmiguelpedro.maclarenapp.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -34,7 +33,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -43,9 +41,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
-
-import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class HomeFragment extends Fragment implements Serializable, GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener,
