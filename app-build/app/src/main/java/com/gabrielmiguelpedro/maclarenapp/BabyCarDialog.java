@@ -51,11 +51,9 @@ public class BabyCarDialog extends AppCompatDialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getContext(),getTheme()));
-        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
-
                 //funciona
                 String id = bundle.getString("markerId");
                 id = id.substring(1);
@@ -154,17 +152,17 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
             }
         })
-                .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.nao, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //funciona
                     }
                 });
         if (callback.getDb().getIsUsingById(callback.getUser().getUserID()) == 1) {
-            builder.setTitle("Finalizar Aluger?")
+            builder.setTitle(R.string.finalizarAluguer)
                     .setMessage("");
         } else {
-            builder.setTitle("Alugar Carrinho?")
+            builder.setTitle(R.string.alugarCarro)
                     .setMessage("");
         }
         return builder.create();
