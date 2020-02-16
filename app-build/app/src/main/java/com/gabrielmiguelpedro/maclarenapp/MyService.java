@@ -1,14 +1,23 @@
 package com.gabrielmiguelpedro.maclarenapp;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.media.MediaPlayer;
+import android.os.Build;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -20,10 +29,10 @@ import java.util.TimerTask;
 
 public class MyService extends Service {
     DBHelperClient db;
-    private FusedLocationProviderClient fusedLocationClient; //localização atual
+    private LocationListener listener;
+    private LocationManager locationManager;
     private double lat;
     private double lon;
-    //private MediaPlayer player;
 
     @Nullable
     @Override
@@ -35,44 +44,44 @@ public class MyService extends Service {
         super();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        db = new DbHelper(this); //
-        /*player = MediaPlayer.create(this, Settings.System.DEFAULT_RINGTONE_URI);
-        player.setLooping(true);
-        player.start();*/
-
-        new Timer().scheduleAtFixedRate(new TimerTask() {
+    public void onCreate() {
+        db = new DbHelper(getApplicationContext());
+        listener = new LocationListener() {
             @Override
-            public void run() {
-                //FUNCIONA player.start();
-                getPhoneLocation();
+            public void onLocationChanged(Location location) {
+                lon = location.getLongitude();
+                lat = location.getLatitude();
                 Date date = new Date();
                 db.addHistoricCoordinates(new HistoricCoordinates(0, date, lon, lat, db.getHistoricById(db.getLastIdFromTableHistoric()))); //TODO coerdenadas
             }
-        }, 0, 10000);
-        return START_STICKY;
+
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) { }
+
+            @Override
+            public void onProviderEnabled(String s) {}
+
+            @Override
+            public void onProviderDisabled(String s) {}
+        };
+
+        LocationManager locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 15000, 0, listener);
+
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-
-        //player.stop();
-    }
-
-    public void getPhoneLocation() {
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        //Toast.makeText(getContext(),"Altitude: "+location.getAltitude()+" Longitude: "+location.getLongitude(), Toast.LENGTH_LONG).show();
-                        if (location != null) {
-                            //Toast.makeText(getContext(),"222Altitude: "+location.getAltitude()+" Longitude: "+location.getLongitude(), Toast.LENGTH_LONG).show();
-                            lon = location.getLongitude();
-                            lat = location.getLatitude();
-                        }
-                    }
-                });
+        if(locationManager != null){
+            //noinspection MissingPermission
+            locationManager.removeUpdates(listener);
+        }
     }
 }

@@ -75,7 +75,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                     callback.getDb().setIsUseCar(1, String.valueOf(markerId));//colocar o carro em uso!!
                     rowId = callback.getDb().addHistoric(new Historic(0, date, callback.getUser(), callback.getDb().getBabyCarById(markerId)));
 
-                    getActivity().startService(new Intent(getActivity(), MyService.class));//chamar o service
+                   callback.startService(new Intent(getContext(), MyService.class));//chamar o service
 
                     //Toast.makeText(getContext(), "Car: " + callback.db.getUseByIdBabyCar(markerId) + " User: " + callback.getDb().getIsUsingById(callback.getUser().getUserID()), Toast.LENGTH_LONG).show();
                     //Toast.makeText(getContext(), "RowId: " + rowId, Toast.LENGTH_LONG).show();
@@ -84,7 +84,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
 
                     /////////////////////////////////////////////////////////////////////////////////////////////RESET
 
-                    getActivity().stopService(new Intent(getActivity(), MyService.class));
+                    callback.stopService(new Intent(getContext(), MyService.class));
                     callback.getDb().setIsUsing(0, callback.getUser());//tirar utilzador de uso
                     callback.getDb().setIsUseCar(0, String.valueOf(markerId));//tirar o carro em uso!!
 
@@ -111,7 +111,7 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                 } else {
                     Toast.makeText(getContext(), "Não é possivel Alugar", Toast.LENGTH_SHORT).show();
                 }
-            }
+                }
         })
                 .setNegativeButton("Não", new DialogInterface.OnClickListener() {
                     @Override
