@@ -461,7 +461,7 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
     public Historic getHistoricById(int id) {
         Historic historic = new Historic();
 
-        String query = "SELECT " + HISTORIC_ID + " FROM " + TABLE_HISTORIC + " WHERE " + HISTORIC_ID + "=" + id;
+        String query = "SELECT " + HISTORIC_ID +" FROM " + TABLE_HISTORIC + " WHERE " + HISTORIC_ID + "=" + id;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {
@@ -469,6 +469,38 @@ public class DbHelper extends SQLiteOpenHelper implements DBHelperClient, DBHelp
         }
         db.close();
         return historic;
+    }
+
+
+    @Override
+    public ArrayList<Historic> getHistoricByUserId(int id) {
+
+
+        String query = "SELECT HISTORIC.ID, HISTORICDATE,cartype.ID, cartype.NAME , cartype.BASECOST,CARS.COMMENTS FROM HISTORIC JOIN cars on ID_CAR  = CARS.ID JOIN cartype ON cars.ID_CARTYPE = cartype.ID";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        ArrayList<Historic> historicList = new ArrayList<Historic>()
+                ;
+        while (cursor.moveToNext()) {
+            Historic historic = new Historic();
+            historic.setId(cursor.getInt(0));
+            historic.setDate(new Date(cursor.getLong(1)));
+
+            BabyCarType babyCarType = new BabyCarType();
+            babyCarType.setId(cursor.getInt(2));
+            babyCarType.setName(cursor.getString(3));
+            babyCarType.setPrice(cursor.getFloat(4));
+
+            BabyCar babyCar = new BabyCar();
+            babyCar.setComments(cursor.getString(5));
+            babyCar.setBabyCarType(babyCarType);
+
+            historic.setBabyCar(babyCar);
+            historicList.add(historic);
+        }
+
+        db.close();
+        return historicList;
     }
 
     @Override
