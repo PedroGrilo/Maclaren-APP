@@ -49,18 +49,15 @@ public class SettingsFragment extends Fragment {
             public void onClick(View view) {
 
                 try {
-                    if (checkFields() == true) {
-                        Toast.makeText(getContext(), "Alteru", Toast.LENGTH_SHORT).show();
+                    if (checkFields()) {
+                        Toast.makeText(getContext(), getString(R.string.email_changed), Toast.LENGTH_SHORT).show();
                         String email = editText.getText().toString();
                         callback.getDb().setEmail(String.valueOf(callback.getUser().getUserID()),email );
                         SaveInfoConfig.saveUser(email,getContext());
+                        callback.changeHeader();
                     }
-                } catch (InvalidFieldException e) {
-                    e.printStackTrace();
-                } catch (EmptyFieldException e) {
-                    e.printStackTrace();
-                } catch (EmailErrorException e) {
-                    e.printStackTrace();
+                } catch (InvalidFieldException | EmptyFieldException | EmailErrorException e) {
+                    Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG).show();
                 }
             }
         });

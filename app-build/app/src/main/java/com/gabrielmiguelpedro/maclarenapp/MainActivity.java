@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     private AppBarConfiguration mAppBarConfiguration;
     private Bundle infoBundle;
     private User user;
+    TextView navUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-        TextView navUsername = headerView.findViewById(R.id.emailTextView);
+         navUsername = headerView.findViewById(R.id.emailTextView);
 
         navUsername.setText(user.GetName() + "!");
 
@@ -84,6 +85,11 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         finish();
     }
 
+
+    public void changeHeader(){
+        user = db.getUserByEmail(SaveInfoConfig.getEmail(this));
+        navUsername.setText(user.GetName() + "!");
+    }
 
     public void checkPermissions() {
         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
