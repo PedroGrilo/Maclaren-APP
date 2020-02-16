@@ -162,10 +162,10 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                 });
         if (callback.getDb().getIsUsingById(callback.getUser().getUserID()) == 1) {
             builder.setTitle("Finalizar Aluger?")
-                    .setMessage("Finalizar este Aluger?");
+                    .setMessage("");
         } else {
-            builder.setTitle("Alugar Carrinho")
-                    .setMessage("Pretende Alugar este Carrinho?");
+            builder.setTitle("Alugar Carrinho?")
+                    .setMessage("");
         }
         return builder.create();
     }
