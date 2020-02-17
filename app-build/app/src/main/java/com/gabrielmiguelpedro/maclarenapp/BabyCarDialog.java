@@ -109,14 +109,9 @@ public class BabyCarDialog extends AppCompatDialogFragment {
                         int aux = 0;
 
                         ArrayList<HistoricCoordinates> arrayList = callback.getDb().getHistoricCoordinatesById(callback.getDb().getLastIdFromTableHistoric());
-                        for (HistoricCoordinates historicCoordinates : arrayList) {
-                            try {
-                                finalDistance += distanceInKmBetweenEarthCoordinates(arrayList.get(aux).getLat(), arrayList.get(aux).getLonge(), arrayList.get(++aux).getLat(), arrayList.get(++aux).getLonge());
-                            } catch (Exception e) {
-                                Toast.makeText(getContext(), "Exption", Toast.LENGTH_SHORT);
-                            }
+                        for(int x = 0; x< arrayList.size()-1;x++)
+                            finalDistance += distanceInKmBetweenEarthCoordinates(arrayList.get(x).getLat(), arrayList.get(x).getLonge(), arrayList.get(x+1).getLat(), arrayList.get(x+1).getLonge());
 
-                        }
                         /** /DISTANCIA **/
 
                         /** COST **/

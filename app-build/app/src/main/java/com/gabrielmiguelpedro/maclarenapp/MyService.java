@@ -46,18 +46,10 @@ public class MyService extends Service {
             @Override
             public void onLocationChanged(Location location) {
                 int userid = db.getUserByEmail(SaveInfoConfig.getEmail(getApplicationContext())).getUserID();
-                if (db.getIdTransactionsValue(userid) > 0) {
                     lon = location.getLongitude();
                     lat = location.getLatitude();
                     Date date = new Date();
                     db.addHistoricCoordinates(new HistoricCoordinates(0, date, lon, lat, db.getHistoricById(db.getLastIdFromTableHistoric())));
-                }else{
-                    player = MediaPlayer.create(getApplicationContext(), Settings.System.DEFAULT_NOTIFICATION_URI);
-                    player.setLooping(true);
-                    player.start();
-                    Toast.makeText(getApplicationContext(),getString(R.string.nomoney),Toast.LENGTH_LONG).show();
-                    locationManager.removeUpdates(listener);
-                }
             }
 
             @Override

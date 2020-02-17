@@ -42,10 +42,8 @@ public class VerificationCodeActivity extends AppCompatActivity implements Seria
 
             String from_activity = info.getString("FROM_ACTIVITY");
 
-            db = new DbHelper(this);
-
             generatedCode = generateRandomCode();
-           // Toast.makeText(getApplicationContext(),generatedCode+"",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),generatedCode+"",Toast.LENGTH_LONG).show();
 
            if (from_activity.equals("SIGN_UP")) {
                 int id = db.getLastID();
